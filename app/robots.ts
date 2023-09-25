@@ -2,10 +2,10 @@ export default function robots() {
   return {
     rules: [
       {
-        userAgent: '*',
+        userAgent: "*",
       },
     ],
-    sitemap: 'https://johndev.app/sitemap.xml',
-    host: 'https://johndev.app',
+    sitemap: "https://jmartinn.com/sitemap.xml",
+    host: "https://jmartinn.com",
   };
 }

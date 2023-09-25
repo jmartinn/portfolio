@@ -1,96 +1,93 @@
-'use client'
+"use client";
 
-import clsx from 'clsx'
-import { usePathname } from 'next/navigation'
-import Link from 'next/link'
-import { LayoutGroup, motion } from 'framer-motion'
+import clsx from "clsx";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { LayoutGroup, motion } from "framer-motion";
 
 const navItems = {
-  '/': {
-    name: 'home',
+  "/": {
+    name: "home",
   },
-  '/uses': {
-    name: 'about',
+  "/uses": {
+    name: "about",
   },
-  // '/blog': {
-  //   name: 'blog',
-  // },
-}
+  "/blog": {
+    name: "blog",
+  },
+  "/projects": {
+    name: "projects",
+  },
+};
 
-function Logo() {
+const Logo = (props) => {
   return (
-    <Link aria-label='Jay' href='/'>
-      <motion.svg
-        className='text-black dark:text-white h-[50px] md:h-[75px]'
-        width='50'
-        height='75'
-        viewBox='0 0 500 750'
-        fill='none'
-        xmlns='http://www.w3.org/2000/svg'
-      >
-        <motion.path
-          initial={{
-            opacity: 0,
-            pathLength: 0,
-          }}
-          animate={{
-            opacity: 1,
-            pathLength: 1,
-          }}
-          transition={{
-            duration: 0.5,
-            type: 'spring',
-            stiffness: 50,
-          }}
-          d='M400 0 v500 q0 150 -150 150 h-100'
-          stroke='currentColor'
-          strokeWidth={78}
-        />
-      </motion.svg>
-    </Link>
-  )
-}
+    <svg
+      width={65.198}
+      height={75.001}
+      viewBox="0 0 65.198 75.001"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="m44.252 42.147-.544.726a11.735 11.735 0 0 1-2.607 2.637 15.948 15.948 0 0 1-2.403 1.465 31.842 31.842 0 0 1-.625.313q-.709.346-1.683.79a124.172 124.172 0 0 1-.94.422 144.982 144.982 0 0 0-.981.44q-1.352.613-1.978.94l-1.924 2.904a231.505 231.505 0 0 1-2.941 4.254q-3.234 4.56-5.803 7.623a58.635 58.635 0 0 1-1.511 1.735q-2.853 3.142-5.409 5.083a21.664 21.664 0 0 1-2.214 1.488Q9.187 75 4.54 75a4.106 4.106 0 0 1-1.561-.285q-.978-.398-1.639-1.352a4.937 4.937 0 0 1-.195-.306Q0 71.116 0 68.702a8.607 8.607 0 0 1 .477-2.768q.359-1.062.989-2.153a14.544 14.544 0 0 1 .041-.071 18.316 18.316 0 0 1 2.192-2.978 23.795 23.795 0 0 1 1.964-1.941 70.7 70.7 0 0 1 5.554-4.429 61.765 61.765 0 0 1 3.871-2.56 73.894 73.894 0 0 1 2.554-1.488 195.961 195.961 0 0 1 8.365-4.281 170.64 170.64 0 0 1 2.707-1.273Q41.928 25.303 55.542 7.043q.262-.262.288-.406a.17.17 0 0 0 .003-.03q0-.145-1.089-.145a6.648 6.648 0 0 0-.605.035q-1.298.123-4.207.681a141.305 141.305 0 0 0-.052.01 57.583 57.583 0 0 0-12.809 4.259 67.263 67.263 0 0 0-3.563 1.785 67.243 67.243 0 0 0-8.837 5.642 55.32 55.32 0 0 0-5.103 4.377q-5.78 5.618-5.808 9.133a4.291 4.291 0 0 0 0 .033 3.424 3.424 0 0 0 1.162 2.622 4.708 4.708 0 0 0 .363.3 5.778 5.778 0 0 0 1.712.9 5.143 5.143 0 0 0 1.573.243 7.689 7.689 0 0 0 2.243-.347 10.004 10.004 0 0 0 1.387-.542 26.415 26.415 0 0 0 1.415-.723q.657-.364 1.21-.726a13.684 13.684 0 0 0 .48-.33 36.612 36.612 0 0 1 .292-.208q.965-.681 1.124-.681.164 0 .179.414a2.45 2.45 0 0 1 .002.094 8.403 8.403 0 0 1-.328 2.393 6.973 6.973 0 0 1-1.07 2.163 8.017 8.017 0 0 1-2.838 2.391 10.09 10.09 0 0 1-1.028.459 14.842 14.842 0 0 1-2.566.737 11.779 11.779 0 0 1-2.172.207q-2.268 0-4.628-.944a9.916 9.916 0 0 1-4.012-2.94 6.925 6.925 0 0 1-1.651-4.537q0-1.089.471-2.578 3.174-10.322 19.057-19.993a107.848 107.848 0 0 1 4.43-2.55 66.207 66.207 0 0 1 10.148-4.414 79.54 79.54 0 0 1 5.118-1.558 68.114 68.114 0 0 1 9.2-1.834 54.285 54.285 0 0 1 6.752-.434q1.38 0 2.396.871a3.827 3.827 0 0 1 .514.526q.503.636.503 1.325a10.495 10.495 0 0 1-.009.454q-.018.411-.071.681a1.656 1.656 0 0 1-.065.245q-.136.375-1.164 1.864a70.465 70.465 0 0 1-.143.205 85.558 85.558 0 0 1-2.36 3.231q-2.271 2.945-4.079 5.324a572.823 572.823 0 0 0-1.547 2.045q-1.978 2.627-13.136 18.511a8561.5 8561.5 0 0 0-4.18 5.957q1.213-.59 3.3-1.432a115.54 115.54 0 0 1 .457-.183 44.585 44.585 0 0 1 .843-.327q1.694-.635 2.224-.635a.627.627 0 0 1 .193.027q.203.065.258.29a.799.799 0 0 1 .021.191 2.259 2.259 0 0 1-.099.65 2.962 2.962 0 0 1-.155.403 7.965 7.965 0 0 1-.251.494q-.132.237-.268.437a4.886 4.886 0 0 1-.008.013 17.117 17.117 0 0 1-.146.211q-.227.323-.54.741a47.362 47.362 0 0 1-.022.028ZM5.286 67.591a2.01 2.01 0 0 0-.095.584.668.668 0 0 0 .38.637q.285.149.784.161a3.719 3.719 0 0 0 .089.001q1.061 0 2.681-.911a15.2 15.2 0 0 0 .604-.359 24.13 24.13 0 0 0 3.83-2.977q1.678-1.592 3.561-3.786a72.559 72.559 0 0 0 .269-.315q2.94-3.485 5.663-7.261Q6.493 63.629 5.286 67.591Z"
+        vectorEffect="non-scaling-stroke"
+        strokeLinecap="round"
+        fillRule="evenodd"
+        fontSize={12}
+        stroke="#fff"
+        strokeWidth={0.303}
+        fill="#fff"
+        style={{
+          stroke: "#fff",
+          strokeWidth: ".10mm",
+          fill: "#fff",
+        }}
+      />
+    </svg>
+  );
+};
 
 export default function Navbar() {
-  let pathname = usePathname() || '/'
-  if (pathname.includes('/blog/')) {
-    pathname = '/blog'
+  let pathname = usePathname() || "/";
+  if (pathname.includes("/blog/")) {
+    pathname = "/blog";
   }
 
   return (
-    <aside className='md:w-[150px] md:flex-shrink-0 -mx-4 md:mx-0 md:px-0'>
-      <div className='lg:sticky lg:top-20'>
-        <div className='ml-2 md:ml-[12px] mb-2 px-4 md:px-0 md:mb-8 space-y-10 flex flex-col md:flex-row items-start '>
+    <aside className="md:w-[150px] md:flex-shrink-0 -mx-4 md:mx-0 md:px-0">
+      <div className="lg:sticky lg:top-20">
+        <div className="ml-2 hidden md:ml-[12px] mb-2 px-4 md:px-0 md:mb-8 space-y-10 md:flex flex-col md:flex-row items-start ">
           <Logo />
         </div>
         <LayoutGroup>
           <nav
-            className='flex flex-row md:flex-col items-start relative px-4 md:px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative'
-            id='nav'
+            className="flex flex-row md:flex-col items-start relative px-4 md:px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
+            id="nav"
           >
-            <div className='flex flex-row md:flex-col space-x-0 pr-10 mb-2 mt-2 md:mt-0'>
+            <div className="flex flex-row md:flex-col space-x-0 pr-10 mb-2 mt-2 md:mt-0">
               {Object.entries(navItems).map(([path, { name }]) => {
-                const isActive = path === pathname
+                const isActive = path === pathname;
                 return (
                   <Link
                     key={path}
                     href={path}
                     className={clsx(
-                      'transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle',
+                      "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle",
                       {
-                        'text-neutral-500': !isActive,
-                        'font-bold': isActive,
-                      },
+                        "text-neutral-500": !isActive,
+                        "font-bold": isActive,
+                      }
                     )}
                   >
-                    <span className='relative py-[5px] px-[10px]'>
+                    <span className="relative py-[5px] px-[10px]">
                       {name}
                       {path === pathname ? (
                         <motion.div
-                          className='absolute inset-0 bg-neutral-100 dark:bg-neutral-800 rounded-md z-[-1]'
-                          layoutId='sidebar'
+                          className="absolute inset-0 bg-neutral-100 dark:bg-neutral-800 rounded-md z-[-1]"
+                          layoutId="sidebar"
                           transition={{
-                            type: 'spring',
+                            type: "spring",
                             stiffness: 350,
                             damping: 30,
                           }}
@@ -98,12 +95,12 @@ export default function Navbar() {
                       ) : null}
                     </span>
                   </Link>
-                )
+                );
               })}
             </div>
           </nav>
         </LayoutGroup>
       </div>
     </aside>
-  )
+  );
 }
