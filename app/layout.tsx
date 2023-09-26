@@ -1,41 +1,41 @@
-import './globals.css'
-import clsx from 'clsx'
-import type { Metadata } from 'next'
-import localFont from 'next/font/local'
-import Sidebar from './components/sidebar'
-import { Analytics } from '@vercel/analytics/react'
+import "./globals.css";
+import clsx from "clsx";
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import Sidebar from "./components/sidebar";
+import { Analytics } from "@vercel/analytics/react";
 
 const graphik = localFont({
   src: [
     {
-      path: '../public/fonts/Graphik-Regular.ttf',
-      weight: '400',
-      style: 'normal',
+      path: "../public/fonts/Graphik-Regular.ttf",
+      weight: "400",
+      style: "normal",
     },
     {
-      path: '../public/fonts/Graphik-Medium.ttf',
-      weight: '600',
-      style: 'bold',
+      path: "../public/fonts/Graphik-Medium.ttf",
+      weight: "600",
+      style: "bold",
     },
   ],
-  variable: '--font-graphik',
-  display: 'swap',
-})
+  variable: "--font-graphik",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://johndev.app'),
+  metadataBase: new URL("https://jmartinn.com"),
   title: {
-    default: 'Juan Pedro Martin',
-    template: '%s | Juan Pedro Martin',
+    default: "Juan Pedro Martin",
+    template: "%s | Juan Pedro Martin",
   },
-  description: 'Developer, writer, and creator.',
+  description: "Developer, writer, and creator.",
   openGraph: {
-    title: 'Juan Pedro Martin',
-    description: 'Developer, writer, and creator.',
-    url: 'https://johndev.app',
-    siteName: 'Juan Pedro Martin',
-    locale: 'en-US',
-    type: 'website',
+    title: "Juan Pedro Martin",
+    description: "Developer, writer, and creator.",
+    url: "https://jmartinn.com",
+    siteName: "Juan Pedro Martin",
+    locale: "en-US",
+    type: "website",
   },
   robots: {
     index: true,
@@ -43,41 +43,41 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   twitter: {
-    title: 'Juan Pedro Martin',
-    card: 'summary_large_image',
+    title: "Juan Pedro Martin",
+    card: "summary_large_image",
   },
   verification: {
-    google: 'eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw',
-    yandex: '14d2e73487fa6c71',
+    google: "eZSdmzAXlLkKhNJzfgwDqWORghxnJ8qR9_CHdAh5-xw",
+    yandex: "14d2e73487fa6c71",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html
-      lang='en'
+      lang="en"
       className={clsx(
-        'text-black bg-white dark:text-white dark:bg-[#111010]',
-        graphik.variable,
+        "text-black bg-white dark:text-white dark:bg-[#111010]",
+        graphik.variable
       )}
     >
-      <body className='antialiased max-w-4xl mb-40 flex flex-col md:flex-row mx-4 mt-8 md:mt-20 lg:mt-32 lg:mx-auto'>
+      <body className="antialiased max-w-4xl mb-40 flex flex-col md:flex-row mx-4 mt-8 md:mt-20 lg:mt-32 lg:mx-auto">
         <Sidebar />
-        <main className='flex-auto min-w-0 mt-6 md:mt-0 flex flex-col px-2 md:px-0'>
+        <main className="flex-auto min-w-0 mt-6 md:mt-0 flex flex-col px-2 md:px-0">
           {children}
           <Analytics />
         </main>
       </body>
     </html>
-  )
+  );
 }
