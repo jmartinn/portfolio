@@ -28,7 +28,7 @@ var computedFields = {
       dateModified: doc.publishedAt,
       description: doc.summary,
       image: doc.image ? `https://jmartinn.com${doc.image}` : `https://jmartinn.com/og?title=${doc.title}`,
-      url: `https://jmartinn.io/blog/${doc._raw.flattenedPath}`,
+      url: `https://jmartinn.com/blog/${doc._raw.flattenedPath}`,
       author: {
         "@type": "Person",
         name: "Juan Pedro Martin"
@@ -98,4 +98,4 @@ export {
   Blog,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-IEUWFNO7.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-FZCB2WZJ.mjs.map

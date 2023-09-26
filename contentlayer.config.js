@@ -31,7 +31,7 @@ const computedFields = {
       image: doc.image
         ? `https://jmartinn.com${doc.image}`
         : `https://jmartinn.com/og?title=${doc.title}`,
-      url: `https://jmartinn.io/blog/${doc._raw.flattenedPath}`,
+      url: `https://jmartinn.com/blog/${doc._raw.flattenedPath}`,
       author: {
         "@type": "Person",
         name: "Juan Pedro Martin",
@@ -76,8 +76,6 @@ export default makeSource({
         {
           theme: "one-dark-pro",
           onVisitLine(node) {
-            // Prevent lines from collapsing in `display: grid` mode, and allow empty
-            // lines to be copy/pasted
             if (node.children.length === 0) {
               node.children = [{ type: "text", value: " " }];
             }

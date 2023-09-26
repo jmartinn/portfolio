@@ -5,64 +5,89 @@ summary: "Turn videos into mesmerizing real-time ASCII art with vid-to-ascii, a 
 image: "/images/vid-to-ascii/og.png"
 ---
 
-In the realm of creative video transformations, the vid-to-ascii application stands out as a captivating and dynamic tool. This C++ program utilizes the power of the OpenCV library to transform live video feeds or video files into mesmerizing ASCII art in real-time. With its adjustable character set and resolution, vid-to-ascii offers a canvas for your artistic expression, all while being highly customizable to suit your unique needs.
+## Introduction
 
-## Features
+In this guide, we'll explore how to transform a video into mesmerizing ASCII art using OpenCV and C++. ASCII art is a creative way to represent images through text characters. We'll take you through the process of setting up the project, building it, and running it on macOS.
 
-### Real-time Video-to-ASCII Conversion
+> If you want to checkout the code of the project you can do it [here](https://github.com/jmartinn/vid-to-ascii)
 
-Vid-to-ascii brings your videos to life by converting them into ASCII art on-the-fly. Whether you're watching a live video feed or playing a pre-recorded video, this feature adds a creative twist to your visual experience.
+With that said, let's dive in!
 
-### Adjustable ASCII Character Set and Resolution
+## Prerequisites
 
-One of the standout features of vid-to-ascii is its flexibility. You have the power to adjust both the ASCII character set and the resolution of your ASCII art. This allows you to fine-tune your output to achieve the desired artistic effect.
+Before we begin, make sure you have the following prerequisites:
 
-### Easily Customizable
+- Basic knowledge of C++ programming.
+- OpenCV installed on your system.
 
-Vid-to-ascii is designed to be user-friendly and highly customizable. You can modify the source code to tailor the application to your specific requirements. Whether you want to experiment with different ASCII character sets or adapt the program for a unique project, vid-to-ascii gives you the freedom to do so.
+## Setting Up the Project
 
-## Dependencies
+### Step 1: Install OpenCV and Set Up the Environment
 
-Before you dive into the world of ASCII art transformation, make sure you have the following dependency installed:
+- Ensure that OpenCV is installed on your macOS. If not, you can install it using a package manager like Homebrew:
+  ```shell
+  $ chmod +x build.sh
+  ```
+  Make sure you have Homebrew installed. If not, you can find installation instructions [here](https://brew.sh/).
 
-- [OpenCV](https://opencv.org/) (Version 4.0 or higher)
+### Step 2: Configure the Project
 
-## Building and Running
+- Open the provided C++ code (main.cpp) in your preferred code editor.
 
-### For MacOS
+### Step 3: Edit compile_commands.json (For VIM Users)
 
-Follow these steps to build and run vid-to-ascii on your MacOS:
+- If you are using Vim, locate the `compile_commands.json` file in your project directory.
+- Find the path to your OpenCV installation and update it in the `compile_commands.json` file.
 
-1. **Install OpenCV and Set Up the Environment:** Ensure you have OpenCV (version 4.0 or higher) installed on your system. Make sure your development environment is set up correctly.
+### Step 4: Modify Paths in build.sh
 
-2. **Edit compile_commands.json:** If you're using Vim, locate the `compile_commands.json` file and update the path to OpenCV to match the actual installation path.
+- Open the `build.sh` script.
+- Update the path to your OpenCV installation.
+- Update the path to OpenCV libraries in the script.
 
-3. **Modify build.sh:** Edit the `build.sh` script to specify the correct path for OpenCV and its libraries.
+### Step 5: Make build.sh Executable
 
-4. **Give Permission to build.sh:** In your terminal, grant execute permission to the `build.sh` script by running the following command:
-
-   ```shell
-   $ chmod +x build.sh
-   ```
-
-5. **Build and Run:** Execute the following command in your terminal to build and run vid-to-ascii:
+- Give execution permission to the `build.sh` script:
 
 ```shell
-$ ./build.sh
+$ chmod +x build.sh
+```
+
+### Step 6: Build the Project
+
+- Run the following command in your terminal to build the project:
+
+```shell
+$ chmod +x build.sh
 ```
 
 ## Usage
 
-After successfully building the application, you can start transforming your videos into ASCII art:
+### Step 1: Edit the Video Path
 
-1. **Edit the Video Path:** In the main.cpp file, locate the line that reads string video_path = "./video.mp4";. Replace "./video.mp4" with the actual path to your video file.
+- Open the `main.cpp` file in your code editor.
+- Locate the line with the comment: "Edit the path of video in main.cpp".
+- Replace `"./video.mp4"` with the path to your video file.
 
-2. **Run the Application:** Once you've configured the video path, run the application with the following command:
+### Step 2: Run the Project
+
+- In your terminal, execute the following command to run the project:
 
 ```shell
-$ ./build.sh
+$ chmod +x build.sh
 ```
 
-Now, sit back and watch as your video comes to life in the form of mesmerizing ASCII art. The console will display the ASCII art in real-time, creating a unique visual experience.
+## Explanation
 
-Vid-to-ascii offers a delightful blend of technology and creativity, making it a perfect choice for artists, developers, and anyone looking to add a touch of magic to their videos. Explore the world of ASCII art with vid-to-ascii and unleash your artistic imagination!
+- The code reads the video specified in `main.cpp`.
+- It converts each frame of the video to grayscale and resizes it to fit the desired ASCII art dimensions.
+- ASCII art is generated from the pixel intensity of each resized frame.
+- The resulting ASCII art is displayed in the terminal in real-time.
+
+## Tips
+
+- You can experiment with different video files to create unique ASCII art.
+- Adjust the `width` and `height` variables in `main.cpp` to change the size of the ASCII art.
+- The `pixelToASCII` function in the code maps pixel intensity to ASCII characters. You can modify this mapping to achieve different visual effects.
+
+Congratulations! You've successfully set up and run a project that transforms videos into captivating ASCII art using OpenCV and C++. Explore the world of ASCII art and unleash your creativity. Enjoy the mesmerizing results!
