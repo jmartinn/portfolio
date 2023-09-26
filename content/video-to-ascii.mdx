@@ -1,5 +1,5 @@
 ---
-title: "Transform Videos into Stunning ASCII Art"
+title: "Transforming Videos into Stunning ASCII Art"
 publishedAt: "2023-09-26"
 summary: "Turn videos into mesmerizing real-time ASCII art with vid-to-ascii, a C++ application using OpenCV"
 image: "/images/vid-to-ascii/og.png"
@@ -7,87 +7,92 @@ image: "/images/vid-to-ascii/og.png"
 
 ## Introduction
 
-In this guide, we'll explore how to transform a video into mesmerizing ASCII art using OpenCV and C++. ASCII art is a creative way to represent images through text characters. We'll take you through the process of setting up the project, building it, and running it on macOS.
+In this technical essay, we will explore a fascinating project that involves transforming videos into ASCII art using C++ and OpenCV. By leveraging the power of OpenCV's computer vision library and the versatility of the C++ programming language, we can create a program that converts video frames into a visually appealing ASCII representation.
 
-> If you want to checkout the code of the project you can do it [here](https://github.com/jmartinn/vid-to-ascii)
+## Features
 
-With that said, let's dive in!
+The program offers the following features:
 
-## Prerequisites
+- Real-time video processing: The program processes video frames in real-time, enabling users to see the ASCII art representation as the video plays.
+- Dynamic resizing: The program automatically resizes the video frames to fit a specified width and height while maintaining the aspect ratio.
+- Customizable ASCII character set: The program utilizes a predefined set of ASCII characters to represent different intensities of pixels, resulting in visually pleasing ASCII art.
+- Cross-platform compatibility: The program is designed to work on multiple platforms, including Windows, macOS, and Linux.
 
-Before we begin, make sure you have the following prerequisites:
+## Dependencies
 
-- Basic knowledge of C++ programming.
-- OpenCV installed on your system.
+In order to build and run the program, you will need the following dependencies:
 
-## Setting Up the Project
+- OpenCV: Install the OpenCV library, which provides the necessary functions for video processing and image manipulation.
+- C++ compiler: Ensure that you have a C++ compiler installed on your system, such as GCC or Clang.
+- Homebrew (macOS only): Ensure you have Homebrew installed in your macOS machine so you can install OpenCV with it.
 
-### Step 1: Install OpenCV and Set Up the Environment
+## Building and Running (macOS)
 
-- Ensure that OpenCV is installed on your macOS. If not, you can install it using a package manager like Homebrew:
+### Clone the repository
+
+First of all you will have to clone this [repository](https://github.com/jmartinn/vid-to-ascii) like so:
+
+```shell
+git clone git@github.com:jmartinn/vid-to-ascii.git
+```
+
+### Install OpenCV
+
+- Install OpenCV by running:
+
+```shell
+brew install opencv
+```
+
+> Refer to the OpenCV [documentation](https://docs.opencv.org/4.x/) for detailed instructions based on your operating system.
+
+### Modify the `compile_commands.json` file:
+
+- If you are a real chad and you are using vim or neovim as your editor, locate the `compile_commands.json` file in your project directory.
+- Find the path of the OpenCV library in your system and replace it with the corresponding path in the `compile_commands.json` file.
+
+  Assuming you are on macOS when you install OpenCV and its libraries the path is always the same except for the version, so in case you have a different version that me just replace the version.
+
   ```shell
-  $ chmod +x build.sh
+  g++ -std=c++11 -I/opt/homebrew/Cellar/opencv/<your_version>/include/opencv4 -L/opt/homebrew/opt/opencv/lib -lopencv_gapi -lopencv_stitching -lopencv_alphamat -lopencv_aruco -lopencv_barcode -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_dnn_objdetect -lopencv_dnn_superres -lopencv_dpm -lopencv_face -lopencv_freetype -lopencv_fuzzy -lopencv_hfs -lopencv_img_hash -lopencv_intensity_transform -lopencv_line_descriptor -lopencv_mcc -lopencv_quality -lopencv_rapid -lopencv_reg -lopencv_rgbd -lopencv_saliency -lopencv_sfm -lopencv_stereo -lopencv_structured_light -lopencv_phase_unwrapping -lopencv_superres -lopencv_optflow -lopencv_surface_matching -lopencv_tracking -lopencv_highgui -lopencv_datasets -lopencv_text -lopencv_plot -lopencv_videostab -lopencv_videoio -lopencv_viz -lopencv_wechat_qrcode -lopencv_xfeatures2d -lopencv_shape -lopencv_ml -lopencv_ximgproc -lopencv_video -lopencv_xobjdetect -lopencv_objdetect -lopencv_calib3d -lopencv_imgcodecs -lopencv_features2d -lopencv_dnn -lopencv_flann -lopencv_xphoto -lopencv_photo -lopencv_imgproc -lopencv_core -o exe main.cpp
   ```
-  Make sure you have Homebrew installed. If not, you can find installation instructions [here](https://brew.sh/).
 
-### Step 2: Configure the Project
+- Also update both `path` and `directory` keys to match your project path and your `main.cpp` file respectively.
+- This step ensures that the compiler can find the necessary OpenCV headers during the build process.
 
-- Open the provided C++ code (main.cpp) in your preferred code editor.
+### Edit the opencv path in `build.sh`:
 
-### Step 3: Edit compile_commands.json (For VIM Users)
+- Open the file
+- Modify the opencv path to match the location of the OpenCV libraries on your system just as we did in the previous step with the `compile_commands.json` file.
 
-- If you are using Vim, locate the `compile_commands.json` file in your project directory.
-- Find the path to your OpenCV installation and update it in the `compile_commands.json` file.
+> You can always use `brew info` command followed by _opencv_ to get the information needed to get the paths we discused earlier.
 
-### Step 4: Modify Paths in build.sh
+### Edit the video path in `main.cpp`:
 
-- Open the `build.sh` script.
-- Update the path to your OpenCV installation.
-- Update the path to OpenCV libraries in the script.
+- Replace the _**video.mp4**_ with the actual path of the video you want to convert into ASCII art.
 
-### Step 5: Make build.sh Executable
+```C++
+string video_path = "./video.mp4";
+```
 
-- Give execution permission to the `build.sh` script:
+### Grant permission to `build.sh`:
+
+- Open the terminal or command prompt.
+- Navigate to the project directory.
+- Run the following command to grant execute permission to the `build.sh` script:
 
 ```shell
 $ chmod +x build.sh
 ```
 
-### Step 6: Build the Project
+### Let the magic happen!
 
-- Run the following command in your terminal to build the project:
-
-```shell
-$ chmod +x build.sh
-```
-
-## Usage
-
-### Step 1: Edit the Video Path
-
-- Open the `main.cpp` file in your code editor.
-- Locate the line with the comment: "Edit the path of video in main.cpp".
-- Replace `"./video.mp4"` with the path to your video file.
-
-### Step 2: Run the Project
-
-- In your terminal, execute the following command to run the project:
+Run the following command and enjoy:
 
 ```shell
-$ chmod +x build.sh
+$ ./build.sh
 ```
 
-## Explanation
+### Conclusion
 
-- The code reads the video specified in `main.cpp`.
-- It converts each frame of the video to grayscale and resizes it to fit the desired ASCII art dimensions.
-- ASCII art is generated from the pixel intensity of each resized frame.
-- The resulting ASCII art is displayed in the terminal in real-time.
-
-## Tips
-
-- You can experiment with different video files to create unique ASCII art.
-- Adjust the `width` and `height` variables in `main.cpp` to change the size of the ASCII art.
-- The `pixelToASCII` function in the code maps pixel intensity to ASCII characters. You can modify this mapping to achieve different visual effects.
-
-Congratulations! You've successfully set up and run a project that transforms videos into captivating ASCII art using OpenCV and C++. Explore the world of ASCII art and unleash your creativity. Enjoy the mesmerizing results!
+In this article, we explored the process of transforming videos into ASCII art using C++ and OpenCV. By following the steps mentioned above, you can build and run the program successfully. With its real-time video processing, dynamic resizing, customizable ASCII character set, and cross-platform compatibility, the program offers a unique and engaging way to experience videos in a creative manner. So go ahead, unleash your creativity, and witness the captivating world of video-to-ASCII art transformation.

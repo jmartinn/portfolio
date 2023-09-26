@@ -1,9 +1,11 @@
 import "./globals.css";
-import clsx from "clsx";
+
 import type { Metadata } from "next";
+
+import { Analytics } from "@vercel/analytics/react";
 import localFont from "next/font/local";
 import Sidebar from "./components/sidebar";
-import { Analytics } from "@vercel/analytics/react";
+import clsx from "clsx";
 
 const graphik = localFont({
   src: [

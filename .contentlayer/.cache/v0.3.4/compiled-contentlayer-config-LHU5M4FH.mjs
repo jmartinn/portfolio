@@ -69,7 +69,6 @@ var contentlayer_config_default = makeSource({
       [
         rehypePrettyCode,
         {
-          theme: "one-dark-pro",
           onVisitLine(node) {
             if (node.children.length === 0) {
               node.children = [{ type: "text", value: " " }];
@@ -98,4 +97,4 @@ export {
   Blog,
   contentlayer_config_default as default
 };
-//# sourceMappingURL=compiled-contentlayer-config-FZCB2WZJ.mjs.map
+//# sourceMappingURL=compiled-contentlayer-config-LHU5M4FH.mjs.map

@@ -12,7 +12,7 @@ export default function ProjectsPage() {
   return (
     <section>
       <h1 className="font-bold text-2xl mb-8 tracking-tighter">
-        Takea look at my projects
+        Take a look at my projects
       </h1>
       <p>
         🚧 Whoops! This part of the sidewalk is under construction 🚧 <br />
