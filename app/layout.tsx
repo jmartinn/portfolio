@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     template: "%s | Juan Pedro Martin",
   },
   description: "Developer, writer, and creator.",
+  alternates: {
+    canonical: "https://jmartinn.com",
+  },
   openGraph: {
     title: "Juan Pedro Martin",
     description: "Developer, writer, and creator.",

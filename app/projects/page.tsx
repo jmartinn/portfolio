@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 
-import Link from "next/link";
-
 export const metadata: Metadata = {
   title: "Projects",
   description:
     "Here are some of my projects that I've built within the past years",
+  alternates: {
+    canonical: "https://jmartinn.com/projects",
+  },
 };
 
 export default function ProjectsPage() {
