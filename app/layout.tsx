@@ -55,6 +55,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: "Juan Pedro Martin",
+    creator: "@juampe_m",
     card: "summary_large_image",
   },
   verification: {
