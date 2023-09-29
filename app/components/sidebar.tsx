@@ -77,7 +77,7 @@ export default function Navbar() {
                       {
                         "text-neutral-500": !isActive,
                         "font-bold": isActive,
-                      }
+                      },
                     )}
                   >
                     <span className="relative py-[5px] px-[10px]">

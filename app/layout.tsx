@@ -56,7 +56,8 @@ export const metadata: Metadata = {
   twitter: {
     title: "Juan Pedro Martin",
     card: "summary_large_image",
-    siteId: "900770820951244800",
+    site: "@juamp_m",
+    creator: "@juamp_m",
   },
   verification: {
     google: "Fyg64Q58kWDqARPWRbdy4uCuy8ENcCPHLITkRgRzyW4",
