@@ -17,7 +17,10 @@ export default function ProjectsPage() {
       <h1 className="font-bold text-2xl mb-8 tracking-tighter">
         take a look at my projects
       </h1>
-
+      <p>
+        🚧 Whoops! This part of the sidewalk is under construction 🚧 <br />
+        Take a coffe and come back later! ☕️
+      </p>
       {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <ProjectCard
           title="Video To ASCII"
