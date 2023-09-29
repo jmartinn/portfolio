@@ -1,10 +1,5 @@
 import { getTweet } from "react-tweet/api";
-import {
-  EmbeddedTweet,
-  TweetNotFound,
-  TweetSkeleton,
-  type TweetProps,
-} from "react-tweet";
+import { EmbeddedTweet, TweetNotFound, type TweetProps } from "react-tweet";
 import "./tweet.css";
 
 const TweetContent = async ({ id, components, onError }: TweetProps) => {
@@ -33,7 +28,7 @@ export const ReactTweet = (props: TweetProps) => <TweetContent {...props} />;
 export async function TweetComponent({ id }: { id: string }) {
   return (
     <div className="tweet my-6">
-      <div className={`flex justify-center`}>
+      <div className={`flex `}>
         <ReactTweet id={id} />
       </div>
     </div>

@@ -85,17 +85,6 @@ export default function Page() {
             <p className="h-7">follow me on twitter</p>
           </a>
         </li>
-        <li>
-          <a
-            className="flex items-center hover:text-neutral-700 dark:hover:text-neutral-200 transition-all"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://threads.net/@juampe_m"
-          >
-            <ArrowIcon />
-            <p className="h-7">follow me on threads</p>
-          </a>
-        </li>
       </ul>
     </section>
   );
