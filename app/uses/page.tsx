@@ -3,14 +3,14 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Uses",
   description:
-    "here's what tech I'm currently using for coding, videos, and music.",
+    "Here's what tech I'm currently using for coding, videos, and music.",
 };
 
 export default function UsesPage() {
   return (
     <section>
       <h1 className="font-bold text-2xl mb-8 tracking-tighter">
-        Here's my setup
+        here's my setup
       </h1>
       <div className="prose prose-neutral dark:prose-invert">
         <h3 id="computer-office">Computer / Office</h3>
