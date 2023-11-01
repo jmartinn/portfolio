@@ -12,10 +12,9 @@ import { BlogLink } from "./components/blog-link";
 export default function Page() {
   return (
     <section>
-      <h1 className="font-bold text-3xl">{name}</h1>
-      <p className="my-5 max-w-[460px] text-neutral-800 dark:text-neutral-200">
-        {about()}
-      </p>
+      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">
+        hey, I'm Juan 👋
+      </h1>
       <div className="flex items-center justify-start my-8 space-x-6 md:space-x-8">
         <Image
           alt={name}

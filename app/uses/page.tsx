@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     canonical: "https://jmartinn.com/uses",
   },
   description:
-    "Here's what tech I'm currently using for coding, videos, and music.",
+    "here's what tech I'm currently using for coding, videos, and music.",
 };
 
 export default function UsesPage() {
