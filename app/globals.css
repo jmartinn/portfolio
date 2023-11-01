@@ -9,7 +9,7 @@
 
 html {
   min-width: 360px;
-  scrollbar-gutter: stable;
+  scrollbar-gutter: auto;
 }
 
 .prose .anchor {

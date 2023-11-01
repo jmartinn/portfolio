@@ -2,10 +2,10 @@ import Image from "next/image";
 import {
   ArrowIcon,
   GitHubIcon,
-  ThreadsIcon,
+  LinkedInIcon,
   TwitterIcon,
 } from "./components/icons";
-import { name, about, bio, avatar } from "lib/info";
+import { bio, avatar } from "lib/info";
 import { Suspense } from "react";
 import { BlogLink } from "./components/blog-link";
 
@@ -17,7 +17,7 @@ export default function Page() {
       </h1>
       <div className="flex items-center justify-start my-8 space-x-6 md:space-x-8">
         <Image
-          alt={name}
+          alt="Juan Pedro Martin"
           className="rounded-full grayscale"
           src={avatar}
           placeholder="blur"
@@ -37,9 +37,9 @@ export default function Page() {
             className="flex items-center gap-2 dark:hover:text-neutral-200"
             rel="noopener noreferrer"
             target="_blank"
-            href="https://threads.net/@juampe_m"
+            href="https://www.linkedin.com/in/juampemartin/"
           >
-            <ThreadsIcon />
+            <LinkedInIcon />
           </a>
           <a
             rel="noopener noreferrer"
