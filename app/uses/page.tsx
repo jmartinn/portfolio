@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Uses",
-  alternates: {
-    canonical: "https://jmartinn.com/uses",
-  },
   description:
     "here's what tech I'm currently using for coding, videos, and music.",
 };

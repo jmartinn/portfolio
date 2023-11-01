@@ -1,8 +1,6 @@
 import * as React from "react";
-
 import Link from "next/link";
 import Image from "next/image";
-
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { TweetComponent } from "./tweet";
 
@@ -104,7 +102,7 @@ export function Mdx({ code }: { code: string }) {
   const Component = useMDXComponent(code);
 
   return (
-    <article className="prose prose-quoteless prose-neutral text-justify dark:prose-invert">
+    <article className="prose prose-quoteless prose-neutral dark:prose-invert">
       <Component components={components} />
     </article>
   );

@@ -10,9 +10,6 @@ import { getViewsCount } from "lib/metrics";
 export const metadata: Metadata = {
   title: "Blog",
   description: "Read my thoughts on software development, design, and more.",
-  alternates: {
-    canonical: "https://jmartinn.com/blog",
-  },
 };
 
 export default async function BlogPage() {

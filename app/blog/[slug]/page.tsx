@@ -43,9 +43,6 @@ export async function generateMetadata({
         },
       ],
     },
-    alternates: {
-      canonical: `https://jmartinn.com/blog/${slug}`,
-    },
     twitter: {
       card: "summary_large_image",
       title,

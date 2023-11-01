@@ -18,6 +18,7 @@ const nextConfig = {
       },
     ];
   },
+  compress: true,
 };
 
 // https://nextjs.org/docs/advanced-features/security-headers
