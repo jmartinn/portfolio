@@ -5,11 +5,7 @@ import me from "app/avatar.jpeg";
 export const name = "Juan Pedro Martin";
 export const avatar = me;
 export const about = () => {
-  return (
-    <>
-      Hey, I'm Juan 👋. I'm a <b>Frontend Developer at Interamplify</b>.
-    </>
-  );
+  return <>Hey, I'm Juan 👋</>;
 };
 export const bio = () => {
   return (

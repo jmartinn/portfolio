@@ -57,9 +57,7 @@ export default function Navbar() {
   return (
     <aside className="md:w-[150px] md:flex-shrink-0 -mx-4 md:mx-0 md:px-0">
       <div className="lg:sticky lg:top-20">
-        <div className="ml-2 hidden md:ml-[12px] mb-2 px-4 md:px-0 md:mb-8 space-y-10 md:flex flex-col md:flex-row items-start ">
-          <Logo />
-        </div>
+        <div className="ml-2 hidden md:ml-[12px] mb-2 px-4 md:px-0 md:mb-8 space-y-10 md:flex flex-col md:flex-row items-start" />
         <LayoutGroup>
           <nav
             className="flex flex-row md:flex-col items-start relative px-4 md:px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
@@ -77,7 +75,7 @@ export default function Navbar() {
                       {
                         "text-neutral-500": !isActive,
                         "font-bold": isActive,
-                      },
+                      }
                     )}
                   >
                     <span className="relative py-[5px] px-[10px]">

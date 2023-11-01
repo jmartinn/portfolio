@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 
-// import { ProjectCard } from "app/components/project-card";
-
 export const metadata: Metadata = {
   title: "Projects",
   description:
@@ -21,28 +19,6 @@ export default function ProjectsPage() {
         🚧 Whoops! This part of the sidewalk is under construction 🚧 <br />
         Take a coffe and come back later! ☕️
       </p>
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <ProjectCard
-          title="Video To ASCII"
-          description="Generate ASCII art from a video using C++ and OpenCV"
-          link={"https://github.com/jmartinn/vid-to-ascii"}
-        />
-        <ProjectCard
-          title="Video To ASCII"
-          description="Generate ASCII art from a video using C++ and OpenCV"
-          link={"https://github.com/jmartinn/vid-to-ascii"}
-        />
-        <ProjectCard
-          title="Video To ASCII"
-          description="Generate ASCII art from a video using C++ and OpenCV"
-          link={"https://github.com/jmartinn/vid-to-ascii"}
-        />
-        <ProjectCard
-          title="Video To ASCII"
-          description="Generate ASCII art from a video using C++ and OpenCV"
-          link={"https://github.com/jmartinn/vid-to-ascii"}
-        />
-      </div> */}
     </section>
   );
 }

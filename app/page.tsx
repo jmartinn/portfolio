@@ -71,6 +71,10 @@ export default function Page() {
       <div className="my-8 flex flex-col space-y-4 w-full">
         <Suspense>
           <BlogLink name="Video To ASCII Using C++" slug="video-to-ascii" />
+          <BlogLink
+            name="The Importance of Clean Code in Software"
+            slug="clean-code"
+          />
         </Suspense>
       </div>
       <ul className="flex flex-col md:flex-row mt-8 space-x-0 md:space-x-4 space-y-2 md:space-y-0 font-sm text-neutral-500 dark:text-neutral-400">
@@ -83,6 +87,17 @@ export default function Page() {
           >
             <ArrowIcon />
             <p className="h-7">follow me on twitter</p>
+          </a>
+        </li>
+        <li>
+          <a
+            className="flex items-center hover:text-neutral-700 dark:hover:text-neutral-200 transition-all"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="mailto:juamp_m@hotmail.com"
+          >
+            <ArrowIcon />
+            <p className="h-7">send me an email</p>
           </a>
         </li>
       </ul>
