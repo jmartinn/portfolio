@@ -16,30 +16,6 @@ export default function ProjectsPage() {
         🚧 Whoops! This part of the sidewalk is under construction 🚧 <br />
         Take a coffe and come back later! ☕️
       </p>
-      {/* <p>
-        🚧 Whoops! This part of the sidewalk is under construction 🚧 <br />
-        Take a coffe and come back later! ☕️
-      </p>
-      <p>
-        🚧 Whoops! This part of the sidewalk is under construction 🚧 <br />
-        Take a coffe and come back later! ☕️
-      </p>
-      <p>
-        🚧 Whoops! This part of the sidewalk is under construction 🚧 <br />
-        Take a coffe and come back later! ☕️
-      </p>
-      <p>
-        🚧 Whoops! This part of the sidewalk is under construction 🚧 <br />
-        Take a coffe and come back later! ☕️
-      </p>
-      <p>
-        🚧 Whoops! This part of the sidewalk is under construction 🚧 <br />
-        Take a coffe and come back later! ☕️
-      </p>
-      <p>
-        🚧 Whoops! This part of the sidewalk is under construction 🚧 <br />
-        Take a coffe and come back later! ☕️
-      </p> */}
     </section>
   );
 }
