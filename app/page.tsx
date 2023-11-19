@@ -175,6 +175,10 @@ export default function Page() {
             name="The Importance of Clean Code in Software"
             slug="clean-code"
           />
+          <BlogLink
+            name="Turmoil at OpenAI: The Unexpected Ousting of Sam Altman and What Lies Ahead"
+            slug="openai-ceo-sam-altman"
+          />
         </Suspense>
       </div>
       <ul className="flex flex-col md:flex-row mt-8 space-x-0 md:space-x-4 space-y-2 md:space-y-0 font-sm text-neutral-600 dark:text-neutral-300">
