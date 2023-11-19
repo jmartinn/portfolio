@@ -176,7 +176,7 @@ export default function Page() {
             slug="clean-code"
           />
           <BlogLink
-            name="Turmoil at OpenAI: The Unexpected Ousting of Sam Altman and What Lies Ahead"
+            name="Turmoil at OpenAI: Sam Altman Fired"
             slug="openai-ceo-sam-altman"
           />
         </Suspense>
