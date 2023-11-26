@@ -9,19 +9,19 @@ import Sidebar from "./components/sidebar";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jmartinn.com"),
+  metadataBase: new URL("https://www.jmartinn.com"),
   title: {
     default: "Juan Pedro Martin",
     template: "%s | Juan Pedro Martin",
   },
   description: "Developer, writer, and creator.",
   alternates: {
-    canonical: "https://www.jmartinn.com",
+    canonical: "https://www.www.jmartinn.com",
   },
   openGraph: {
     title: "Juan Pedro Martin",
     description: "Developer, writer, and creator.",
-    url: "https://jmartinn.com",
+    url: "https://www.jmartinn.com",
     siteName: "Juan Pedro Martin",
     locale: "en_US",
     type: "website",

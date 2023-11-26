@@ -29,9 +29,9 @@ const computedFields = {
       dateModified: doc.publishedAt,
       description: doc.summary,
       image: doc.image
-        ? `https://jmartinn.com${doc.image}`
-        : `https://jmartinn.com/og?title=${doc.title}`,
-      url: `https://jmartinn.com/blog/${doc._raw.flattenedPath}`,
+        ? `https://www.jmartinn.com${doc.image}`
+        : `https://www.jmartinn.com/og?title=${doc.title}`,
+      url: `https://www.jmartinn.com/blog/${doc._raw.flattenedPath}`,
       author: {
         "@type": "Person",
         name: "Juan Pedro Martin",
