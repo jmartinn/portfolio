@@ -176,8 +176,8 @@ export default function Page() {
             slug="clean-code"
           />
           <BlogLink
-            name="Turmoil at OpenAI: Sam Altman Fired"
-            slug="openai-ceo-sam-altman"
+            name="I Intrigue: The Unprecedented Power Shift at OpenAI and Microsoft"
+            slug="openai-drama"
           />
         </Suspense>
       </div>
