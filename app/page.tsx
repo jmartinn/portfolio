@@ -176,7 +176,7 @@ export default function Page() {
             slug="clean-code"
           />
           <BlogLink
-            name="I Intrigue: The Unprecedented Power Shift at OpenAI and Microsoft"
+            name="The Unprecedented Power Shift at OpenAI and Microsoft"
             slug="openai-drama"
           />
         </Suspense>
