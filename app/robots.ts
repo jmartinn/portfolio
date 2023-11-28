@@ -5,7 +5,7 @@ export default function robots() {
         userAgent: "*",
       },
     ],
-    sitemap: "https://www.www.jmartinn.com/sitemap.xml",
-    host: "https://www.www.jmartinn.com",
+    sitemap: "https://www.jmartinn.com/sitemap.xml",
+    host: "https://www.jmartinn.com",
   };
 }
