@@ -49,6 +49,11 @@ export const Blog = defineDocumentType(() => ({
       type: "string",
       required: true,
     },
+    keywords: {
+      type: "list",
+      of: { type: "string" },
+      required: false,
+    },
     publishedAt: {
       type: "string",
       required: true,

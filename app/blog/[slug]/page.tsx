@@ -25,11 +25,14 @@ export async function generateMetadata({
     publishedAt: publishedTime,
     summary: description,
     image,
+    keywords,
     slug,
   } = post;
   const ogImage = image
     ? `https://www.jmartinn.com${image}`
-    : `https://www.jmartinn.com/og?title=${title}`;
+    : `https://www.jmartinn.com/og?title=${title}&aoc=${keywords?.includes(
+        "aoc"
+      )}    `;
 
   return {
     title,

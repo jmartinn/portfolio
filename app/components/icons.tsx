@@ -73,6 +73,7 @@ export function InteramplifyIcon() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="14"
+      className="!mr-1"
       height="14"
       viewBox="0 0 68 68"
     >

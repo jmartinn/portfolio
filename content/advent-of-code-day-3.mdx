@@ -1,0 +1,151 @@
+---
+title: "Advent of Code Day 1: Trebuchet?"
+publishedAt: "2023-12-01"
+summary: "In this blog post, we embark on the Advent of Code Day 1 challenge, using it as an opportunity to dive into C++."
+keywords:
+  - C++
+  - Advent of Code
+  - Algorithms
+  - aoc
+  - aoc2023
+---
+
+Welcome to my coding journey with this year's Advent of Code! As a frontend developer diving into the world of C++, I'm thrilled to share my experiences, learnings, and occasional stumbles. Today, let's explore Day 1's challenge, a seemingly simple task that unfolds into a fascinating problem-solving adventure.
+
+## Part 1: The First Digit Quest
+
+Day 1 started with a straightforward yet intriguing problem. The task was to find the first and last digit on each line of a text document, combine these digits to form a two-digit number, and then sum up these numbers across all lines. For example, "1abc2" translates to 12.
+
+Confident and eager, I jumped right in. The plan was simple: parse the input file, read each line, identify the first digit, and then find the last one. Sounds easy, right?
+
+A key takeaway from this part was converting characters to integers, a process that leverages ASCII values. It's fascinating how such a small detail can be crucial in coding! This might actually sound like one of those "Everybody knows that!" moments, but I'm still a beginner, so I'm allowed to be excited about it ;).
+
+```cpp
+#include <fstream>
+#include <iostream>
+#include <string>
+
+int main(int argc, char *argv[]) {
+  std::ifstream file("input.prod");
+  std::string line;
+  int sum = 0;
+
+  if (file.is_open()) {
+    while (getline(file, line)) {
+      int firstDigit = '0';
+      int lastDigit = '0';
+
+      bool foundFirst = false;
+
+      for (char c : line) {
+        if (std::isdigit(c)) {
+          firstDigit = c;
+          foundFirst = true;
+          break;
+        }
+      }
+
+      if (foundFirst) {
+        for (auto it = line.rbegin(); it != line.rend(); it++) {
+          if (std::isdigit(*it)) {
+            lastDigit = *it;
+            break;
+          }
+        }
+      }
+
+      if (foundFirst) {
+        int value = (firstDigit - '0') * 10 + (lastDigit - '0');
+        sum += value;
+      }
+    }
+    file.close();
+  } else {
+    std::cout << "Failed to open the input file" << std::endl;
+    return -1;
+  }
+
+  std::cout << "Total sum: " << sum << std::endl;
+
+  return 0;
+}
+```
+
+Completing Part 1 was a boost to my morale. It felt great to apply C++ in solving real problems, and it was reassuring to see that my strategy worked as intended
+
+## Part 2: The Spelling Challenge
+
+Just when I thought I had it all figured out, Part 2 threw a curveball. Now, the 'digits' could also be words like "one", "two", "three", etc. The task remained the same: form a two-digit number from the first and last 'digits' on each line and sum them up. For instance, "two1nine" becomes 29.
+
+This part was a different beast (at least for me). Parsing spelled-out numbers into digits was a challenge that tested my patience and skills. The process involved creating a function to convert strings to digits, considering both numerals and their word equivalents. After grappling with various issues and spending a considerable amount of time debugging, I finally cracked it. And you know how it feels to solve a problem that has been bugging you for hours.
+
+```cpp
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+
+// Array of digit representations
+const std::string digits[] = { "0",   "1",   "2",     "3",    "4",    "5",   "6",     "7",     "8",   "9", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+
+// Convert string to digit
+int64_t to_digit(const std::string &str) {
+  for (size_t i = 0; i < std::size(digits); ++i) {
+    if (str.find(digits[i]) == 0) {
+      return (i >= 10) ? i - 9 : i;
+    }
+  }
+  return -1;
+}
+
+// Main function to process the document
+int64_t spelled_out(const std::string &document) {
+  int64_t total = 0;
+  std::istringstream iss(document);
+  std::string line;
+
+  while (std::getline(iss, line)) {
+    int64_t first = -1, last = -1;
+
+    for (size_t i = 0; i < line.length(); ++i) {
+      for (size_t j = 1; j <= line.length() - i; ++j) {
+        int64_t digit = to_digit(line.substr(i, j));
+        if (digit != -1) {
+          if (first == -1)
+            first = digit;
+          last = digit;
+        }
+      }
+    }
+
+    if (first != -1 && last != -1) {
+      total += first * 10 + last;
+    }
+  }
+
+  return total;
+}
+
+int main() {
+  // File input
+  std::ifstream file("input.prod");
+  if (!file) {
+    std::cerr << "Error opening file 'input.txt'" << std::endl;
+    return 1;
+  }
+
+  std::string document((std::istreambuf_iterator<char>(file)),
+                       std::istreambuf_iterator<char>());
+
+  std::cout << "Total: " << spelled_out(document) << std::endl;
+
+  return 0;
+}
+```
+
+In conclusion, day 1 of the Advent of Code was a blend of simplicity and complexity, comfort and challenge. It was a perfect start to my C++ journey, teaching me not just about the language but also about the nuances of problem-solving in programming. Every line of code was a step forward in my learning path.
+
+Stay tuned for more of my Advent of Code journey. If you find these insights helpful, or if you're also on a coding adventure, let's connect and learn together. Share, comment, and let's build a community of learners and coding enthusiasts!
+
+And in case you missed it, here's the [GitHub repo](https://www.github.com/jmartinn/aoc2023) for this year's Advent of Code.
