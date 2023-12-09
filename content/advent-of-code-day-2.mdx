@@ -1,0 +1,144 @@
+---
+title: "Advent of Code Day 2: Cube Conundrum"
+publishedAt: "2023-12-02"
+summary: "In this blog post, we continue the adventure right where we left off yesterday with Advent of Code Day 2 challenge."
+keywords:
+  - C++
+  - Advent Of Code
+  - Algorithms
+  - aoc
+  - 2023
+---
+
+Welcome back to my Advent of Code diary! On Day 2, we dived into a challenge that revolved around a simple yet intriguing concept: cube counting in a game setting. Let’s unpack this puzzle and see how I navigated through its two distinct parts. Now before we get into it I encourage you to try to solve the [problems](https://adventofcode.com/2023/day/2) yourself.
+
+## Part 1: Cube Counting Challenge
+
+The first part of the day involved determining the feasibility of various games based on the availability of red, green, and blue cubes. The task was to verify if any game's single reveal of cubes exceeded the set limit of a spefic numbers of cubes, in my case 12 red, 13 green, and 14 blue.
+This part felt quite direct. My main task was to parse the information about the games and structure them efficiently in classes. Once this was set up, assessing whether each game was possible became a straightforward logical process.
+
+So my goal was centered around efficiently parsing the game data and organizing it into a structured format. I focused on creating a class structure that could easily represent each game and its rounds, encapsulating the details of the cubes used in each round.
+
+```cpp
+struct Round {
+  int red, green, blue;
+  Round(int r, int g, int b) : red(r), green(g), blue(b) {}
+};
+
+struct Game {
+  int id;
+  std::vector<Round> rounds;
+
+  Game(int id) : id(id){};
+
+  void print_game_details() {
+    std::cout << "Game ID: " << id << std::endl;
+    for (size_t i = 0; i < rounds.size(); ++i) {
+      std::cout << "Round " << (i + 1) << ": "
+                << "Red: " << rounds[i].red << ", "
+                << "Green: " << rounds[i].green << ", "
+                << "Blue: " << rounds[i].blue << std::endl;
+    }
+  }
+};
+```
+
+With this structure in place, the main task became a matter of iterating through the rounds of each game and checking against the set limits for red, green, and blue cubes. The logic here was straightforward: if any round in a game exceeded the available number of cubes for any color, that game was deemed impossible. This approach allowed me to quickly assess the feasibility of each game by simply comparing the numbers from the rounds to the predefined limits.
+
+```cpp
+int64_t is_game_possible(int max_red, int max_green, int max_blue) {
+  for (auto &round : rounds) {
+    if (round.red > max_red || round.green > max_green ||
+        round.blue > max_blue) {
+      return 0;
+    }
+  }
+  return id;
+}
+```
+
+I also used this helper function to extract the number of cubes for each round for each color:
+
+```cpp
+int64_t extract_number(const std::string &round_info, const std::string &color) {
+  size_t pos = round_info.find(color);
+  if (pos != std::string::npos) {
+    int i = pos - 1;
+    while (i >= 0 && std::isspace(round_info[i])) {
+      --i;
+    }
+
+    int start = i;
+    while (start >= 0 && std::isdigit(round_info[start])) {
+      --start;
+    }
+
+    std::string number_str = round_info.substr(start + 1, i - start);
+    int number = std::stoi(number_str);
+
+    return number;
+  }
+  return 0;
+}
+```
+
+## Part 2: Minimum Cube Calculation
+
+The second part of the challenge required a shift in strategy. This time, the goal was to determine the minimum number of cubes of each color needed to make each game feasible. This involved calculating the 'power' of each game based on the maximum number of cubes revealed in any single round.
+
+Now for this part I modified the Game class to include a new method to calculate the game's power. This change in approach from verifying feasibility to calculating minimum requirements added a fresh layer of complexity to the problem.
+This process involved iterating through each round of the game and identifying the maximum number of red, green, and blue cubes that were revealed in a single round. These maxima were then multiplied together to obtain the 'power' of the game. This new method provided a streamlined way to calculate the essential resource requirements for each game, reflecting the minimum number of cubes needed to ensure that all rounds of the game could be played.
+
+```cpp
+  int64_t get_game_power() {
+    int game_power = 0;
+    int min_red = 0, min_green = 0, min_blue = 0;
+    for (auto &round : rounds) {
+      min_red = std::max(min_red, round.red);
+      min_green = std::max(min_green, round.green);
+      min_blue = std::max(min_blue, round.blue);
+    }
+
+    game_power = min_red * min_green * min_blue;
+    return game_power;
+  }
+```
+
+Then I just needed to call the method in the `process_line` function instead of calling the `is_game_possible` function as we did on part one.
+
+```cpp
+int64_t process_line(const std::string &line) {
+  std::stringstream ss(line);
+  std::string token;
+  std::string word;
+  int game_id;
+
+  std::getline(ss, token, ':');
+
+  std::stringstream tokenStream(token);
+
+  tokenStream >> word >> game_id;
+
+  Game current_game(game_id);
+
+  while (std::getline(ss, token, ';')) {
+    int red = extract_number(token, "red");
+    int green = extract_number(token, "green");
+    int blue = extract_number(token, "blue");
+
+    Round round(red, green, blue);
+
+    current_game.rounds.push_back(round);
+  }
+
+  /* Here we replace the is_game_possible by the get_game_power we defined before */
+  return current_game.get_game_power();
+}
+```
+
+## Conclusion
+
+In conclusion, day three challenge was a blend of data parsing, class structuring, and logical problem-solving. While neither part was excessively difficult, they required careful consideration and an understanding of how to manipulate data structures to get the desired outcome.
+
+I hope you found this article help full and yet entertaining. Stay tuned as I continue to navigate the Advent of Code, sharing my experiences and insights along the way. If you’re enjoying this series, don’t forget to share and connect.
+Also here's the [GitHub repo](https://github.com/jmartinn/aoc-2023) if you want to checkout the full code of today's challenge.

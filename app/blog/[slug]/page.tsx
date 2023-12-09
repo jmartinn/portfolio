@@ -49,6 +49,8 @@ export async function generateMetadata({
         },
       ],
     },
+    keywords: [...keywords!],
+
     twitter: {
       card: "summary_large_image",
       title,
