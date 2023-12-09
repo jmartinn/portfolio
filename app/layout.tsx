@@ -1,12 +1,12 @@
 import "./globals.css";
+import type { Metadata } from "next";
 
 import clsx from "clsx";
-
-import type { Metadata } from "next";
 import { GeistSans, GeistMono } from "geist/font";
 import Sidebar from "./components/sidebar";
 
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jmartinn.com"),
