@@ -1,5 +1,5 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type Metadata from "next";
 
 import clsx from "clsx";
 import { GeistSans, GeistMono } from "geist/font";
@@ -66,6 +66,7 @@ export default function RootLayout({
         <main className="flex-auto min-w-0 mt-6 md:mt-0 flex flex-col px-2 md:px-0">
           {children}
           <Analytics />
+          <SpeedInsights />
         </main>
       </body>
     </html>
