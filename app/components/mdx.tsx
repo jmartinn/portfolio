@@ -117,9 +117,8 @@ function Code({ children, ...props }) {
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
-function slugify(str) {
+function slugify(str: string): string {
   return str
-    .toString()
     .toLowerCase()
     .trim() // Remove whitespace from both ends of a string
     .replace(/\s+/g, "-") // Replace spaces with -
@@ -128,9 +127,9 @@ function slugify(str) {
     .replace(/\-\-+/g, "-"); // Replace multiple - with single -
 }
 
-function createHeading(level) {
-  return ({ children }) => {
-    let slug = slugify(children);
+function createHeading(level: number) {
+  const Component = ({ children }: { children: React.ReactNode }) => {
+    let slug = slugify(children as string);
     return React.createElement(
       `h${level}`,
       { id: slug },
@@ -144,6 +143,8 @@ function createHeading(level) {
       children
     );
   };
+  Component.displayName = `Heading${level}`;
+  return Component;
 }
 
 let components = {
