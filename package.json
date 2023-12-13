@@ -5,7 +5,8 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "build-only": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.10",
@@ -29,5 +30,9 @@
     "swr": "^2.2.4",
     "tailwindcss": "^3.3.5",
     "typescript": "5.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "eslint-config-next": "^14.0.4"
   }
 }

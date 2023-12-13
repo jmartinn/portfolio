@@ -69,7 +69,7 @@ export default function Page() {
   return (
     <section>
       <h1 className="font-semibold text-2xl mb-8 tracking-tighter">
-        hey, I'm Juan 👋
+        hey, I&apos;m Juan 👋
       </h1>
       <div className="flex items-center justify-start my-8 space-x-6 md:space-x-8">
         <Image
@@ -167,12 +167,12 @@ export default function Page() {
         </p>
         <blockquote className="font-semibold">
           I firmly believe that developers are akin to poets, scripting the
-          world's most impactful language - the language of machines.
+          world&apos;s most impactful language - the language of machines.
         </blockquote>
         <p>
-          I'm always eager to connect and collaborate on interesting projects,
-          while consistently learning and growing in this ever-evolving tech
-          industry.
+          I&apos;m always eager to connect and collaborate on interesting
+          projects, while consistently learning and growing in this
+          ever-evolving tech industry.
         </p>
       </div>
       <div className="my-8 flex flex-col space-y-4 w-full">

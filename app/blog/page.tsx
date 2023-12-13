@@ -28,8 +28,12 @@ export default function BlogPage() {
             }
             return 1;
           })
-          .map((post) => (
-            <BlogLink name={post.metadata.title} slug={post.slug} />
+          .map((post, idx) => (
+            <BlogLink
+              key={`blog-card-${idx}`}
+              name={post.metadata.title}
+              slug={post.slug}
+            />
           ))}
       </div>
     </section>

@@ -10,7 +10,7 @@ export default function UsesPage() {
   return (
     <section>
       <h1 className="font-bold text-2xl mb-8 tracking-tighter">
-        here's my setup
+        here&apos;s my setup
       </h1>
       <div className="prose prose-neutral dark:prose-invert">
         <h3 id="computer-office">Computer / Office</h3>
