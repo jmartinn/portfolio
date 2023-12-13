@@ -111,7 +111,7 @@ export default function Blog({ params }) {
             url: `https://www.jmartinn.com/blog/${post.slug}`,
             author: {
               "@type": "Person",
-              name: "Juan Pedro Martin",
+              name: "jmartinn",
             },
           }),
         }}
