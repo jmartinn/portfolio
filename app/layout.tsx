@@ -1,12 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
 
-import clsx from "clsx";
-import { GeistSans, GeistMono } from "geist/font";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono} from "geist/font/mono";
 import Sidebar from "./components/sidebar";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SandpackCSS } from "./blog/[slug]/sandpack";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jmartinn.com"),
@@ -26,7 +27,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-  keywords: ["Juan Pedro Martin", "Developer", "Writer", "Creator", "Frontend"],
+  keywords: [
+    "Juan Pedro Martin",
+    "Developer",
+    "Writer",
+    "Creator",
+    "Frontend",
+    "Software",
+  ],
   robots: {
     index: true,
     follow: true,
@@ -41,12 +49,14 @@ export const metadata: Metadata = {
   twitter: {
     title: "Juan Pedro Martin",
     card: "summary_large_image",
-    creator: "@juamp_m"
+    creator: "@juamp_m",
   },
   verification: {
     google: "Fyg64Q58kWDqARPWRbdy4uCuy8ENcCPHLITkRgRzyW4",
   },
 };
+
+const cx = (...classes) => classes.filter(Boolean).join(" ");
 
 export default function RootLayout({
   children,
@@ -56,12 +66,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={clsx(
+      className={cx(
         "text-black bg-white dark:text-white dark:bg-[#111010]",
         GeistSans.variable,
-        GeistMono.variable
+        GeistMono.variable,
       )}
     >
+      <head>
+        <SandpackCSS />
+      </head>
       <body className="antialiased max-w-4xl mb-40 flex flex-col md:flex-row mx-4 mt-8 md:mt-20 lg:mt-20 lg:mx-auto">
         <Sidebar />
         <main className="flex-auto min-w-0 mt-6 md:mt-0 flex flex-col px-2 md:px-0">

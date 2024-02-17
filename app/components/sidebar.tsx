@@ -10,13 +10,13 @@ const navItems = {
     name: "home",
   },
   "/uses": {
-    name: "about",
+    name: "uses",
   },
   "/blog": {
     name: "blog",
   },
-  "/projects": {
-    name: "projects",
+  "/work": {
+    name: "work",
   },
 };
 
@@ -47,7 +47,7 @@ export default function Sidebar() {
                       {
                         "text-neutral-500": !isActive,
                         "font-bold": isActive,
-                      }
+                      },
                     )}
                   >
                     <span className="relative py-[5px] px-[10px]">

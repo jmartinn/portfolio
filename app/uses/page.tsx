@@ -23,11 +23,12 @@ export default function UsesPage() {
         <h3 id="coding">Coding</h3>
         <ul>
           <li>
-            Editor: VSCode (
-            {/* <a href='https://gist.github.com/leerob/e7883ab35d900b8cbb684ac77e7c470'>*/}
-            <a href="#">Settings / Extensions</a>)
+            Editor: Neovim(
+            <a href="https://www.github.com/jmartinn/neovim-config/">
+              Settings / Plugins</a>
+            )
           </li>
-          <li>Theme: Dark Modern</li>
+          <li>Theme: Dark Plus</li>
           <li>Terminal: iTerm2 / zsh</li>
         </ul>
         <h3 id="audio-video">Audio</h3>
