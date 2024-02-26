@@ -20,7 +20,7 @@ const navItems = {
   },
 };
 
-export default function Sidebar() {
+export function Sidebar() {
   let pathname = usePathname() || "/";
   if (pathname.includes("/blog/")) {
     pathname = "/blog";

@@ -11,23 +11,23 @@ import { unstable_noStore as noStore } from "next/cache";
 export async function generateMetadata({
   params,
 }): Promise<Metadata | undefined> {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+  const post = getBlogPosts().find((post) => post.slug === params.slug);
   if (!post) {
     return;
   }
 
-  let {
+  const {
     title,
     publishedAt: publishedTime,
     summary: description,
     image,
     keywords,
   } = post.metadata;
-  let ogImage = image
+  const ogImage = image
     ? `https://www.jmartinn.com${image}`
     : `https://www.jmartinn.com/og?title=${title}&aoc=${keywords?.includes(
-        "aoc"
-      )}`;
+      "aoc",
+    )}`;
 
   return {
     title,
@@ -54,34 +54,48 @@ export async function generateMetadata({
   };
 }
 
-function formatDate(date: string) {
+function formatDate(date: string): string {
   noStore();
-  let currentDate = new Date();
-  if (!date.includes('T')) {
+  const currentDate = new Date();
+  if (!date.includes("T")) {
     date = `${date}T00:00:00`;
   }
-  let targetDate = new Date(date);
+  const targetDate = new Date(date);
+  const diffTime = Math.abs(currentDate.getTime() - targetDate.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
   let yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
   let monthsAgo = currentDate.getMonth() - targetDate.getMonth();
   let daysAgo = currentDate.getDate() - targetDate.getDate();
 
-  let formattedDate = '';
+  if (daysAgo < 0) {
+    monthsAgo--;
+    daysAgo += new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      0,
+    ).getDate();
+  }
+  if (monthsAgo < 0) {
+    yearsAgo--;
+    monthsAgo += 12;
+  }
 
+  let formattedDate = "";
   if (yearsAgo > 0) {
     formattedDate = `${yearsAgo}y ago`;
   } else if (monthsAgo > 0) {
     formattedDate = `${monthsAgo}mo ago`;
-  } else if (daysAgo > 0) {
-    formattedDate = `${daysAgo}d ago`;
+  } else if (diffDays > 0) {
+    formattedDate = `${diffDays}d ago`;
   } else {
-    formattedDate = 'Today';
+    formattedDate = "Today";
   }
 
-  let fullDate = targetDate.toLocaleString('en-us', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
+  const fullDate = targetDate.toLocaleString("en-us", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
   });
 
   return `${fullDate} (${formattedDate})`;
@@ -118,7 +132,7 @@ export default function Blog({ params }) {
           }),
         }}
       />
-      <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
+      <h1 className="title font-semibold text-3xl tracking-tighter max-w-[650px]">
         {post.metadata.title}
       </h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">

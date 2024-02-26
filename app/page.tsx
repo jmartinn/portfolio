@@ -5,7 +5,7 @@ import {
   LinkedInIcon,
   TwitterIcon,
 } from "./components/icons";
-import avatar from "app/avatar.jpeg";
+import avatar from "public/images/avatar.jpeg";
 import ViewCounter from "app/blog/view-counter";
 import { Suspense } from "react";
 import { getViewsCount } from "./db/queries";

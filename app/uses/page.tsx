@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Uses",
   description:
-    "Here's what tech I'm currently using for coding, videos, and music.",
+    "Here's what tech I'm currently using for coding, working, and music.",
 };
 
 export default function UsesPage() {
   return (
     <section>
-      <h1 className="font-bold text-2xl mb-8 tracking-tighter">
+      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">
         here&apos;s my setup
       </h1>
       <div className="prose prose-neutral dark:prose-invert">
@@ -24,7 +24,7 @@ export default function UsesPage() {
         <ul>
           <li>
             Editor: Neovim(
-            <a href="https://www.github.com/jmartinn/neovim-config/">
+            <a href="https://www.github.com/jmartinn/neovim-config/" target="_blank">
               Settings / Plugins</a>
             )
           </li>
@@ -41,7 +41,7 @@ export default function UsesPage() {
           <li>Apple Music</li>
           <li>Obsidian</li>
           <li>Grammarly</li>
-          <li>Texts</li>
+          <li>TablePlus</li>
           <li>Raycast</li>
         </ul>
         <h3 id="other-tech">Other Tech</h3>

@@ -6,7 +6,6 @@ export const runtime = "edge";
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const postTitle = searchParams.get("title");
-  const isAoc = searchParams.get("aoc") === "true";
   const font = fetch(
     new URL("../../public/fonts/montserrat-semibold.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
@@ -22,9 +21,7 @@ export async function GET(req: NextRequest) {
           flexDirection: "column",
           alignItems: "flex-start",
           justifyContent: "center",
-          backgroundImage: isAoc
-            ? "url(https://www.jmartinn.com/og-bg-aoc.png)"
-            : "url(https://www.jmartinn.com/og-bg.png)",
+          backgroundImage: "url(https://www.jmartinn.com/og-bg.png)",
         }}
       >
         <div

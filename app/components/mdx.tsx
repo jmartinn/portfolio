@@ -4,7 +4,6 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { TweetComponent } from "./tweet";
 import { highlight } from "sugar-high";
 import React from "react";
-import { LiveCode } from "./sandpack";
 
 function Table({ data }) {
   let headers = data.headers.map((header, index) => (
@@ -118,7 +117,7 @@ function Code({ children, ...props }) {
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 
-function slugify(str) {
+function slugify(str: string | number) {
   return str
     .toString()
     .toLowerCase()
@@ -164,7 +163,6 @@ let components = {
   StaticTweet: TweetComponent,
   code: Code,
   Table,
-  LiveCode,
 };
 
 export function CustomMDX(props) {
