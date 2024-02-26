@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Suspense, cache } from "react";
-import { notFound } from "next/navigation";
 import { CustomMDX } from "app/components/mdx";
-import { getViewsCount } from "app/db/queries";
+import { notFound } from "next/navigation";
+import { getViewsCount } from "app/db/actions";
 import { getBlogPosts } from "app/db/blog";
-import ViewCounter from "../view-counter";
 import { increment } from "app/db/actions";
 import { unstable_noStore as noStore } from "next/cache";
+import ViewCounter from "../view-counter";
 
 export async function generateMetadata({
   params,
@@ -102,7 +102,7 @@ function formatDate(date: string): string {
 }
 
 export default function Blog({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug);
+  const post = getBlogPosts().find((post) => post.slug === params.slug);
 
   if (!post) {
     notFound();
@@ -150,10 +150,10 @@ export default function Blog({ params }) {
   );
 }
 
-let incrementViews = cache(increment);
+const incrementViews = cache(increment);
 
 async function Views({ slug }: { slug: string }) {
-  let views = await getViewsCount();
+  const views = await getViewsCount();
   incrementViews(slug);
   return <ViewCounter allViews={views} slug={slug} />;
 }

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ViewCounter from "app/blog/view-counter";
 import {
   InteramplifyIcon,
   LinkedInIcon,
@@ -7,13 +8,12 @@ import {
   ArrowIcon
 } from "./components/icons";
 import { Badge } from "./components/ui/badge";
-import avatar from "public/images/avatar.jpeg";
-import ViewCounter from "app/blog/view-counter";
 import { Suspense } from "react";
-import { getViewsCount } from "./db/queries";
+import { getViewsCount } from "./db/actions";
+import avatar from "public/images/avatar.jpeg";
 
 async function Views({ slug }: { slug: string }) {
-  let views = await getViewsCount();
+  const views = await getViewsCount();
   return <ViewCounter allViews={views} slug={slug} />;
 }
 

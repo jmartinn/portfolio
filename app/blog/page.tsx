@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { Suspense } from "react";
-import ViewCounter from "./view-counter";
-import { getViewsCount } from "app/db/queries";
+import { ArrowIcon } from "app/components/icons";
+import { getViewsCount } from "app/db/actions";
 import { getBlogPosts } from "app/db/blog";
+import ViewCounter from "./view-counter";
 
 export const metadata = {
   title: "Blog",
@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default function BlogPage() {
-  let allBlogs = getBlogPosts();
+  const allBlogs = getBlogPosts();
 
   return (
     <section>
@@ -41,26 +41,9 @@ export default function BlogPage() {
 }
 
 async function Views({ slug }: { slug: string }) {
-  let views = await getViewsCount();
+  const views = await getViewsCount();
 
   return <ViewCounter allViews={views} slug={slug} />;
-}
-
-function ArrowIcon() {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
 }
 
 async function BlogLink({ slug, name }) {
