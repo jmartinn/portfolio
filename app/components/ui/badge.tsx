@@ -1,6 +1,6 @@
 "use client";
 
-export default function Badge(props) {
+export function Badge(props) {
   return (
     <a
       {...props}
