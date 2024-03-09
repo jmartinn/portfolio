@@ -34,12 +34,9 @@ function Table({ data }: TableProps) {
   );
 }
 
-interface CustomLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  href: string;
-}
+function CustomLink(props) {
+  let href = props.href;
 
-function CustomLink({ href, ...props }: CustomLinkProps) {
   if (href.startsWith("/")) {
     return (
       <Link href={href} {...props}>
