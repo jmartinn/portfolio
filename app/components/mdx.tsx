@@ -34,8 +34,11 @@ function Table({ data }: TableProps) {
   );
 }
 
-function CustomLink(props) {
-  let href = props.href;
+interface CustomLinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> { }
+
+function CustomLink(props: CustomLinkProps) {
+  let href: string = props.href!;
 
   if (href.startsWith("/")) {
     return (
