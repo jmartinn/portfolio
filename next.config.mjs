@@ -6,7 +6,6 @@ export const sql = postgres(process.env.POSTGRES_URL, {
 
 const nextConfig = {
   experimental: {
-    ppr: true,
     useLightningcss: true,
   },
   async redirects() {
@@ -43,6 +42,7 @@ const ContentSecurityPolicy = `
     media-src 'none';
     connect-src *;
     font-src 'self' data:;
+    frame-src 'self' *.codesandbox.io vercel.live;
 `;
 
 const securityHeaders = [

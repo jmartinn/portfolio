@@ -18,13 +18,13 @@ export default function UsesPage() {
           <li>Mac Mini (2023)</li>
           <li>24&quot; LG 24MP400-B</li>
           <li>Logitech G Pro Mouse</li>
-          <li>Keychron V3 QMK</li>
+          <li>Keychron V4 QMK</li>
         </ul>
         <h3 id="coding">Coding</h3>
         <ul>
           <li>
-            Editor: Neovim(
-            <a href="https://www.github.com/jmartinn/neovim-config/" target="_blank">
+            Editor: Neovim (
+            <a href="https://www.github.com/jmartinn/vimrc/" target="_blank">
               Settings / Plugins</a>
             )
           </li>
@@ -40,8 +40,8 @@ export default function UsesPage() {
           <li>1Password</li>
           <li>Apple Music</li>
           <li>Obsidian</li>
-          <li>Grammarly</li>
           <li>TablePlus</li>
+          <li>Amethyst</li>
           <li>Raycast</li>
         </ul>
         <h3 id="other-tech">Other Tech</h3>

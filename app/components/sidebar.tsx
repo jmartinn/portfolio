@@ -1,9 +1,10 @@
 "use client";
 
-import clsx from "clsx";
 import Link from "next/link";
 import { LayoutGroup, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+
+import { cn } from "lib/utils";
 
 const navItems = {
   "/": {
@@ -42,7 +43,7 @@ export function Sidebar() {
                   <Link
                     key={path}
                     href={path}
-                    className={clsx(
+                    className={cn(
                       "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle",
                       {
                         "text-neutral-500": !isActive,

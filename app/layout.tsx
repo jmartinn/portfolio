@@ -5,9 +5,10 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Sidebar } from "./components/sidebar";
 
+import { cn } from "lib/utils";
+
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jmartinn.com"),
@@ -56,8 +57,6 @@ export const metadata: Metadata = {
   },
 };
 
-const cx = (...classes) => classes.filter(Boolean).join(" ");
-
 export default function RootLayout({
   children,
 }: {
@@ -66,21 +65,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cx(
+      className={cn(
         "text-black bg-white dark:text-white dark:bg-[#111010]",
         GeistSans.variable,
         GeistMono.variable,
       )}
     >
-      <body className="antialiased max-w-4xl mb-40 flex flex-col md:flex-row mx-4 mt-8 md:mt-20 lg:mt-20 lg:mx-auto">
+      <body className="antialiased max-w-4xl mb-40 flex flex-col md:flex-row mx-4 mt-8 md:mt-20 lg:mx-auto lg:mt-20">
         <Sidebar />
-        <main className="flex-auto min-w-0 mt-6 md:mt-0 flex flex-col px-2 md:px-0">
+        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0 md:mt-0">
           {children}
           <Analytics />
           <SpeedInsights />
         </main>
       </body>
-      <GoogleAnalytics gaId="G-SZW29GL9NX" />
     </html>
   );
 }

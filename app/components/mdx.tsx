@@ -1,9 +1,11 @@
+import React from "react";
+
 import Link from "next/link";
 import Image, { ImageProps } from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { TweetComponent } from "./tweet";
+
 import { highlight } from "sugar-high";
-import React from "react";
 
 interface TableProps {
   data: {

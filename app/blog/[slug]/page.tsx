@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { getViewsCount } from "app/db/actions";
 import { getBlogPosts } from "app/db/blog";
 import { increment } from "app/db/actions";
-import { unstable_noStore as noStore } from "next/cache";
+import { formatDate } from "lib/utils";
 import ViewCounter from "../view-counter";
 
 export async function generateMetadata({
@@ -52,53 +52,6 @@ export async function generateMetadata({
       images: [ogImage],
     },
   };
-}
-
-function formatDate(date: string): string {
-  noStore();
-  const currentDate = new Date();
-  if (!date.includes("T")) {
-    date = `${date}T00:00:00`;
-  }
-  const targetDate = new Date(date);
-  const diffTime = Math.abs(currentDate.getTime() - targetDate.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-  let yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
-  let monthsAgo = currentDate.getMonth() - targetDate.getMonth();
-  let daysAgo = currentDate.getDate() - targetDate.getDate();
-
-  if (daysAgo < 0) {
-    monthsAgo--;
-    daysAgo += new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      0,
-    ).getDate();
-  }
-  if (monthsAgo < 0) {
-    yearsAgo--;
-    monthsAgo += 12;
-  }
-
-  let formattedDate = "";
-  if (yearsAgo > 0) {
-    formattedDate = `${yearsAgo}y ago`;
-  } else if (monthsAgo > 0) {
-    formattedDate = `${monthsAgo}mo ago`;
-  } else if (diffDays > 0) {
-    formattedDate = `${diffDays}d ago`;
-  } else {
-    formattedDate = "Today";
-  }
-
-  const fullDate = targetDate.toLocaleString("en-us", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-
-  return `${fullDate} (${formattedDate})`;
 }
 
 export default function Blog({ params }) {
