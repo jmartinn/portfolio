@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Sidebar } from "./components/sidebar";
+import { Footer } from "./components/footer";
 
 import { cn } from "lib/utils";
 
@@ -75,6 +76,7 @@ export default function RootLayout({
         <Sidebar />
         <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0 md:mt-0">
           {children}
+          <Footer />
           <Analytics />
           <SpeedInsights />
         </main>

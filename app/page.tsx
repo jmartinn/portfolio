@@ -157,36 +157,12 @@ export default function Page() {
             slug="advent-of-code-day-1"
           />
           <BlogLink name="Video To ASCII Using C++" slug="video-to-ascii" />
-          <BlogLink
-            name="The Unprecedented Power Shift at OpenAI and Microsoft"
-            slug="openai-drama"
-          />
+          {/* <BlogLink */}
+          {/*   name="The Unprecedented Power Shift at OpenAI and Microsoft" */}
+          {/*   slug="openai-drama" */}
+          {/* /> */}
         </Suspense>
       </div>
-      <ul className="flex flex-col md:flex-row mt-8 space-x-0 md:space-x-4 space-y-2 md:space-y-0 font-sm text-neutral-600 dark:text-neutral-300">
-        <li>
-          <a
-            className="flex items-center hover:text-neutral-800 dark:hover:text-neutral-100 transition-all"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://twitter.com/juamp_m"
-          >
-            <ArrowIcon />
-            <p className="h-7 ml-2">follow me on twitter</p>
-          </a>
-        </li>
-        <li>
-          <a
-            rel="noopener noreferrer"
-            target="_blank"
-            href="mailto:juamp_m@hotmail.com"
-            className="flex items-center hover:text-neutral-800 dark:hover:text-neutral-100 transition-all"
-          >
-            <ArrowIcon />
-            <p className="h-7 ml-2">send me an email</p>
-          </a>
-        </li>
-      </ul>
     </section>
   );
 }
