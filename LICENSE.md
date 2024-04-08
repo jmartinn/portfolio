@@ -1,1 +1,1 @@
-[This project](https://www.jmartinn.com/) by [Juan Pedro Martin](https://www.github.com/jmartinn) is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1)
+This project is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1)
