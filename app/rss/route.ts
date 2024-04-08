@@ -26,9 +26,9 @@ export async function GET() {
   const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0">
     <channel>
-        <title>My Portfolio</title>
+        <title>JMartin's Portfolio Blog</title>
         <link>${'https://www.jmartinn.com'}</link>
-        <description>This is my portfolio RSS feed</description>
+        <description>Stay updated with the latest posts from JMartin's Portfolio Blog, where I share insights on web development, project showcases, and personal reflections on the tech industry. Subscribe to dive into my world of coding and creativity</description>
         ${itemsXml}
     </channel>
   </rss>`
