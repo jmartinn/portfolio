@@ -58,7 +58,7 @@ function CustomLink(props: CustomLinkProps) {
 }
 
 function RoundedImage({ ...props }: ImageProps) {
-  return <Image className="rounded-lg" {...props} />;
+  return <Image className="rounded-lg" {...props} alt={props.alt ?? ""} />;
 }
 
 interface CalloutProps {
@@ -141,7 +141,14 @@ function ConsCard({ title, cons }: ConsCardProps) {
 
 function Code({ children, ...props }) {
   const codeHTML = highlight(children);
-  return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
+
+  return (
+    <code
+      className="relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm"
+      dangerouslySetInnerHTML={{ __html: codeHTML }}
+      {...props}
+    />
+  )
 }
 
 function slugify(str: string | number) {
