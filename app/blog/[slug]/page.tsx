@@ -94,7 +94,7 @@ export default function Blog({ params }) {
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(post.metadata.publishedAt)}
         </p>
-        <Suspense fallback={<Skeleton className="h-6 w-[90px] bg-neutral-100" />}>
+        <Suspense fallback={<Skeleton className="h-6 w-[90px] bg-neutral-100 dark:bg-neutral-500" />}>
           <Views slug={post.slug} />
         </Suspense>
       </div>

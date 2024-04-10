@@ -58,7 +58,7 @@ async function BlogLink({ slug, name }) {
           <p className="font-medium text-neutral-900 dark:text-neutral-100">
             {name}
           </p>
-          <Suspense fallback={<Skeleton className="h-6 w-[90px]" />}>
+          <Suspense fallback={<Skeleton className="h-6 w-[90px] dark:bg-neutral-600" />}>
             <Views slug={slug} />
           </Suspense>
         </div>
