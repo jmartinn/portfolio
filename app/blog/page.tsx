@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { ArrowIcon } from "app/components/icons";
+import { Skeleton } from "app/components/ui/skeleton";
 import { getViewsCount } from "app/db/actions";
 import { getBlogPosts } from "app/db/blog";
 import ViewCounter from "./view-counter";
@@ -57,7 +58,7 @@ async function BlogLink({ slug, name }) {
           <p className="font-medium text-neutral-900 dark:text-neutral-100">
             {name}
           </p>
-          <Suspense fallback={<p className="h-6" />}>
+          <Suspense fallback={<Skeleton className="h-6 w-[90px]" />}>
             <Views slug={slug} />
           </Suspense>
         </div>

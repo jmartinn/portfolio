@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense, cache } from "react";
 import { CustomMDX } from "app/components/mdx";
+import { Skeleton } from "app/components/ui/skeleton";
 import { notFound } from "next/navigation";
 import { getViewsCount } from "app/db/actions";
 import { getBlogPosts } from "app/db/blog";
@@ -26,8 +27,8 @@ export async function generateMetadata({
   const ogImage = image
     ? `https://www.jmartinn.com${image}`
     : `https://www.jmartinn.com/og?title=${title}&aoc=${keywords?.includes(
-      "aoc",
-    )}`;
+        "aoc",
+      )}`;
 
   return {
     title,
@@ -92,7 +93,7 @@ export default function Blog({ params }) {
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(post.metadata.publishedAt)}
         </p>
-        <Suspense fallback={<p className="h-5" />}>
+        <Suspense fallback={<Skeleton className="h-6 w-[90px] bg-neutral-100" />}>
           <Views slug={post.slug} />
         </Suspense>
       </div>

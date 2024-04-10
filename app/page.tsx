@@ -9,6 +9,7 @@ import {
 } from "./components/icons";
 import { Badge } from "./components/ui/badge";
 import { Suspense } from "react";
+import { Skeleton } from "./components/ui/skeleton";
 import { getViewsCount } from "./db/actions";
 import avatar from "public/images/avatar.jpeg";
 
@@ -28,7 +29,7 @@ async function BlogLink({ slug, name }) {
           <p className="font-medium text-neutral-900 dark:text-neutral-100">
             {name}
           </p>
-          <Suspense fallback={<p className="h-6" />}>
+          <Suspense fallback={<Skeleton className="h-6 w-[90px]" />}>
             <Views slug={slug} />
           </Suspense>
         </div>
@@ -60,12 +61,12 @@ export default function Page() {
             rel="noopener noreferrer"
             target="_blank"
             href="https://twitter.com/juamp_m"
-            className="flex items-center gap-2 dark:hover:text-neutral-200"
+            className="flex items-center gap-2 hover:text-neutral-700 dark:hover:text-neutral-200"
           >
             <TwitterIcon />
           </a>
           <a
-            className="flex items-center gap-2 dark:hover:text-neutral-200"
+            className="flex items-center gap-2 hover:text-neutral-700 dark:hover:text-neutral-200"
             rel="noopener noreferrer"
             target="_blank"
             href="https://www.linkedin.com/in/juampemartin/"
@@ -76,7 +77,7 @@ export default function Page() {
             rel="noopener noreferrer"
             target="_blank"
             href="https://github.com/jmartinn"
-            className="flex items-center gap-2 dark:hover:text-neutral-200"
+            className="flex items-center gap-2 hover:text-neutral-700 dark:hover:text-neutral-200"
           >
             <GitHubIcon />
           </a>
