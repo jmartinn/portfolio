@@ -7,6 +7,7 @@ import { getViewsCount } from "app/db/actions";
 import { getBlogPosts } from "app/db/blog";
 import { increment } from "app/db/actions";
 import { formatDate } from "lib/utils";
+
 import ViewCounter from "../view-counter";
 
 export async function generateMetadata({
@@ -97,7 +98,7 @@ export default function Blog({ params }) {
           <Views slug={post.slug} />
         </Suspense>
       </div>
-      <article className="prose prose-quoteless prose-neutral dark:prose-invert mb-6">
+      <article className="prose prose-quoteless prose-neutral dark:prose-invert mb-6 text-justify">
         <CustomMDX source={post.content} />
       </article>
     </section>
