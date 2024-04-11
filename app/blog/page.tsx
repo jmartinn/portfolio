@@ -10,8 +10,8 @@ export const metadata = {
   description: "Read my thoughts on software development, design, and more.",
 };
 
-export default function BlogPage() {
-  const allBlogs = getBlogPosts();
+export default async function BlogPage() {
+  const allBlogs = await getBlogPosts();
 
   return (
     <section>

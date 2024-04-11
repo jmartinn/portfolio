@@ -4,7 +4,7 @@ import { CustomMDX } from "app/components/mdx";
 import { Skeleton } from "app/components/ui/skeleton";
 import { notFound } from "next/navigation";
 import { getViewsCount } from "app/db/actions";
-import { getBlogPosts } from "app/db/blog";
+import { getBlogPost, getBlogPosts } from "app/db/blog";
 import { increment } from "app/db/actions";
 import { formatDate } from "lib/utils";
 
@@ -13,7 +13,8 @@ import ViewCounter from "../view-counter";
 export async function generateMetadata({
   params,
 }): Promise<Metadata | undefined> {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+  const post = (await getBlogPosts()).find((post) => post.slug === params.slug);
+
   if (!post) {
     return;
   }
@@ -56,8 +57,8 @@ export async function generateMetadata({
   };
 }
 
-export default function Blog({ params }) {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+export default async function Blog({ params }) {
+  const post = await getBlogPost(params.slug);
 
   if (!post) {
     notFound();

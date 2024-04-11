@@ -1,5 +1,6 @@
-import fs from "fs";
-import path from "path";
+"use server";
+
+import { sql } from "./postgres";
 
 type Metadata = {
   title: string;
@@ -7,6 +8,13 @@ type Metadata = {
   summary: string;
   image?: string;
   keywords?: string[];
+};
+
+type Post = {
+  slug: string;
+  metadata: Metadata;
+  tweetIds: string[];
+  content: string;
 };
 
 function parseFrontmatter(fileContent: string) {
@@ -31,35 +39,52 @@ function parseFrontmatter(fileContent: string) {
   return { metadata: metadata as Metadata, content };
 }
 
-function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
-}
-
-function readMDXFile(filePath: string) {
-  const rawContent = fs.readFileSync(filePath, "utf-8");
-  return parseFrontmatter(rawContent);
-}
-
 function extractTweetIds(content: string) {
   const tweetMatches = content.match(/<StaticTweet\sid="[0-9]+"\s\/>/g);
   return tweetMatches?.map((tweet: string) => tweet.match(/[0-9]+/g)![0]) || [];
 }
 
-function getMDXData(dir: string) {
-  const mdxFiles = getMDXFiles(dir);
-  return mdxFiles.map((file) => {
-    const { metadata, content } = readMDXFile(path.join(dir, file));
-    const slug = path.basename(file, path.extname(file));
-    const tweetIds = extractTweetIds(content);
+export async function getBlogPosts(): Promise<Post[]> {
+  const rawPosts = await sql`
+    SELECT slug, content
+    FROM posts
+  `;
+
+  const posts: Post[] = rawPosts.map(({ slug, content }) => {
+    const { metadata, content: processedContent } = parseFrontmatter(content);
+    const tweetIds = extractTweetIds(processedContent);
+
     return {
-      metadata,
       slug,
+      metadata,
       tweetIds,
-      content,
+      content: processedContent,
     };
   });
+
+  return posts;
 }
 
-export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), "content"));
+export async function getBlogPost(slug: string): Promise<Post | null> {
+  const rawPost = await sql`
+    SELECT slug, content
+    FROM posts
+    WHERE slug = ${slug}
+    LIMIT 1
+  `;
+
+  if (rawPost.length === 0) {
+    return null;
+  }
+
+  const { slug: postSlug, content } = rawPost[0];
+  const { metadata, content: processedContent } = parseFrontmatter(content);
+  const tweetIds = extractTweetIds(processedContent);
+
+  return {
+    slug: postSlug,
+    metadata,
+    tweetIds,
+    content: processedContent,
+  };
 }
