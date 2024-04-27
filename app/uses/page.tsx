@@ -24,7 +24,7 @@ export default function UsesPage() {
         <ul>
           <li>
             Editor: Neovim (
-            <a href="https://www.github.com/jmartinn/vimrc/" target="_blank">
+            <a href="https://www.github.com/jmartinn/dotfiles/" target="_blank">
               Settings / Plugins</a>
             )
           </li>
