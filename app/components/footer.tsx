@@ -1,4 +1,4 @@
-import { ArrowIcon } from "app/components/icons";
+import { Icons } from "app/components/icons";
 
 export function Footer() {
   return (
@@ -11,7 +11,7 @@ export function Footer() {
             target="_blank"
             href="/rss"
           >
-            <ArrowIcon />
+            <Icons.arrow />
             <p className="ml-2 h-7">rss</p>
           </a>
         </li>
@@ -22,7 +22,7 @@ export function Footer() {
             target="_blank"
             href="https://twitter.com/juamp_m"
           >
-            <ArrowIcon />
+            <Icons.arrow />
             <p className="h-7 ml-2">follow me on twitter</p>
           </a>
         </li>
@@ -33,7 +33,7 @@ export function Footer() {
             target="_blank"
             href="mailto:juamp_m@hotmail.com"
           >
-            <ArrowIcon />
+            <Icons.arrow />
             <p className="h-7 ml-2">send me an email</p>
           </a>
         </li>

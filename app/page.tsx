@@ -1,12 +1,6 @@
 import Image from "next/image";
 import ViewCounter from "app/blog/view-counter";
-import {
-  InteramplifyIcon,
-  LinkedInIcon,
-  TwitterIcon,
-  GitHubIcon,
-  ArrowIcon
-} from "./components/icons";
+import { Icons } from "./components/icons";
 import { Badge } from "./components/ui/badge";
 import { Suspense } from "react";
 import { Skeleton } from "./components/ui/skeleton";
@@ -23,18 +17,20 @@ async function BlogLink({ slug, name }) {
     <div className="group">
       <a
         href={`/blog/${slug}`}
-        className="border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 rounded flex items-center justify-between px-3 py-4 w-full"
+        className="border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 hover:border-neutral-300 hover:bg-neutral-100 dark:hover:border-neutral-600 dark:hover:bg-neutral-700 rounded flex items-center justify-between px-3 py-4 w-full"
       >
         <div className="flex flex-col">
           <p className="font-medium text-neutral-900 dark:text-neutral-100">
             {name}
           </p>
-          <Suspense fallback={<Skeleton className="h-6 w-[90px] dark:bg-neutral-600" />}>
+          <Suspense
+            fallback={<Skeleton className="h-6 w-[90px] dark:bg-neutral-600" />}
+          >
             <Views slug={slug} />
           </Suspense>
         </div>
         <div className="text-neutral-700 dark:text-neutral-300 transform transition-transform duration-300 group-hover:-rotate-12">
-          <ArrowIcon />
+          <Icons.arrow />
         </div>
       </a>
     </div>
@@ -63,7 +59,7 @@ export default function Page() {
             href="https://twitter.com/juamp_m"
             className="flex items-center gap-2 hover:text-neutral-700 dark:hover:text-neutral-200"
           >
-            <TwitterIcon />
+            <Icons.twitter />
           </a>
           <a
             className="flex items-center gap-2 hover:text-neutral-700 dark:hover:text-neutral-200"
@@ -71,7 +67,7 @@ export default function Page() {
             target="_blank"
             href="https://www.linkedin.com/in/juampemartin/"
           >
-            <LinkedInIcon />
+            <Icons.linkedin />
           </a>
           <a
             rel="noopener noreferrer"
@@ -79,7 +75,7 @@ export default function Page() {
             href="https://github.com/jmartinn"
             className="flex items-center gap-2 hover:text-neutral-700 dark:hover:text-neutral-200"
           >
-            <GitHubIcon />
+            <Icons.github />
           </a>
         </div>
       </div>
@@ -89,13 +85,13 @@ export default function Page() {
         work as Frontend Developer at `}
         <span className="not-prose">
           <Badge href="https://interamplify.com">
-            <InteramplifyIcon />
+            <Icons.interamplify />
             Interamplify
           </Badge>
         </span>
         {`, where I leverage technologies like `}
         <Badge href="https://react.dev">
-          <img
+          <Image
             alt="React logomark"
             src="/react-logo.svg"
             className="!mr-1"
@@ -106,7 +102,7 @@ export default function Page() {
         </Badge>
         {`, `}
         <Badge href="https://nextjs.org">
-          <img
+          <Image
             alt="Next.js logomark"
             src="/next-logo.svg"
             className="!mr-1"

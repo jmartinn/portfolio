@@ -29,7 +29,7 @@ export default function UsesPage() {
             )
           </li>
           <li>Theme: Dark Plus</li>
-          <li>Terminal: iTerm2 / zsh</li>
+          <li>Terminal: WezTerm / zsh</li>
         </ul>
         <h3 id="audio-video">Audio</h3>
         <ul>

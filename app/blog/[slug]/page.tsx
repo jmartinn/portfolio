@@ -99,7 +99,7 @@ export default async function Blog({ params }) {
           <Views slug={post.slug} />
         </Suspense>
       </div>
-      <article className="prose prose-quoteless prose-neutral dark:prose-invert mb-6 text-justify">
+      <article suppressHydrationWarning className="prose prose-quoteless prose-neutral dark:prose-invert mb-6 text-justify">
         <CustomMDX source={post.content} />
       </article>
     </section>

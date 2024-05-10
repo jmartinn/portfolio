@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image, { ImageProps } from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { TweetComponent } from "./tweet";
+import { Pre } from "./pre";
 
 import { highlight } from "sugar-high";
 
@@ -139,8 +140,9 @@ function ConsCard({ title, cons }: ConsCardProps) {
   );
 }
 
-function Code({ children, ...props }) {
+async function Code({ children, ...props }) {
   const codeHTML = highlight(children);
+  // const codeHTML = await highlightCode(children, "c++");
 
   return (
     <code
@@ -148,7 +150,7 @@ function Code({ children, ...props }) {
       dangerouslySetInnerHTML={{ __html: codeHTML }}
       {...props}
     />
-  )
+  );
 }
 
 function slugify(str: string | number) {
@@ -193,6 +195,7 @@ const components = {
   ProsCard,
   ConsCard,
   StaticTweet: TweetComponent,
+  pre: Pre,
   code: Code,
   Table,
 };
