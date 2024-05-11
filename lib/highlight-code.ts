@@ -10,9 +10,9 @@ import { getHighlighter } from "shiki";
 const highlightCodeEnabled = process.env.NODE_ENV !== "development";
 
 export async function highlightCode(code: string, lang: string) {
-  // if (!highlightCodeEnabled) {
-  //   return code;
-  // }
+  if (!highlightCodeEnabled) {
+    return code;
+  }
 
   const editorTheme = await fs.readFile(
     path.join(process.cwd(), "lib/themes/dark.json"),

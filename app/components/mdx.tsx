@@ -140,13 +140,13 @@ function ConsCard({ title, cons }: ConsCardProps) {
   );
 }
 
-async function Code({ children, ...props }) {
+function Code({ children, ...props }) {
   const codeHTML = highlight(children);
   // const codeHTML = await highlightCode(children, "c++");
 
   return (
     <code
-      className="relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm"
+      className="rounded px-[0.3rem] py-[0.2rem] font-mono text-sm"
       dangerouslySetInnerHTML={{ __html: codeHTML }}
       {...props}
     />

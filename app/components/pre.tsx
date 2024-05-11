@@ -8,13 +8,15 @@ export function Pre({ children, ...props }) {
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).then(
       () => {
-        console.log("Copied to clipboard successfully!");
         toast({
           description: "Copied to clipboard!",
         });
       },
-      (err) => {
-        console.error("Failed to copy text to clipboard", err);
+      () => {
+        toast({
+          description: "Failed to copy to clipboard",
+          variant: "destructive",
+        });
       },
     );
   };
@@ -27,15 +29,16 @@ export function Pre({ children, ...props }) {
       copyToClipboard(text);
     }
   };
+
   return (
-    <pre className="py-6 px-4 relative" {...props}>
+    <pre className="px-4 flex flex-row items-start" {...props}>
+      <div className="flex-grow self-center">{children}</div>
       <button
         onClick={handleCopyClick}
-        className="absolute right-4 text-xs text-neutral-900 bg-neutral-200 dark:bg-neutral-700 dark:text-neutral-100 hover:bg-neutral-300 hover:dark:bg-neutral-600 shadow-md px-2 py-2 rounded"
+        className="text-xs text-neutral-900 bg-neutral-200 dark:bg-neutral-700 dark:text-neutral-100 hover:bg-neutral-300 hover:dark:bg-neutral-600 shadow-md px-2 py-2 rounded"
       >
         <Icons.clipboard />
       </button>
-      {children}
     </pre>
   );
 }
