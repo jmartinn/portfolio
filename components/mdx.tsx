@@ -37,7 +37,7 @@ function Table({ data }: TableProps) {
   );
 }
 
-interface CustomLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> { }
+interface CustomLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {}
 
 function CustomLink(props: CustomLinkProps) {
   const href: string = props.href!;
@@ -174,7 +174,7 @@ function createHeading(level: number): React.FC<{ children: React.ReactNode }> {
         key: `link-${slug}`,
         className: "anchor",
       }),
-      children,
+      children
     );
   };
   Component.displayName = `Heading${level}`;
@@ -200,7 +200,7 @@ const components = {
 };
 
 export function CustomMDX(
-  props: React.JSX.IntrinsicAttributes & MDXRemoteProps,
+  props: React.JSX.IntrinsicAttributes & MDXRemoteProps
 ) {
   return (
     <MDXRemote

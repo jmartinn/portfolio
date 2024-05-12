@@ -20,7 +20,7 @@ export function Pre({ children, ...props }) {
           description: "Failed to copy to clipboard",
           variant: "destructive",
         });
-      },
+      }
     );
   };
 

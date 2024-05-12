@@ -29,9 +29,7 @@ export async function generateMetadata({
   } = post.metadata;
   const ogImage = image
     ? `https://www.jmartinn.com${image}`
-    : `https://www.jmartinn.com/og?title=${title}&aoc=${keywords?.includes(
-      "aoc",
-    )}`;
+    : `https://www.jmartinn.com/og?title=${title}`;
 
   return {
     title,

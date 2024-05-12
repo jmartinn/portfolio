@@ -5,7 +5,7 @@ import { JSX, ClassAttributes, AnchorHTMLAttributes } from "react";
 export function Badge(
   props: JSX.IntrinsicAttributes &
     ClassAttributes<HTMLAnchorElement> &
-    AnchorHTMLAttributes<HTMLAnchorElement>,
+    AnchorHTMLAttributes<HTMLAnchorElement>
 ) {
   return (
     <a
