@@ -1,16 +1,15 @@
 import "./globals.css";
-import type { Metadata } from "next";
-
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import { Sidebar } from "./components/sidebar";
-import { Footer } from "./components/footer";
-
-import { cn } from "lib/utils";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Toaster } from "./components/ui/toaster";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+import type { Metadata } from "next";
+
+import { Footer } from "components/footer";
+import { Sidebar } from "components/sidebar";
+import { Toaster } from "components/ui/toaster";
+import { cn } from "lib/utils";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jmartinn.com"),

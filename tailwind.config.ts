@@ -1,9 +1,14 @@
-import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
+import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
 
 export default {
-  content: ["./app/**/*.{ts,tsx}", "./content/**/*.mdx", "./public/**/*.svg"],
+  content: [
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./content/**/*.mdx",
+    "./public/**/*.svg",
+  ],
   theme: {
     extend: {
       colors: {

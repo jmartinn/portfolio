@@ -1,6 +1,12 @@
 "use client";
 
-export function Badge(props) {
+import { JSX, ClassAttributes, AnchorHTMLAttributes } from "react";
+
+export function Badge(
+  props: JSX.IntrinsicAttributes &
+    ClassAttributes<HTMLAnchorElement> &
+    AnchorHTMLAttributes<HTMLAnchorElement>,
+) {
   return (
     <a
       {...props}

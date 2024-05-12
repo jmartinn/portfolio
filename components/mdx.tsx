@@ -1,12 +1,12 @@
-import React from "react";
+import React, { AnchorHTMLAttributes, createElement } from "react";
 
-import Link from "next/link";
 import Image, { ImageProps } from "next/image";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { TweetComponent } from "./tweet";
-import { Pre } from "./pre";
-
+import Link from "next/link";
+import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import { highlight } from "sugar-high";
+
+import { Pre } from "./pre";
+import { TweetComponent } from "./tweet";
 
 interface TableProps {
   data: {
@@ -37,11 +37,10 @@ function Table({ data }: TableProps) {
   );
 }
 
-interface CustomLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> { }
+interface CustomLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> { }
 
 function CustomLink(props: CustomLinkProps) {
-  let href: string = props.href!;
+  const href: string = props.href!;
 
   if (href.startsWith("/")) {
     return (
@@ -167,10 +166,10 @@ function slugify(str: string | number) {
 function createHeading(level: number): React.FC<{ children: React.ReactNode }> {
   const Component: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const slug = slugify(children as string);
-    return React.createElement(
+    return createElement(
       `h${level}`,
       { id: slug },
-      React.createElement("a", {
+      createElement("a", {
         href: `#${slug}`,
         key: `link-${slug}`,
         className: "anchor",
@@ -200,7 +199,9 @@ const components = {
   Table,
 };
 
-export function CustomMDX(props) {
+export function CustomMDX(
+  props: React.JSX.IntrinsicAttributes & MDXRemoteProps,
+) {
   return (
     <MDXRemote
       {...props}

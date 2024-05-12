@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
 import { Suspense, cache } from "react";
-import { CustomMDX } from "app/components/mdx";
-import { Skeleton } from "app/components/ui/skeleton";
+
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getViewsCount } from "app/db/actions";
+
+import { getViewsCount, increment } from "app/db/actions";
 import { getBlogPost } from "app/db/blog";
-import { increment } from "app/db/actions";
+import { CustomMDX } from "components/mdx";
+import { Skeleton } from "components/ui/skeleton";
 import { formatDate } from "lib/utils";
 
 import ViewCounter from "../view-counter";
@@ -29,8 +30,8 @@ export async function generateMetadata({
   const ogImage = image
     ? `https://www.jmartinn.com${image}`
     : `https://www.jmartinn.com/og?title=${title}&aoc=${keywords?.includes(
-        "aoc",
-      )}`;
+      "aoc",
+    )}`;
 
   return {
     title,
@@ -95,11 +96,15 @@ export default async function Blog({ params }) {
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(post.metadata.publishedAt)}
         </p>
-        <Suspense fallback={<Skeleton className="h-6 w-[90px] bg-neutral-100 dark:bg-neutral-500" />}>
+        <Suspense
+          fallback={
+            <Skeleton className="h-6 w-[90px] bg-neutral-100 dark:bg-neutral-500" />
+          }
+        >
           <Views slug={post.slug} />
         </Suspense>
       </div>
-      <article suppressHydrationWarning className="prose prose-quoteless prose-neutral dark:prose-invert mb-6 text-justify">
+      <article className="prose prose-quoteless prose-neutral dark:prose-invert mb-6 text-justify">
         <CustomMDX source={post.content} />
       </article>
     </section>

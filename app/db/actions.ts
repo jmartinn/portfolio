@@ -1,7 +1,8 @@
 "use server";
 
-import { sql } from "./postgres";
 import { unstable_noStore as noStore } from "next/cache";
+
+import { sql } from "./postgres";
 
 export async function getBlogViews() {
   if (!process.env.POSTGRES_URL) {

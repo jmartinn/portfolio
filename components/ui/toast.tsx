@@ -1,11 +1,13 @@
 "use client";
 
 import * as React from "react";
+
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import { Icons } from "../icons";
 import { cn } from "lib/utils";
+
+import { Icons } from "../icons";
 
 const ToastProvider = ToastPrimitives.Provider;
 

@@ -2,6 +2,7 @@
 
 import { promises as fs } from "fs";
 import path from "path";
+
 import { getHighlighter } from "shiki";
 
 // Highlighting is failing in server components.

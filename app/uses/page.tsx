@@ -25,7 +25,8 @@ export default function UsesPage() {
           <li>
             Editor: Neovim (
             <a href="https://www.github.com/jmartinn/dotfiles/" target="_blank">
-              Settings / Plugins</a>
+              Settings / Plugins
+            </a>
             )
           </li>
           <li>Theme: Dark Plus</li>

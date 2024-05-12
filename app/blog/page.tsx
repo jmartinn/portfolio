@@ -1,8 +1,10 @@
 import { Suspense } from "react";
-import { Icons } from "app/components/icons";
-import { Skeleton } from "app/components/ui/skeleton";
+
 import { getViewsCount } from "app/db/actions";
 import { getBlogPosts } from "app/db/blog";
+import { Icons } from "components/icons";
+import { Skeleton } from "components/ui/skeleton";
+
 import ViewCounter from "./view-counter";
 
 export const metadata = {

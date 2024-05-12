@@ -3,10 +3,10 @@ import { Suspense } from "react";
 import Image from "next/image";
 
 import ViewCounter from "app/blog/view-counter";
-import { Icons } from "app/components/icons";
-import { Badge } from "app/components/ui/badge";
-import { Skeleton } from "app/components/ui/skeleton";
 import { getViewsCount } from "app/db/actions";
+import { Icons } from "components/icons";
+import { Badge } from "components/ui/badge";
+import { Skeleton } from "components/ui/skeleton";
 import avatar from "public/images/avatar.jpeg";
 
 async function Views({ slug }: { slug: string }) {
