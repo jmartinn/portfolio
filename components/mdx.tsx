@@ -83,7 +83,7 @@ interface ProsCardProps {
 function ProsCard({ title, pros }: ProsCardProps) {
   return (
     <div className="border border-emerald-200 dark:border-emerald-900 bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 my-4 w-full">
-      <span>{`You might use ${title} if...`}</span>
+      <span>{`What you might find useful about ${title}`}</span>
       <div className="mt-4">
         {pros.map((pro) => (
           <div key={pro} className="flex font-medium items-baseline mb-2">
@@ -117,7 +117,7 @@ interface ConsCardProps {
 function ConsCard({ title, cons }: ConsCardProps) {
   return (
     <div className="border border-red-200 dark:border-red-900 bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 my-6 w-full">
-      <span>{`You might not use ${title} if...`}</span>
+      <span>{`What you might not find useful about ${title}`}</span>
       <div className="mt-4">
         {cons.map((con) => (
           <div key={con} className="flex font-medium items-baseline mb-2">
