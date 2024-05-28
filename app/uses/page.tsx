@@ -45,12 +45,6 @@ export default function UsesPage() {
           <li>Amethyst</li>
           <li>Raycast</li>
         </ul>
-        <h3 id="other-tech">Other Tech</h3>
-        <ul>
-          <li>Apple Airpods</li>
-          <li>Apple iPad</li>
-          <li>Apple iPhone</li>
-        </ul>
       </div>
     </section>
   );
