@@ -1,6 +1,6 @@
 "use client";
 
-import { JSX, ClassAttributes, AnchorHTMLAttributes } from "react";
+import type { JSX, ClassAttributes, AnchorHTMLAttributes } from "react";
 
 export function Badge(
   props: JSX.IntrinsicAttributes &
