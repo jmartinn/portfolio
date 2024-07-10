@@ -1,8 +1,8 @@
-import React, { AnchorHTMLAttributes, createElement } from "react";
+import React, { type AnchorHTMLAttributes, createElement } from "react";
 
-import Image, { ImageProps } from "next/image";
+import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
-import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
+import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { highlight } from "sugar-high";
 
 import { Pre } from "./pre";
