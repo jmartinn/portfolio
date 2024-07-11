@@ -4,9 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { increment } from "app/db/actions";
 import getIP from "lib/get-ip";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
