@@ -1,15 +1,19 @@
-import { Suspense, cache } from "react";
+import { Suspense } from "react";
 
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getViewsCount, increment } from "app/db/actions";
+import { getViewsCount } from "app/db/actions";
 import { getBlogPost } from "app/db/blog";
 import { CustomMDX } from "components/mdx";
 import { Skeleton } from "components/ui/skeleton";
 import { formatDate } from "lib/utils";
 
 import ViewCounter from "../view-counter";
+
+import { ReportView } from "./views";
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -101,6 +105,7 @@ export default async function Blog({ params }) {
         >
           <Views slug={post.slug} />
         </Suspense>
+        <ReportView slug={post.slug} />
       </div>
       <article className="prose prose-quoteless prose-neutral dark:prose-invert mb-6 text-justify">
         <CustomMDX source={post.content} />
@@ -109,10 +114,7 @@ export default async function Blog({ params }) {
   );
 }
 
-const incrementViews = cache(increment);
-
 async function Views({ slug }: { slug: string }) {
   const views = await getViewsCount();
-  incrementViews(slug);
   return <ViewCounter allViews={views} slug={slug} />;
 }
