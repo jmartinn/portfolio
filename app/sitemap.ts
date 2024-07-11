@@ -1,7 +1,9 @@
+import type { MetadataRoute } from "next";
+
 import { getBlogPosts } from "app/db/blog";
 
-export default async function sitemap() {
-  const posts = await getBlogPosts();
+export default function sitemap(): MetadataRoute.Sitemap {
+  const posts = getBlogPosts();
 
   const blogs = posts.map((post) => ({
     url: `https://www.jmartinn.com/blog/${post.slug}`,

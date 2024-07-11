@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import { getViewsCount } from "app/db/actions";
 import { getBlogPosts } from "app/db/blog";
 import { Icons } from "components/icons";
-import { Skeleton } from "components/ui/skeleton";
 
 import ViewCounter from "./view-counter";
 
@@ -13,7 +12,7 @@ export const metadata = {
 };
 
 export default async function BlogPage() {
-  const allBlogs = await getBlogPosts();
+  const allBlogs = getBlogPosts();
 
   return (
     <section>
@@ -60,9 +59,7 @@ async function BlogLink({ slug, name }) {
           <p className="font-medium text-neutral-900 dark:text-neutral-100">
             {name}
           </p>
-          <Suspense
-            fallback={<Skeleton className="h-6 w-[90px] dark:bg-neutral-600" />}
-          >
+          <Suspense fallback={<p className="h-6" />}>
             <Views slug={slug} />
           </Suspense>
         </div>

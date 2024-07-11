@@ -4,21 +4,28 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { getViewsCount } from "app/db/actions";
-import { getBlogPost } from "app/db/blog";
+import { getBlogPosts } from "app/db/blog";
 import { CustomMDX } from "components/mdx";
-import { Skeleton } from "components/ui/skeleton";
 import { formatDate } from "lib/utils";
 
 import ViewCounter from "../view-counter";
 
-import { ReportView } from "./views";
+import { ReportView } from "./report-view";
 
 export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const posts = getBlogPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 export async function generateMetadata({
   params,
 }): Promise<Metadata | undefined> {
-  const post = await getBlogPost(params.slug);
+  const post = getBlogPosts().find((post) => post.slug === params.slug);
 
   if (!post) {
     return;
@@ -61,7 +68,7 @@ export async function generateMetadata({
 }
 
 export default async function Blog({ params }) {
-  const post = await getBlogPost(params.slug);
+  const post = getBlogPosts().find((post) => post.slug === params.slug);
 
   if (!post) {
     notFound();
@@ -98,11 +105,7 @@ export default async function Blog({ params }) {
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(post.metadata.publishedAt)}
         </p>
-        <Suspense
-          fallback={
-            <Skeleton className="h-6 w-[90px] bg-neutral-100 dark:bg-neutral-500" />
-          }
-        >
+        <Suspense fallback={<p className="h-5" />}>
           <Views slug={post.slug} />
         </Suspense>
         <ReportView slug={post.slug} />

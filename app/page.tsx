@@ -6,7 +6,6 @@ import ViewCounter from "app/blog/view-counter";
 import { getViewsCount } from "app/db/actions";
 import { Icons } from "components/icons";
 import { Badge } from "components/ui/badge";
-import { Skeleton } from "components/ui/skeleton";
 import avatar from "public/images/avatar.jpeg";
 
 async function Views({ slug }: { slug: string }) {
@@ -25,9 +24,7 @@ async function BlogLink({ slug, name }) {
           <p className="font-medium text-neutral-900 dark:text-neutral-100">
             {name}
           </p>
-          <Suspense
-            fallback={<Skeleton className="h-6 w-[90px] dark:bg-neutral-600" />}
-          >
+          <Suspense fallback={<p className="h-6" />}>
             <Views slug={slug} />
           </Suspense>
         </div>

@@ -1,7 +1,7 @@
 import { getBlogPosts } from "app/db/blog";
 
 export async function GET() {
-  const allBlogs = await getBlogPosts();
+  const allBlogs = getBlogPosts();
 
   const itemsXml = allBlogs
     .sort((a, b) => {
