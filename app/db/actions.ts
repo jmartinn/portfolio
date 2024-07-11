@@ -1,8 +1,7 @@
 "use server";
 
+import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
-
-import { sql } from "./postgres";
 
 export async function getBlogViews() {
   if (!process.env.POSTGRES_URL) {
@@ -10,10 +9,12 @@ export async function getBlogViews() {
   }
 
   noStore();
-  const views = await sql`
+  const res = await sql`
     SELECT count
     FROM views
   `;
+
+  const views = res.rows;
 
   return views.reduce((acc, curr) => acc + Number(curr.count), 0);
 }
@@ -26,10 +27,12 @@ export async function getViewsCount(): Promise<
   }
 
   noStore();
-  return sql`
+  const res = await sql`
     SELECT slug, count
     FROM views
   `;
+
+  return res.rows as { slug: string; count: number }[];
 }
 
 export async function increment(slug: string) {

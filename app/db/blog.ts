@@ -1,6 +1,6 @@
 "use server";
 
-import { sql } from "./postgres";
+import { sql } from "@vercel/postgres";
 
 type Metadata = {
   title: string;
@@ -45,10 +45,12 @@ function extractTweetIds(content: string) {
 }
 
 export async function getBlogPosts(): Promise<Post[]> {
-  const rawPosts = await sql`
+  const res = await sql`
     SELECT slug, content
     FROM posts
   `;
+
+  const rawPosts = res.rows;
 
   const posts: Post[] = rawPosts.map(({ slug, content }) => {
     const { metadata, content: processedContent } = parseFrontmatter(content);
@@ -66,18 +68,19 @@ export async function getBlogPosts(): Promise<Post[]> {
 }
 
 export async function getBlogPost(slug: string): Promise<Post | null> {
-  const rawPost = await sql`
+  const res = await sql`
     SELECT slug, content
     FROM posts
     WHERE slug = ${slug}
-    LIMIT 1
   `;
 
-  if (rawPost.length === 0) {
+  if (!res.rows) {
     return null;
   }
 
-  const { slug: postSlug, content } = rawPost[0];
+  const rawPost = res.rows[0];
+
+  const { slug: postSlug, content } = rawPost;
   const { metadata, content: processedContent } = parseFrontmatter(content);
   const tweetIds = extractTweetIds(processedContent);
 
