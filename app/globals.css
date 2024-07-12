@@ -38,6 +38,8 @@
 
 html {
   min-width: 360px;
+  scrollbar-gutter: stable;
+  @apply scroll-smooth;
 }
 
 .prose .anchor {
