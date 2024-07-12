@@ -148,11 +148,11 @@ export default function Page() {
       </div>
       <div className="my-8 flex flex-col space-y-4 w-full">
         <Suspense>
-          <BlogLink name="Video To ASCII Using C++" slug="video-to-ascii" />
           <BlogLink
-            name="Advent Of Code Day 2: Cube Conundrum"
-            slug="advent-of-code-day-2"
+            name="Balancing Perfectionism"
+            slug="balancing-perfectionism"
           />
+          <BlogLink name="Video To ASCII Using C++" slug="video-to-ascii" />
         </Suspense>
       </div>
     </section>
