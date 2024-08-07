@@ -29,7 +29,9 @@ export default function UsesPage() {
             </a>
             )
           </li>
-          <li>Theme: Dark Plus</li>
+          <li>
+            Theme: <a href="https://github.com/rose-pine/neovim/">Rose Pine</a>
+          </li>
           <li>Terminal: WezTerm / zsh</li>
         </ul>
         <h3 id="audio-video">Audio</h3>
@@ -42,7 +44,7 @@ export default function UsesPage() {
           <li>Apple Music</li>
           <li>Obsidian</li>
           <li>TablePlus</li>
-          <li>Amethyst</li>
+          <li>Rectangle</li>
           <li>Raycast</li>
         </ul>
       </div>
