@@ -1,10 +1,16 @@
 "use client";
 import { useRef } from "react";
 
-import { Icons } from "./icons";
-import { useToast } from "./ui/use-toast";
+import { Icons } from "../ui/icons";
+import { useToast } from "../ui/use-toast";
 
-export function Pre({ children, ...props }) {
+export function Pre({
+  children,
+  ...props
+}: {
+  [x: string]: unknown;
+  children: React.ReactNode;
+}) {
   const preRef = useRef<HTMLPreElement>(null);
   const { toast } = useToast();
 
@@ -30,7 +36,11 @@ export function Pre({ children, ...props }) {
   };
 
   return (
-    <pre ref={preRef} className="px-4 flex flex-row items-start" {...props}>
+    <pre
+      ref={preRef}
+      className="font-mono px-4 flex flex-row items-start"
+      {...props}
+    >
       <div className="flex-grow self-center">{children}</div>
       <button
         onClick={handleCopy}

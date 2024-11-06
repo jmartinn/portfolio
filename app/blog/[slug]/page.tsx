@@ -3,14 +3,12 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getViewsCount } from "app/db/actions";
-import { getBlogPosts } from "app/db/blog";
-import { CustomMDX } from "components/mdx";
-import { formatDate } from "lib/utils";
-
-import ViewCounter from "../view-counter";
-
-import { ReportView } from "./report-view";
+import { ReportView } from "@/components/blog/report-view";
+import ViewCounter from "@/components/blog/view-counter";
+import { CustomMDX } from "@/components/mdx/mdx";
+import { getViewsCount } from "@/lib/db/actions";
+import { getBlogPosts } from "@/lib/db/blog";
+import { formatDate } from "@/lib/utils";
 
 export const revalidate = 60;
 
@@ -22,10 +20,15 @@ export async function generateStaticParams() {
   }));
 }
 
+type Params = Promise<{ slug: string }>;
+
 export async function generateMetadata({
   params,
+}: {
+  params: Params;
 }): Promise<Metadata | undefined> {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+  const { slug } = await params;
+  const post = getBlogPosts().find((post) => post.slug === slug);
 
   if (!post) {
     return;
@@ -67,8 +70,10 @@ export async function generateMetadata({
   };
 }
 
-export default async function Blog({ params }) {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+export default async function Blog({ params }: { params: Params }) {
+  const { slug } = await params;
+
+  const post = getBlogPosts().find((post) => post.slug === slug);
 
   if (!post) {
     notFound();
@@ -89,7 +94,7 @@ export default async function Blog({ params }) {
             description: post.metadata.summary,
             image: post.metadata.image
               ? `https://www.jmartinn.com${post.metadata.image}`
-              : `https://www.jmartinn.com/og?title=${post.metadata.title}`,
+              : `http://www.jmartinn.com/og?title=${post.metadata.title}`,
             url: `https://www.jmartinn.com/blog/${post.slug}`,
             author: {
               "@type": "Person",

@@ -1,10 +1,9 @@
 import { Suspense } from "react";
 
-import { getViewsCount } from "app/db/actions";
-import { getBlogPosts } from "app/db/blog";
-import { Icons } from "components/icons";
-
-import ViewCounter from "./view-counter";
+import ViewCounter from "@/components/blog/view-counter";
+import { Icons } from "@/components/ui/icons";
+import { getViewsCount } from "@/lib/db/actions";
+import { getBlogPosts } from "@/lib/db/blog";
 
 export const metadata = {
   title: "Blog",
@@ -48,7 +47,12 @@ async function Views({ slug }: { slug: string }) {
   return <ViewCounter allViews={views} slug={slug} />;
 }
 
-async function BlogLink({ slug, name }) {
+interface BlogLinkProps {
+  slug: string;
+  name: string;
+}
+
+async function BlogLink({ slug, name }: BlogLinkProps) {
   return (
     <div className="group" key={slug}>
       <a

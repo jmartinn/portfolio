@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { getBlogPosts } from "app/db/blog";
+import { getBlogPosts } from "@/lib/db/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getBlogPosts();

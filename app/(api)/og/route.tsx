@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const postTitle = searchParams.get("title");
   const font = fetch(
-    new URL("../../public/fonts/montserrat-semibold.ttf", import.meta.url)
+    new URL("../../../public/fonts/Montserrat-Semibold.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
   const fontData = await font;
 
@@ -31,7 +31,6 @@ export async function GET(req: NextRequest) {
             display: "flex",
             fontSize: 130,
             fontFamily: "Montserrat",
-            letterSpacing: "-0.05em",
             fontStyle: "normal",
             color: "white",
             lineHeight: "120px",

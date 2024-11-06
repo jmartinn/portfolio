@@ -7,7 +7,6 @@ export default {
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./content/**/*.mdx",
-    "./public/**/*.svg",
   ],
   theme: {
     extend: {

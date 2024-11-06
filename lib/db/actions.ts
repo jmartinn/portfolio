@@ -1,14 +1,13 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
-import { unstable_noStore as noStore } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export async function getBlogViews() {
   if (!process.env.POSTGRES_URL) {
     return [];
   }
 
-  noStore();
   const res = await sql`
     SELECT count
     FROM views
@@ -26,7 +25,6 @@ export async function getViewsCount(): Promise<
     return [];
   }
 
-  noStore();
   const res = await sql`
     SELECT slug, count
     FROM views
@@ -36,11 +34,12 @@ export async function getViewsCount(): Promise<
 }
 
 export async function increment(slug: string) {
-  noStore();
   await sql`
     INSERT INTO views (slug, count)
     VALUES (${slug}, 1)
     ON CONFLICT (slug)
     DO UPDATE SET count = views.count + 1
   `;
+
+  revalidatePath(`/blog/${slug}`);
 }

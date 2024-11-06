@@ -1,8 +1,8 @@
 import { kv } from "@vercel/kv";
 import { NextRequest, NextResponse } from "next/server";
 
-import { increment } from "app/db/actions";
-import getIP from "lib/get-ip";
+import { increment } from "@/lib/db/actions";
+import { getIP } from "@/lib/get-ip";
 
 export const runtime = "edge";
 

@@ -1,4 +1,4 @@
-import { Icons } from "components/icons";
+import { Icons } from "../ui/icons";
 
 export function Footer() {
   return (
@@ -20,7 +20,7 @@ export function Footer() {
             className="flex items-center hover:text-neutral-800 dark:hover:text-neutral-100 transition-all"
             rel="noopener noreferrer"
             target="_blank"
-            href="https://twitter.com/juamp_m"
+            href="https://x.com/jmartinn07"
           >
             <Icons.arrow />
             <p className="h-7 ml-2">follow me on twitter</p>

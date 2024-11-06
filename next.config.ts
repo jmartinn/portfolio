@@ -1,8 +1,10 @@
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   experimental: {
     useLightningcss: true,
   },
-  headers() {
+  async headers() {
     return [
       {
         source: "/(.*)",

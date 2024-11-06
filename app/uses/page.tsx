@@ -30,7 +30,8 @@ export default function UsesPage() {
             )
           </li>
           <li>
-            Theme: <a href="https://github.com/rose-pine/neovim/">Rose Pine</a>
+            Theme:{" "}
+            <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a>
           </li>
           <li>Terminal: WezTerm / zsh</li>
         </ul>
@@ -40,11 +41,11 @@ export default function UsesPage() {
         </ul>
         <h3 id="software">Software</h3>
         <ul>
-          <li>1Password</li>
-          <li>Apple Music</li>
           <li>Obsidian</li>
           <li>TablePlus</li>
           <li>Rectangle</li>
+          <li>Screen Studio</li>
+          <li>CleanShot X</li>
           <li>Raycast</li>
         </ul>
       </div>

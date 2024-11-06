@@ -5,8 +5,9 @@ import Link from "next/link";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { highlight } from "sugar-high";
 
+import { TweetComponent } from "../tweet/tweet";
+
 import { Pre } from "./pre";
-import { TweetComponent } from "./tweet";
 
 interface TableProps {
   data: {

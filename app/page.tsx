@@ -2,18 +2,18 @@ import { Suspense } from "react";
 
 import Image from "next/image";
 
-import ViewCounter from "app/blog/view-counter";
-import { getViewsCount } from "app/db/actions";
-import { Icons } from "components/icons";
-import { Badge } from "components/ui/badge";
-import avatar from "public/images/avatar.jpeg";
+import ViewCounter from "@/components/blog/view-counter";
+import { Badge } from "@/components/ui/badge";
+import { Icons } from "@/components/ui/icons";
+import { getViewsCount } from "@/lib/db/actions";
+import avatar from "@/public/images/avatar.jpeg";
 
 async function Views({ slug }: { slug: string }) {
   const views = await getViewsCount();
   return <ViewCounter allViews={views} slug={slug} />;
 }
 
-async function BlogLink({ slug, name }) {
+async function BlogLink({ slug, name }: { slug: string; name: string }) {
   return (
     <div className="group">
       <a
@@ -55,7 +55,7 @@ export default function Page() {
           <a
             rel="noopener noreferrer"
             target="_blank"
-            href="https://twitter.com/juamp_m"
+            href="https://x.com/jmartinn07"
             className="flex items-center gap-2 hover:text-neutral-700 dark:hover:text-neutral-200"
           >
             <Icons.twitter />
