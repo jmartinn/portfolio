@@ -29,8 +29,12 @@ function parseFrontmatter(fileContent: string) {
     let value = valueArr.join(": ").trim();
     value = value.replace(/^['"](.*)['"]$/, "$1");
     if (key.trim() === "keywords") {
-      metadata[key.trim()] = value.split(",").map((word) => word.trim());
+      metadata[key.trim() as "keywords"] = value
+        .split(",")
+        .map((word) => word.trim());
     } else {
+      // FIX: Provide a more accurate type
+      // @ts-expect-error: Wrong type
       metadata[key.trim()] = value;
     }
   });

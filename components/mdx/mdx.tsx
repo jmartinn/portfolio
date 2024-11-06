@@ -140,9 +140,10 @@ function ConsCard({ title, cons }: ConsCardProps) {
   );
 }
 
+// FIX: Provide more accurate type
+// @ts-expect-error: unspecified type for props
 function Code({ children, ...props }) {
   const codeHTML = highlight(children);
-  // const codeHTML = await highlightCode(children, "c++");
 
   return (
     <code
@@ -206,6 +207,8 @@ export function CustomMDX(
   return (
     <MDXRemote
       {...props}
+      // FIX: Fix type error
+      // @ts-expect-error: components type missmatch
       components={{ ...components, ...(props.components || {}) }}
     />
   );
