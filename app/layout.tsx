@@ -102,9 +102,9 @@ export default function RootLayout({
         <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0 md:mt-0">
           {children}
           <Footer />
-          <Analytics />
-          <SpeedInsights />
         </main>
+        <Analytics />
+        <SpeedInsights />
         <Toaster />
       </body>
     </html>
