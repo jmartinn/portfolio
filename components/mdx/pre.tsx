@@ -38,13 +38,13 @@ export function Pre({
   return (
     <pre
       ref={preRef}
-      className="font-mono px-4 flex flex-row items-start"
+      className="flex flex-row items-start px-4 font-mono"
       {...props}
     >
-      <div className="flex-grow self-center">{children}</div>
+      <div className="grow self-center">{children}</div>
       <button
         onClick={handleCopy}
-        className="text-xs text-neutral-900 bg-neutral-200 dark:bg-neutral-700 dark:text-neutral-100 hover:bg-neutral-300 hover:dark:bg-neutral-600 shadow-md px-2 py-2 rounded"
+        className="rounded bg-neutral-200 p-2 text-xs text-neutral-900 shadow-md hover:bg-neutral-300 dark:bg-neutral-700 dark:text-neutral-100 hover:dark:bg-neutral-600"
       >
         <Icons.clipboard />
       </button>
