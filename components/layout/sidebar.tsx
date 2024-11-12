@@ -28,15 +28,14 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="md:w-[150px] md:flex-shrink-0 -mx-4 md:mx-0 md:px-0 overflow-y-hidden">
-      <div className="lg:sticky lg:top-20">
-        <div className="ml-2 hidden md:ml-[12px] mb-2 px-4 md:px-0 md:mb-8 space-y-10 md:flex flex-col md:flex-row items-start" />
+    <aside className="-mx-4 overflow-y-hidden md:mx-0 md:w-[150px] md:shrink-0 md:px-0">
+      <div className="lg:sticky lg:top-1">
         <LayoutGroup>
           <nav
-            className="flex flex-row md:flex-col items-start relative px-4 md:px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
+            className="relative flex flex-row items-start px-4 pb-0 md:relative md:flex-col md:overflow-auto md:px-0 md:pt-14"
             id="nav"
           >
-            <div className="flex flex-row md:flex-col space-x-0 pr-10 mb-2 mt-2 md:mt-0">
+            <div className="my-2 flex flex-row space-x-0 pr-10 md:mt-0 md:flex-col">
               {Object.entries(navItems).map(([path, { name }]) => {
                 const isActive = path === pathname;
                 return (
@@ -44,18 +43,18 @@ export function Sidebar() {
                     key={path}
                     href={path}
                     className={cn(
-                      "transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle",
+                      "flex align-middle transition-all hover:text-neutral-800 dark:hover:text-neutral-200",
                       {
                         "text-neutral-500": !isActive,
                         "font-bold": isActive,
                       }
                     )}
                   >
-                    <span className="relative py-[5px] px-[10px]">
+                    <span className="relative px-[10px] py-[5px]">
                       {name}
                       {path === pathname ? (
                         <motion.div
-                          className="absolute inset-0 bg-neutral-100 dark:bg-neutral-800 rounded-md z-[-1]"
+                          className="absolute inset-0 z-[-1] rounded-md bg-neutral-100 dark:bg-neutral-800"
                           layoutId="sidebar"
                           transition={{
                             type: "spring",

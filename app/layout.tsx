@@ -87,7 +87,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        "text-black bg-white dark:text-white dark:bg-[#111010]",
+        "bg-white text-black dark:bg-[#111010] dark:text-white",
         GeistSans.variable,
         GeistMono.variable
       )}
@@ -95,11 +95,11 @@ export default function RootLayout({
       <body
         className={cn(
           GeistSans.className,
-          "antialiased max-w-4xl mb-40 flex flex-col md:flex-row mx-4 mt-8 md:mt-20 lg:mx-auto lg:mt-20"
+          "mx-4 mt-8 flex max-w-4xl flex-col antialiased md:mt-10 md:flex-row lg:mx-auto lg:mt-16"
         )}
       >
         <Sidebar />
-        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0 md:mt-0">
+        <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
           {children}
           <Footer />
         </main>
