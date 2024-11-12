@@ -126,7 +126,7 @@ export default async function Blog({ params }: { params: Params }) {
           <p>{formatDate(post.metadata.publishedAt)}</p>
         </span>
 
-        <span className="pr-12">
+        <span className="md:pr-12">
           <Suspense fallback={<span className="h-5" />}>
             <Views slug={post.slug} />
           </Suspense>
