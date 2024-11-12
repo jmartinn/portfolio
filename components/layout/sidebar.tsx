@@ -28,8 +28,8 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="-mx-4 overflow-y-hidden md:mx-0 md:w-[150px] md:shrink-0 md:px-0">
-      <div className="lg:sticky lg:top-1">
+    <aside className="-mx-4 overflow-y-hidden md:sticky md:top-1 md:mx-0 md:h-fit md:w-[150px] md:shrink-0 md:px-0">
+      <div>
         <LayoutGroup>
           <nav
             className="relative flex flex-row items-start px-4 pb-0 md:relative md:flex-col md:overflow-auto md:px-0 md:pt-14"
