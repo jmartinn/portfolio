@@ -25,18 +25,18 @@ const GeistMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jmartinn.com"),
   title: {
-    default: "Juan Pedro Martin - Developer, Writer, and Creator",
+    default: "Juan Pedro Martin - Software Developer",
     template: "%s | Juan Pedro Martin",
   },
   description:
-    "Juan Pedro Martin is a developer, writer, and creator specializing in frontend development and software engineering. Explore my projects, articles, and insights.",
+    "Juan Pedro Martin is a passionate software developer, specializing in frontend development. Explore his projects, articles, and insights.",
   alternates: {
     canonical: "https://www.jmartinn.com",
   },
   openGraph: {
-    title: "Juan Pedro Martin - Developer, Writer, and Creator",
+    title: "Juan Pedro Martin - Software Developer",
     description:
-      "Explore the work of Juan Pedro Martin - a passionate developer, insightful writer, and innovative creator in the world of software engineering.",
+      "Juan Pedro Martin is a passionate software developer, specializing in frontend development. Explore his projects, articles, and insights.",
     url: "https://www.jmartinn.com",
     siteName: "Juan Pedro Martin",
     locale: "en_US",
@@ -66,9 +66,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Juan Pedro Martin - Developer, Writer, and Creator",
-    description:
-      "Explore the work of Juan Pedro Martin - passionate developer, insightful writer, and innovative creator.",
+    title: "Juan Pedro Martin - Software Developer",
+    description: "Minimalist code. Maximum impact.",
     creator: "@jmartinn07",
   },
   verification: {
