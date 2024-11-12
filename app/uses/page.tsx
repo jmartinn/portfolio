@@ -15,42 +15,76 @@ export default function UsesPage() {
       <div className="prose prose-neutral dark:prose-invert">
         <h3 id="computer-office">Computer / Office</h3>
         <ul>
-          <li>Mac Mini (2023)</li>
-          <li>24&quot; LG 24MP400-B</li>
-          <li>Logitech Signature M650</li>
-          <li>Keychron V4 QMK</li>
+          <li>
+            <strong>Mac Mini (2023)</strong> - Reliable, compact, and powerful
+            for daily development.
+          </li>
+          <li>
+            <strong>24&quot; LG 24MP400-B</strong> - Just a monitor, nothing
+            fancy.
+          </li>
+          <li>
+            <strong>Logitech Signature M650</strong> - Silent and precise.
+          </li>
+          <li>
+            <strong>Keychron V4 QMK</strong> - Customizable with a tactile
+            mechanical feel.
+          </li>
         </ul>
         <h3 id="coding">Coding</h3>
         <ul>
           <li>
-            Editor: Neovim (
+            <strong>Neovim</strong> (
             <a
               href="https://github.com/jmartinn/dotfiles/tree/main/.config/nvim"
               target="_blank"
             >
               Settings / Plugins
             </a>
-            )
+            ) - My editor of choice for it&apos;s speed and versatility.
           </li>
           <li>
-            Theme:{" "}
-            <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a>
+            <strong>Theme:</strong>{" "}
+            <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a>-
+            Aesthetic and easy on the eyes theme by the one and only{" "}
+            <a href="https://github.com/folke">Folke.</a>
           </li>
-          <li>Terminal: WezTerm / zsh</li>
+          <li>
+            <strong>Terminal: WezTerm / zsh</strong> - For seamless terminal
+            work.
+          </li>
         </ul>
-        <h3 id="audio-video">Audio</h3>
+        <h3 id="audio">Audio</h3>
         <ul>
-          <li>Sony WH-1000XM4</li>
+          <li>
+            <strong>Sony WH-1000XM4</strong> - Excellent noise-canceling.
+          </li>
         </ul>
         <h3 id="software">Software</h3>
-        <ul>
-          <li>Obsidian</li>
-          <li>TablePlus</li>
-          <li>Rectangle</li>
-          <li>Screen Studio</li>
-          <li>CleanShot X</li>
-          <li>Raycast</li>
-        </ul>
+        <div>
+          <h4 id="productivity">Productivity</h4>
+          <ul>
+            <li>
+              <strong>Obsidian</strong> - Note-taking and knowledge management.
+            </li>
+            <li>
+              <strong>Rectangle</strong> - Simple yet efficient macOS window
+              tiling manager.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4>Development</h4>
+          <ul>
+            <li>
+              <strong>TablePlus</strong> – Easy database management.
+            </li>
+            <li>
+              <strong>Screen Studio</strong> – High-quality screen recordings
+              for tutorials.
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   );
