@@ -8,9 +8,9 @@ type CardProps = {
 
 export function WorkCard({ title, description, image }: CardProps) {
   return (
-    <div className="transition-all border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 hover:border-neutral-300 hover:bg-neutral-100 dark:hover:border-neutral-600 dark:hover:bg-neutral-700 rounded flex flex-col items-start justify-between px-3 py-4 w-full hover:cursor-pointer">
+    <div className="flex w-full flex-col items-start justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 transition-all hover:cursor-pointer hover:border-neutral-300 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600 dark:hover:bg-neutral-700">
       <div>
-        <div className="aspect-[16/9] relative">
+        <div className="relative aspect-[16/9]">
           <Image
             alt="miniatura"
             className="object-cover"

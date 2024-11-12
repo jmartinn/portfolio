@@ -15,7 +15,7 @@ export default async function BlogPage() {
 
   return (
     <section>
-      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">
+      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
         read my blog
       </h1>
       <div className="space-y-6">
@@ -57,7 +57,7 @@ async function BlogLink({ slug, name }: BlogLinkProps) {
     <div className="group" key={slug}>
       <a
         href={`/blog/${slug}`}
-        className="transition-all border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 hover:border-neutral-300 hover:bg-neutral-100 dark:hover:border-neutral-600 dark:hover:bg-neutral-700 rounded flex items-center justify-between px-3 py-4 w-full"
+        className="flex w-full items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 transition-all hover:border-neutral-300 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600 dark:hover:bg-neutral-700"
       >
         <div className="flex flex-col">
           <p className="font-medium text-neutral-900 dark:text-neutral-100">
@@ -67,7 +67,7 @@ async function BlogLink({ slug, name }: BlogLinkProps) {
             <Views slug={slug} />
           </Suspense>
         </div>
-        <div className="text-neutral-700 dark:text-neutral-300 transform transition-transform duration-300 group-hover:-rotate-12">
+        <div className="text-neutral-700 transition-transform duration-300 group-hover:-rotate-12 dark:text-neutral-300">
           <Icons.arrow />
         </div>
       </a>

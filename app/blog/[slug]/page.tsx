@@ -103,10 +103,10 @@ export default async function Blog({ params }: { params: Params }) {
           }),
         }}
       />
-      <h1 className="title font-semibold text-4xl tracking-tighter max-w-[650px]">
+      <h1 className="title max-w-[650px] text-4xl font-semibold tracking-tighter">
         {post.metadata.title}
       </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">
+      <div className="mb-8 mt-2 flex max-w-[650px] items-center justify-between text-sm">
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(post.metadata.publishedAt)}
         </p>
@@ -115,7 +115,7 @@ export default async function Blog({ params }: { params: Params }) {
         </Suspense>
         <ReportView slug={post.slug} />
       </div>
-      <article className="prose prose-quoteless prose-neutral dark:prose-invert mb-6 text-justify">
+      <article className="prose prose-neutral prose-quoteless mb-6 text-justify dark:prose-invert">
         <CustomMDX source={post.content} />
       </article>
     </section>
