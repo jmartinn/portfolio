@@ -18,7 +18,7 @@ async function BlogLink({ slug, name }: { slug: string; name: string }) {
     <div className="group">
       <a
         href={`/blog/${slug}`}
-        className="border transition-all border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 hover:border-neutral-300 hover:bg-neutral-100 dark:hover:border-neutral-600 dark:hover:bg-neutral-700 rounded flex items-center justify-between px-3 py-4 w-full"
+        className="flex w-full items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 transition-all hover:border-neutral-300 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600 dark:hover:bg-neutral-700"
       >
         <div className="flex flex-col">
           <p className="font-medium text-neutral-900 dark:text-neutral-100">
@@ -28,7 +28,7 @@ async function BlogLink({ slug, name }: { slug: string; name: string }) {
             <Views slug={slug} />
           </Suspense>
         </div>
-        <div className="text-neutral-700 dark:text-neutral-300 transform transition-transform duration-300 group-hover:-rotate-12">
+        <div className="text-neutral-700 transition-transform duration-300 group-hover:-rotate-12 dark:text-neutral-300">
           <Icons.arrow />
         </div>
       </a>
@@ -39,10 +39,13 @@ async function BlogLink({ slug, name }: { slug: string; name: string }) {
 export default function Page() {
   return (
     <section>
-      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">
-        hey, I&apos;m Juan 👋
+      <h1 className="group mb-8 text-2xl font-semibold tracking-tighter">
+        hey, I&apos;m Juan{" "}
+        <span className="inline-block origin-[70%_70%] transition-transform group-hover:animate-waving-hand">
+          👋
+        </span>
       </h1>
-      <div className="flex items-center justify-start my-8 space-x-6 md:space-x-8">
+      <div className="my-8 flex items-center justify-start space-x-6 md:space-x-8">
         <Image
           alt="Juan Pedro Martin"
           className="rounded-full grayscale"
@@ -56,12 +59,12 @@ export default function Page() {
             rel="noopener noreferrer"
             target="_blank"
             href="https://x.com/jmartinn07"
-            className="flex items-center gap-2 hover:text-neutral-700 dark:hover:text-neutral-200"
+            className="flex items-center gap-2 transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
           >
             <Icons.twitter />
           </a>
           <a
-            className="flex items-center gap-2 hover:text-neutral-700 dark:hover:text-neutral-200"
+            className="flex items-center gap-2 transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
             rel="noopener noreferrer"
             target="_blank"
             href="https://www.linkedin.com/in/juampemartin/"
@@ -72,7 +75,7 @@ export default function Page() {
             rel="noopener noreferrer"
             target="_blank"
             href="https://github.com/jmartinn"
-            className="flex items-center gap-2 hover:text-neutral-700 dark:hover:text-neutral-200"
+            className="flex items-center gap-2 transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
           >
             <Icons.github />
           </a>
@@ -80,15 +83,14 @@ export default function Page() {
       </div>
 
       <p className="prose prose-neutral dark:prose-invert">
-        {`I'm a frontend developer, sport enthusiast, and an optimist at heart. I currently
-        work as Frontend Developer at `}
+        {`I'm a frontend developer currently working at `}
         <span className="not-prose">
           <Badge href="https://interamplify.com">
             <Icons.interamplify />
             Interamplify
           </Badge>
         </span>
-        {`, where I leverage technologies like `}
+        {`, leveraging technologies like `}
         <Badge href="https://react.dev">
           <Image
             alt="React logomark"
@@ -117,7 +119,7 @@ export default function Page() {
             height="13"
             viewBox="0 0 400 400"
             xmlns="http://www.w3.org/2000/svg"
-            className="inline-flex mr-1"
+            className="mr-1 inline-flex"
           >
             <style>{`.st0{fill:#007acc}.st1{fill:#fff}`}</style>
             <path className="st0" d="M0 200V0h400v400H0" />
@@ -128,25 +130,26 @@ export default function Page() {
           </svg>
           TypeScript
         </Badge>
-        {` to create and enhance dynamic web experiences.`}
+        {` to craft seamless, dynamic web experiences. My goal is to bridge the gap between desisgn and functionality.`}
       </p>
 
       <div className="prose prose-neutral dark:prose-invert">
         <p>
-          Apart from coding, I have a passion for sports and bring my optimism
-          and discipline into every project I take on.
+          Beyond the keyboard, I&apos;m a sports enthusiast with a passion for
+          pushing limits—whether it’s on the track or in the tech world.
+          Discipline and optimism guide me in every project.
         </p>
         <blockquote className="font-semibold">
-          I firmly believe that developers are akin to poets, scripting the
-          world&apos;s most impactful language - the language of machines.
+          I believe great software is built with precision, creativity, and
+          care. It&apos;s more than functionality; it&apos;s an experience.
         </blockquote>
         <p>
           I&apos;m always eager to connect and collaborate on interesting
-          projects, while consistently learning and growing in this
-          ever-evolving tech industry.
+          projects, while consistently learning and growing in the ever-evolving
+          tech industry.
         </p>
       </div>
-      <div className="my-8 flex flex-col space-y-4 w-full">
+      <div className="my-8 flex w-full flex-col space-y-4">
         <Suspense>
           <BlogLink
             name="Balancing Perfectionism"
