@@ -103,18 +103,36 @@ export default async function Blog({ params }: { params: Params }) {
           }),
         }}
       />
-      <h1 className="title max-w-[650px] text-4xl font-semibold tracking-tighter">
+      <h1 className="title max-w-[650px] text-3xl font-bold tracking-tighter dark:text-gray-100">
         {post.metadata.title}
       </h1>
-      <div className="mb-8 mt-2 flex max-w-[650px] items-center justify-between text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.metadata.publishedAt)}
-        </p>
-        <Suspense fallback={<p className="h-5" />}>
-          <Views slug={post.slug} />
-        </Suspense>
-        <ReportView slug={post.slug} />
-      </div>
+
+      <span className="mt-2 flex font-mono text-sm text-neutral-600 dark:text-gray-400">
+        <span className="flex grow">
+          <span className="hidden md:inline">
+            <span>
+              <a
+                href="https://x.com/jmartinn07"
+                className="hover:text-gray-800 dark:hover:text-gray-300"
+                target="_blank"
+              >
+                @jmartinn
+              </a>
+            </span>
+
+            <span className="mx-2">|</span>
+          </span>
+
+          <p>{formatDate(post.metadata.publishedAt)}</p>
+        </span>
+
+        <span className="pr-12">
+          <Suspense fallback={<span className="h-5" />}>
+            <Views slug={post.slug} />
+          </Suspense>
+          <ReportView slug={post.slug} />
+        </span>
+      </span>
       <article className="prose prose-neutral prose-quoteless mb-6 text-justify dark:prose-invert">
         <CustomMDX source={post.content} />
       </article>

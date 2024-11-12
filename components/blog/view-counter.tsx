@@ -13,7 +13,7 @@ export default function ViewCounter({
   const number = new Number(viewsForSlug?.count || 0);
 
   return (
-    <p className="text-neutral-600 dark:text-neutral-400">
+    <p className="font-mono text-sm text-gray-500 dark:text-gray-400">
       {`${number.toLocaleString()} views`}
     </p>
   );

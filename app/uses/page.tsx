@@ -10,21 +10,24 @@ export default function UsesPage() {
   return (
     <section>
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        here&apos;s my setup
+        here&apos;s what I use on a daily basis
       </h1>
       <div className="prose prose-neutral dark:prose-invert">
         <h3 id="computer-office">Computer / Office</h3>
         <ul>
           <li>Mac Mini (2023)</li>
           <li>24&quot; LG 24MP400-B</li>
-          <li>Logitech G Pro Mouse</li>
+          <li>Logitech Signature M650</li>
           <li>Keychron V4 QMK</li>
         </ul>
         <h3 id="coding">Coding</h3>
         <ul>
           <li>
             Editor: Neovim (
-            <a href="https://www.github.com/jmartinn/dotfiles/" target="_blank">
+            <a
+              href="https://github.com/jmartinn/dotfiles/tree/main/.config/nvim"
+              target="_blank"
+            >
               Settings / Plugins
             </a>
             )

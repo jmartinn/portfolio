@@ -87,7 +87,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        "bg-white text-black dark:bg-[#111010] dark:text-white",
+        "bg-white text-black dark:bg-[#111010] dark:text-gray-100",
         GeistSans.variable,
         GeistMono.variable
       )}

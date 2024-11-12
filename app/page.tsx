@@ -24,7 +24,7 @@ async function BlogLink({ slug, name }: { slug: string; name: string }) {
           <p className="font-medium text-neutral-900 dark:text-neutral-100">
             {name}
           </p>
-          <Suspense fallback={<p className="h-6" />}>
+          <Suspense fallback={<p className="h-5" />}>
             <Views slug={slug} />
           </Suspense>
         </div>
