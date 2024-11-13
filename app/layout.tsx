@@ -73,7 +73,12 @@ export const metadata: Metadata = {
   verification: {
     google: "Fyg64Q58kWDqARPWRbdy4uCuy8ENcCPHLITkRgRzyW4",
   },
-  authors: [{ name: "Juan Pedro Martin", url: "https://www.jmartinn.com" }],
+  authors: [
+    {
+      name: "Juan Pedro Martin",
+      url: "https://x.com/jmartinn07",
+    },
+  ],
   category: "Technology",
 };
 
