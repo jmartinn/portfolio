@@ -30,6 +30,9 @@ yarn-error.log*
 .env*.local
 .env
 
+# Ignore draft articles
+/content/*.draft.mdx
+
 # vercel
 .vercel
 
