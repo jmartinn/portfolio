@@ -1,98 +1,102 @@
 ---
-title: "Transforming Videos into Stunning ASCII Art"
+title: "Transforming Videos into ASCII Art in C++"
 publishedAt: "2023-09-26"
-summary: "Turn videos into mesmerizing real-time ASCII art with vid-to-ascii, a C++ application using OpenCV"
-keywords: C++, ASCII, Art, Coding, OpenCV
+summary: "A journey into creating a C++ application that transforms videos into mesmerizing ASCII art in real-time"
+keywords: C++, ASCII, Art, Creative Coding, OpenCV, Computer Vision
 ---
 
-## Introduction
+Have you ever wondered what your favorite video would look like if it were made entirely of text characters? One afternoon, fueled by curiosity and coffee, I decided to find out. The result? A C++ program that transforms any video into a flowing stream of ASCII characters in real-time. Let me take you through this fascinating journey of creative coding.
 
-In this technical essay, we will explore a fascinating project that involves transforming videos into ASCII art using C++ and OpenCV. By leveraging the power of OpenCV's computer vision library and the versatility of the C++ programming language, we can create a program that converts video frames into a visually appealing ASCII representation.
+## The Magic Behind ASCII Art
 
-## Features
+ASCII art has been around since the early days of computing, when printers and terminals could only display text characters. By using different characters to represent varying levels of brightness, we can create surprising detailed images using nothing but text. Now imagine doing this 30 times per second to create fluid video – that's exactly what we're going to build.
 
-The program offers the following features:
+## Building the ASCII Video Converter
 
-- Real-time video processing: The program processes video frames in real-time, enabling users to see the ASCII art representation as the video plays.
-- Dynamic resizing: The program automatically resizes the video frames to fit a specified width and height while maintaining the aspect ratio.
-- Customizable ASCII character set: The program utilizes a predefined set of ASCII characters to represent different intensities of pixels, resulting in visually pleasing ASCII art.
-- Cross-platform compatibility: The program is designed to work on multiple platforms, including Windows, macOS, and Linux.
+### The Core Components
+Our ASCII video converter relies on two main pieces:
+1. **OpenCV** - A powerful computer vision library that handles video processing
+2. **C++** - Our language of choice for its performance and low-level control
 
-## Dependencies
+### Key Features
+- **Real-time Processing**: Watch your video transform into ASCII art as it plays
+- **Dynamic Resizing**: Automatically adjusts to your terminal size while maintaining aspect ratio
+- **Customizable Character Set**: Fine-tune the visual output by modifying the ASCII characters used
+- **Cross-platform Support**: Runs on Windows, macOS, and Linux
 
-In order to build and run the program, you will need the following dependencies:
+## Let's Build It!
 
-- OpenCV: Install the OpenCV library, which provides the necessary functions for video processing and image manipulation.
-- C++ compiler: Ensure that you have a C++ compiler installed on your system, such as GCC or Clang.
-- Homebrew (macOS only): Ensure you have Homebrew installed in your macOS machine so you can install OpenCV with it.
+### Step 1: Setting Up Your Environment
 
-## Building and Running (macOS)
-
-### Clone the repository
-
-First of all you will have to clone this [repository](https://github.com/jmartinn/vid-to-ascii) like so:
+First, you'll need to grab the code and set up your environment:
 
 ```shell
+# Clone the repository
 git clone git@github.com:jmartinn/vid-to-ascii.git
-```
 
-### Install OpenCV
-
-- Install OpenCV by running:
-
-```shell
+# For macOS users, install OpenCV using Homebrew
 brew install opencv
 ```
 
-> Refer to the OpenCV [documentation](https://docs.opencv.org/4.x/) for detailed instructions based on your operating system.
+### Step 2: Configuration
 
-### Modify the `compile_commands.json` file:
+The setup process requires a few configuration tweaks to ensure everything works smoothly:
 
-- If you are a real chad and you are using vim or neovim as your editor, locate the `compile_commands.json` file in your project directory.
-- Find the path of the OpenCV library in your system and replace it with the corresponding path in the `compile_commands.json` file.
-
-  Assuming you are on macOS when you install OpenCV and its libraries the path is always the same except for the version, so in case you have a different version that me just replace the version.
-
-  ```shell
-  g++ -std=c++11 -I/opt/homebrew/Cellar/opencv/<your_version>/include/opencv4 -L/opt/homebrew/opt/opencv/lib -lopencv_gapi -lopencv_stitching -lopencv_alphamat -lopencv_aruco -lopencv_barcode -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_dnn_objdetect -lopencv_dnn_superres -lopencv_dpm -lopencv_face -lopencv_freetype -lopencv_fuzzy -lopencv_hfs -lopencv_img_hash -lopencv_intensity_transform -lopencv_line_descriptor -lopencv_mcc -lopencv_quality -lopencv_rapid -lopencv_reg -lopencv_rgbd -lopencv_saliency -lopencv_sfm -lopencv_stereo -lopencv_structured_light -lopencv_phase_unwrapping -lopencv_superres -lopencv_optflow -lopencv_surface_matching -lopencv_tracking -lopencv_highgui -lopencv_datasets -lopencv_text -lopencv_plot -lopencv_videostab -lopencv_videoio -lopencv_viz -lopencv_wechat_qrcode -lopencv_xfeatures2d -lopencv_shape -lopencv_ml -lopencv_ximgproc -lopencv_video -lopencv_xobjdetect -lopencv_objdetect -lopencv_calib3d -lopencv_imgcodecs -lopencv_features2d -lopencv_dnn -lopencv_flann -lopencv_xphoto -lopencv_photo -lopencv_imgproc -lopencv_core -o exe main.cpp
-  ```
-
-- Also update both `path` and `directory` keys to match your project path and your `main.cpp` file respectively.
-- This step ensures that the compiler can find the necessary OpenCV headers during the build process.
-
-### Edit the opencv path in `build.sh`:
-
-- Open the file
-- Modify the opencv path to match the location of the OpenCV libraries on your system just as we did in the previous step with the `compile_commands.json` file.
-
-> You can always use `brew info` command followed by _opencv_ to get the information needed to get the paths we discused earlier.
-
-### Edit the video path in `main.cpp`:
-
-- Replace the _**video.mp4**_ with the actual path of the video you want to convert into ASCII art.
-
-```C++
-string video_path = "./video.mp4";
+1. **Update OpenCV Paths**: 
+```shell
+# In compile_commands.json, update the OpenCV path:
+g++ -std=c++11 -I/opt/homebrew/Cellar/opencv/<your_version>/include/opencv4 ...
 ```
 
-### Grant permission to `build.sh`:
+2. **Set Your Video Path**:
+```cpp
+// In main.cpp
+string video_path = "./video.mp4";  // Replace with your video path
+```
 
-- Open the terminal or command prompt.
-- Navigate to the project directory.
-- Run the following command to grant execute permission to the `build.sh` script:
+3. **Prepare the Build Script**:
+```shell
+# Make the build script executable
+chmod +x build.sh
+```
+
+### Step 3: Running the Converter
+
+With everything set up, it's showtime:
 
 ```shell
-$ chmod +x build.sh
+./build.sh
 ```
 
-### Let the magic happen!
+## Under the Hood
 
-Run the following command and enjoy:
+The conversion process follows these steps:
+1. Read each frame from the video
+2. Convert the frame to grayscale
+3. Resize to fit the terminal
+4. Map each pixel's brightness to an ASCII character
+5. Display the resulting ASCII frame
 
-```shell
-$ ./build.sh
-```
+The magic happens in the pixel-to-ASCII conversion, where we map different brightness levels to specific characters. Darker pixels become denser characters like '@' or '#', while lighter pixels become lighter characters like '.' or ' '.
 
-### Conclusion
+## Troubleshooting Tips
 
-In this article, we explored the process of transforming videos into ASCII art using C++ and OpenCV. By following the steps mentioned above, you can build and run the program successfully. With its real-time video processing, dynamic resizing, customizable ASCII character set, and cross-platform compatibility, the program offers a unique and engaging way to experience videos in a creative manner. So go ahead, unleash your creativity, and witness the captivating world of video-to-ASCII art transformation.
+- If you're getting OpenCV-related errors, double-check your paths using `brew info opencv`
+- Make sure your terminal window is large enough for the ASCII output
+- For performance issues, try reducing the input video resolution
+
+## Future Enhancements
+
+There's always room for improvement! Some ideas I'm considering:
+- Color support using ANSI escape codes
+- Custom character mappings via configuration files
+- GUI interface for real-time parameter adjustment
+- Video export functionality
+
+## Ready to Try It?
+
+The complete source code is available on [GitHub](https://github.com/jmartinn/vid-to-ascii). Feel free to experiment, modify, and create your own ASCII masterpieces. Whether you're creating art or just having fun with code, this project shows how programming can transform the ordinary into something extraordinary.
+
+---
+
+> *"Art is not what you see, but what you make others see."* – Edgar Degas

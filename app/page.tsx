@@ -152,7 +152,7 @@ export default function Page() {
       <div className="my-8 flex w-full flex-col space-y-4">
         <Suspense>
           <BlogLink
-            name="Balancing Perfectionism"
+            name="A Guide to Productive Perfectionism"
             slug="balancing-perfectionism"
           />
           <BlogLink name="Video To ASCII Using C++" slug="video-to-ascii" />
