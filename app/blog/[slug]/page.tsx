@@ -94,11 +94,12 @@ export default async function Blog({ params }: { params: Params }) {
             description: post.metadata.summary,
             image: post.metadata.image
               ? `https://www.jmartinn.com${post.metadata.image}`
-              : `http://www.jmartinn.com/og?title=${post.metadata.title}`,
+              : `https://www.jmartinn.com/og?title=${post.metadata.title}`,
             url: `https://www.jmartinn.com/blog/${post.slug}`,
             author: {
               "@type": "Person",
               name: "jmartinn",
+              jobTitle: "Frontend Developer",
               url: "https://x.com/jmartinn07",
             },
           }),
