@@ -89,8 +89,8 @@ export default async function Blog({ params }: { params: Params }) {
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
+            datePublished: `${post.metadata.publishedAt}T08:00:00+01:00`,
+            dateModified: `${post.metadata.updatedAt}T08:00:00+01:00`,
             description: post.metadata.summary,
             image: post.metadata.image
               ? `https://www.jmartinn.com${post.metadata.image}`
@@ -99,6 +99,7 @@ export default async function Blog({ params }: { params: Params }) {
             author: {
               "@type": "Person",
               name: "jmartinn",
+              url: "https://x.com/jmartinn07",
             },
           }),
         }}
