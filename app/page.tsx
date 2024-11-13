@@ -57,6 +57,7 @@ export default function Page() {
         <div className="flex flex-col space-y-3 text-neutral-500 dark:text-neutral-400">
           <a
             rel="noopener noreferrer"
+            aria-label="Twitter"
             target="_blank"
             href="https://x.com/jmartinn07"
             className="flex items-center gap-2 transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
@@ -64,15 +65,17 @@ export default function Page() {
             <Icons.twitter />
           </a>
           <a
-            className="flex items-center gap-2 transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
             rel="noopener noreferrer"
+            aria-label="LinkedIn"
             target="_blank"
             href="https://www.linkedin.com/in/juampemartin/"
+            className="flex items-center gap-2 transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
           >
             <Icons.linkedin />
           </a>
           <a
             rel="noopener noreferrer"
+            aria-label="GitHub"
             target="_blank"
             href="https://github.com/jmartinn"
             className="flex items-center gap-2 transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
