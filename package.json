@@ -24,6 +24,8 @@
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
     "react-tweet": "3.2.0",
+    "rehype-pretty-code": "^0.14.0",
+    "shiki": "^1.22.2",
     "sugar-high": "^0.6.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7"

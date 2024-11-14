@@ -3,11 +3,11 @@ import React, { type AnchorHTMLAttributes, createElement } from "react";
 import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
-import { highlight } from "sugar-high";
+import { rehypePrettyCode } from "rehype-pretty-code";
+
+import { cn } from "@/lib/utils";
 
 import { TweetComponent } from "../tweet/tweet";
-
-import { Pre } from "./pre";
 
 interface TableProps {
   data: {
@@ -140,20 +140,6 @@ function ConsCard({ title, cons }: ConsCardProps) {
   );
 }
 
-// FIX: Provide more accurate type
-// @ts-expect-error: unspecified type for props
-function Code({ children, ...props }) {
-  const codeHTML = highlight(children);
-
-  return (
-    <code
-      className="rounded px-[0.3rem] py-[0.2rem] font-mono text-sm"
-      dangerouslySetInnerHTML={{ __html: codeHTML }}
-      {...props}
-    />
-  );
-}
-
 function slugify(str: string | number) {
   return str
     .toString()
@@ -196,10 +182,31 @@ const components = {
   ProsCard,
   ConsCard,
   StaticTweet: TweetComponent,
-  pre: Pre,
-  code: Code,
+  pre: ({ children }: { children: React.ReactNode }) => (
+    <pre className="overflow-auto rounded-lg p-4">{children}</pre>
+  ),
+  code: ({
+    children,
+    className,
+  }: {
+    children: React.ReactNode;
+    className?: string;
+  }) => (
+    <code className={cn("whitespace-pre font-mono text-sm", className)}>
+      {children}
+    </code>
+  ),
   Table,
 };
+
+// Options for rehype-pretty-code
+const options = {
+  theme: "github-dark",
+  keepBackground: true,
+};
+
+// Rehype plugins array
+const rehypePlugins = [[rehypePrettyCode, options]];
 
 export function CustomMDX(
   props: React.JSX.IntrinsicAttributes & MDXRemoteProps
@@ -208,8 +215,15 @@ export function CustomMDX(
     <MDXRemote
       {...props}
       // FIX: Fix type error
-      // @ts-expect-error: components type missmatch
+      // @ts-expect-error: Components type missmatch
       components={{ ...components, ...(props.components || {}) }}
+      options={{
+        mdxOptions: {
+          // FIX: Fix type error
+          // @ts-expect-error: Plugins type missmatch
+          rehypePlugins,
+        },
+      }}
     />
   );
 }
