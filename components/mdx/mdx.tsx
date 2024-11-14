@@ -201,7 +201,7 @@ const components = {
 
 // Options for rehype-pretty-code
 const options = {
-  theme: "github-dark",
+  theme: "one-dark-pro",
   keepBackground: true,
 };
 
@@ -214,12 +214,10 @@ export function CustomMDX(
   return (
     <MDXRemote
       {...props}
-      // FIX: Fix type error
       // @ts-expect-error: Components type missmatch
       components={{ ...components, ...(props.components || {}) }}
       options={{
         mdxOptions: {
-          // FIX: Fix type error
           // @ts-expect-error: Plugins type missmatch
           rehypePlugins,
         },
