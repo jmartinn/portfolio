@@ -1,0 +1,174 @@
+---
+title: "ADHD in Dev: Tools and Strategies"
+publishedAt: "2024-11-13"
+summary: "A personal journey and practical guide to leveraging ADHD traits in software development while managing its challenges"
+keywords: ADHD, productivity, software development, mental health, developer tools
+---
+
+Picture your mind as a powerful but uniquely configured computer. Sometimes it overclocks itself to hyperfocus on complex algorithms, while other times it spawns countless background processes that make it hard to focus on a single task. That's what developing software with ADHD feels like – and after years of experience, I've learned it's not just about managing challenges, but also harnessing distinct advantages.
+
+## Understanding the ADHD Developer Mind
+
+Having ADHD as a developer is like running an alternative operating system. While others might execute tasks sequentially, our minds often parallel process – jumping between ideas, making unexpected connections, and sometimes struggling to manage multiple input streams.
+
+### The Challenges
+- **Task Switching Overhead**: Moving between different coding tasks can be either seamless or incredibly difficult
+- **Time Blindness**: That "quick fix" suddenly consumed three hours
+- **Documentation Resistance**: The supreme challenge of stopping to document code when your mind is racing to the next feature
+- **Tab Explosion**: Finding yourself with 47 browser tabs of StackOverflow answers
+- **Dopamine-Driven Development**: Chasing the excitement of new projects while struggling to maintain existing ones
+
+### The Superpowers
+- **Hyperfocus**: Ability to dive deep into complex problems
+- **Pattern Recognition**: Quickly spotting connections in code structures
+- **Creative Problem-Solving**: Finding unconventional solutions through non-linear thinking
+- **Adaptability**: Natural comfort with rapid context switching (when it clicks)
+
+## Building Your Development Environment
+
+The key to thriving as an ADHD developer is creating an environment that works with your brain, not against it. Here's my battle-tested setup:
+
+### Editor Setup: Minimizing Distractions
+I use Neovim as my primary editor for several ADHD-friendly reasons:
+```lua
+-- Example Neovim configuration focusing on focus
+vim.opt.number = true         -- Line numbers for orientation
+vim.opt.relativenumber = true -- Relative numbers for quick navigation
+vim.opt.signcolumn = "yes"   -- Dedicated space for git/error signs
+vim.opt.colorcolumn = "80"   -- Visual guide for line length
+```
+
+The modal editing approach keeps my hands on the keyboard, reducing the cognitive load of context switching between mouse and keyboard.
+
+### Workspace Organization
+
+1. **Project Structure**:
+```txt
+project/
+├── .nvim/        # Project-specific editor config
+├── docs/         # Documentation (with clear templates)
+├── scripts/      # Automation scripts
+└── src/          # Source code with consistent structure
+```
+
+2. **Window Management**:
+- Left: Project tree (toggle-able)
+- Center: Main editor
+- Right: Terminal/REPL (when needed)
+
+## Task Management Strategies
+
+### The "Now and Next" System
+Instead of overwhelming todo lists, I maintain two focus areas:
+1. **Now**: The single task I'm currently working on
+2. **Next**: Maximum of three upcoming tasks
+
+This reduces the cognitive load of decision-making and helps maintain focus.
+
+### Time Management Techniques
+
+1. **Pomodoro with a Twist**:
+   - 25 minutes of focused coding
+   - 5 minutes for quick wins (fixing typos, small refactors)
+   - 15 minutes for physical movement
+   - Repeat
+
+2. **Time Blocking**:
+   ```markdown
+   Morning: Complex Problem Solving
+   ├── 09:00-11:00: Deep Work
+   ├── 11:00-11:30: Quick Wins
+   └── 11:30-12:00: Documentation
+   ```
+
+## Tools That Make a Difference
+
+### Development Tools
+1. **Obsidian** for documentation:
+   - Links between notes mirror how ADHD minds connect ideas
+   - Quick capture for sudden insights
+   - Templates for consistent documentation
+
+2. **GitHub Copilot**:
+   - Reduces cognitive load of boilerplate code
+   - Helps maintain focus on problem-solving
+   - Assists with documentation when motivation is low
+
+### Focus Tools
+1. **Forest App**: Gamifies focus sessions
+2. **Noise-Canceling Headphones**: Essential for managing sensory input
+3. **Time Timer**: Visual representation of time passing
+
+## Communication Strategies
+
+### With Team Members
+- Be upfront about your working style
+- Document decisions immediately after meetings
+- Use async communication when possible
+
+### Code Reviews
+- Review code in short bursts
+- Leave comments as you go
+- Use templates for consistency
+
+## Leveraging Hyperfocus
+
+Hyperfocus can be a superpower when channeled correctly. Here's how I make it work:
+
+1. **Preparation**:
+   - Clear workspace
+   - Water and snacks ready
+   - All notifications disabled
+   - Clear project goals
+
+2. **Recovery**:
+   - Schedule buffer time after intense sessions
+   - Document insights before switching contexts
+   - Take proper breaks
+
+## Debugging with ADHD
+
+Debugging requires a different approach when your mind works differently:
+
+1. **Rubber Duck Debugging+**:
+   ```markdown
+   1. Explain the problem out loud
+   2. Write down the explanation
+   3. Draw a diagram
+   4. Take a short walk
+   5. Review with fresh eyes
+   ```
+
+2. **Strategic Breakpoints**:
+   - Set multiple breakpoints initially
+   - Narrow down progressively
+   - Use conditional breakpoints for complex scenarios
+
+## Building Sustainable Habits
+
+Success with ADHD in development isn't just about tools and techniques – it's about building sustainable habits:
+
+1. **Code Organization**:
+   - Consistent file naming
+   - Clear folder structure
+   - Regular cleanup sessions
+
+2. **Documentation Habits**:
+   - Document immediately after writing code
+   - Use templates for consistency
+   - Set documentation timers
+
+3. **Health Habits**:
+   - Regular exercise
+   - Consistent sleep schedule
+   - Proper nutrition
+
+## Embracing Your Unique Operating System
+
+ADHD in software development isn't a bug – it's a different architecture. Understanding and working with your mind's unique patterns can turn perceived challenges into advantages. The key is building systems that support your natural way of thinking while managing potential pitfalls.
+
+Remember: You're not adapting to a neurotypical development environment; you're creating an environment that works for your neurodivergent mind.
+
+---
+
+> *"The question is not how to get cured, but how to live."* – Joseph Conrad
