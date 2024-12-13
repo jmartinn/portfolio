@@ -199,13 +199,11 @@ const components = {
   Table,
 };
 
-// Options for rehype-pretty-code
 const options = {
   theme: "one-dark-pro",
   keepBackground: true,
 };
 
-// Rehype plugins array
 const rehypePlugins = [[rehypePrettyCode, options]];
 
 export function CustomMDX(
@@ -214,7 +212,6 @@ export function CustomMDX(
   return (
     <MDXRemote
       {...props}
-      // @ts-expect-error: Components type missmatch
       components={{ ...components, ...(props.components || {}) }}
       options={{
         mdxOptions: {
