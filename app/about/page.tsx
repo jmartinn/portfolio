@@ -40,8 +40,8 @@ export default function AboutPage() {
           I&apos;m also passionate about <b>note-taking systems</b> (hello
           Obsidian and Zettelkasten), experimenting with <b>new tools</b>, and
           sharing my findings with others. I believe in learning by doing and
-          contributing wherever I can, whether that’s through
-          <b>open-source</b> contributions or helping others grow.
+          contributing wherever I can, whether that’s through <b>open-source</b>{" "}
+          contributions or helping others grow.
         </p>
         <p>
           My career goal is simple: to <b>create meaningful experiences</b> on
