@@ -96,7 +96,7 @@ export default function Page() {
           <Image
             alt="React logomark"
             src="/react-logo.svg"
-            className="mr-1 inline-block align-middle"
+            className="!mr-1 inline-block align-middle"
             height="16"
             width="16"
           />
@@ -107,7 +107,7 @@ export default function Page() {
           <Image
             alt="Next.js logomark"
             src="/next-logo.svg"
-            className="mr-1 inline-block align-middle"
+            className="!mr-1 inline-block align-middle"
             width="16"
             height="16"
           />
@@ -118,7 +118,7 @@ export default function Page() {
           <Image
             alt="TypeScript logomark"
             src="/typescript-logo.svg"
-            className="mr-1 inline-block align-middle"
+            className="!mr-1 inline-block align-middle"
             width="16"
             height="16"
           />
