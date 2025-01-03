@@ -50,7 +50,7 @@ export default function UsesPage() {
             <a href="https://github.com/folke">Folke.</a>
           </li>
           <li>
-            <strong>Terminal: WezTerm / zsh</strong> - For seamless terminal
+            <strong>Terminal: Ghostty / zsh</strong> - For seamless terminal
             work.
           </li>
         </ul>
