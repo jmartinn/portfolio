@@ -1,0 +1,85 @@
+---
+title: "Building My Homelab: A DevOps Journey"
+publishedAt: 2025-01-08
+summary: "From a curious developer to managing my own infrastructure - my journey into building and maintaining a homelab with Kubernetes, Flux, and modern DevOps practices."
+keywords: homelab, kubernetes, self-hosted, infrastructure, devops, microk8s, cloudflare, monitoring, prometheus, grafana
+---
+
+It started with a YouTube video. Someone showing off their homelab setup - multiple services running seamlessly, all managed through a sleek dashboard. The video was by Mischa Vandenburg, whose content inspired me to take on this journey ([Mischa's channel](https://www.youtube.com/@mischavandenburg)). As a developer, I'm no stranger to running local services, but this was different. This was a full-fledged, professional-grade infrastructure running from home. I was hooked.
+
+## The Spark
+
+Having an old computer gathering dust and a programming background gave me just enough confidence to take the plunge. The plan seemed straightforward: install Ubuntu Server, set up some containers, and I'd be on my way. If only I knew how deep this rabbit hole would go.
+
+## First Steps: More Like Baby Steps
+
+My journey began with installing Ubuntu Server. The first real decision came when choosing a container orchestrator. While the tutorial I was following suggested k3s, I ended up going with microk8s. This turned out to be my first lesson in homelab building: there's rarely a "right" choice, only what works best for your needs.
+
+## The Game Changer: Cloudflare Tunnels
+
+The real breakthrough came when I set up Cloudflare tunnels. Before this, I had vague concerns about exposing ports and securing access to my services. Cloudflare tunnels solved this elegantly - no open ports, secure access from anywhere, and proper SSL certificates out of the box.
+
+Seeing my first service accessible through my custom domain (jmartinn.net) was a moment of pure satisfaction. It felt like crossing a threshold from "playing around with servers" to "running actual infrastructure."
+
+## GitOps: When Git Meets Ops
+
+Enter Flux - a tool that would completely change how I managed my homelab. The concept was beautiful in its simplicity: describe your desired state in Git, and Flux ensures your cluster matches it. Push a change, and watch as your infrastructure updates itself.
+
+This wasn't just about automation; it was about bringing software development best practices to infrastructure management:
+
+- Version control for my entire setup
+- Changes tracked through commit history
+- Easy rollbacks if something goes wrong
+- Documentation living alongside code
+
+## Monitoring: The Eyes and Ears
+
+Setting up Prometheus and Grafana was like turning on the lights in a dark room. Suddenly, I could see everything:
+
+- Real-time CPU and memory usage
+- Network traffic patterns
+- Service health metrics
+- Even my Cloudflare tunnel statistics
+
+But more than just collecting metrics, I learned the value of proper monitoring. It's one thing to run services; it's another to understand how they're performing.
+
+## The Inevitable Struggles
+
+Of course, there were challenges. Plenty of them:
+
+- Learning that hardcoding IP addresses in Kubernetes is a recipe for disaster (they change!)
+- Understanding why proper secret management is crucial (commits with passwords are forever)
+- Debugging network issues only to find it was a DNS problem (it's always DNS)
+- Realizing that documentation isn't just nice to have - it's essential
+
+Each issue taught me something valuable. More importantly, they taught me how to think about infrastructure problems systematically.
+
+## The Current State
+
+Today, my homelab is more than just a collection of services. It's a complete platform:
+
+- Automated deployments through Flux GitOps
+- Secure access via Cloudflare tunnels
+- Comprehensive monitoring with Prometheus and Grafana
+- A custom homepage giving me a quick overview of everything
+- And most importantly, room to grow
+
+Everything is documented, version controlled, and automated. Changes are as simple as pushing to a Git repository. It feels professional because, well, it is professional - just on a smaller scale.
+
+## Looking Forward
+
+This journey has changed how I think about infrastructure. It's shown me that concepts like GitOps, monitoring, and automation aren't just enterprise buzzwords - they're practical tools that make sense even for a home setup.
+
+The beauty of a homelab is that it's never finished. There's always something new to learn, another service to add, or a better way to do things. My GitHub repository has a growing list of ideas and improvements, and I couldn't be more excited about implementing them.
+
+## Starting Your Own Journey
+
+If you're considering building a homelab, here's my advice: do it. Yes, you'll face challenges. Yes, you'll spend late nights debugging weird issues. But the learning experience is invaluable.
+
+Start small, document everything, and don't be afraid to break things. After all, that's how we learn best.
+
+All my configurations and documentation are available on GitHub ([jmartinn/homelab](https://github.com/jmartinn/homelab)). Feel free to use them as inspiration for your own homelab journey. Just remember - the goal isn't to copy someone else's setup, but to build something that works for you.
+
+---
+
+> *"Any sufficiently advanced technology is indistinguishable from magic."* - Arthur C. Clarke
