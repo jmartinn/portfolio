@@ -18,10 +18,11 @@ export default function AboutPage() {
       <div className="prose prose-neutral text-neutral-800 dark:prose-invert dark:text-neutral-200">
         <p>
           I specialize in building{" "}
-          <b>responsive, accessible, and dynamic web applications</b> using{" "}
-          <b>React</b>, <b>Next.js</b>, and <b>TypeScript</b>. I thrive on
-          turning designs into seamless user experiences, with a strong focus on{" "}
-          <b>scalability</b> and <b>performance</b>.
+          <b>responsive, accessible, and dynamic web applications</b> using
+          tools like <b>React</b>, <b>Tailwind</b>, <b>Next.js</b>, and{" "}
+          <b>TypeScript</b>. I thrive on turning designs into seamless user
+          experiences, with a strong focus on <b>scalability</b> and{" "}
+          <b>performance</b>.
         </p>
         <p>
           What sets me apart is my dedication to{" "}

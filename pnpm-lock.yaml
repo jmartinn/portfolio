@@ -66,9 +66,6 @@ importers:
       shiki:
         specifier: ^1.22.2
         version: 1.22.2
-      sugar-high:
-        specifier: ^0.6.1
-        version: 0.6.1
       tailwind-merge:
         specifier: ^2.5.5
         version: 2.5.5
@@ -2425,9 +2422,6 @@ packages:
     resolution: {integrity: sha512-8EbVDiu9iN/nESwxeSxDKe0dunta1GOlHufmSSXxMD2z2/tMZpDMpvXQGsc+ajGo8y2uYUmixaSRUc/QPoQ0GA==}
     engines: {node: '>=16 || 14 >=14.17'}
     hasBin: true
-
-  sugar-high@0.6.1:
-    resolution: {integrity: sha512-kg1qMW7WwJcueXIlHkChL/p2EWY3gf8rQmP6n5nUq2TWVqatqDTMLvViS9WgAjgyTKH5/3/b8sRwWPOOAo1zMA==}
 
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
@@ -5450,8 +5444,6 @@ snapshots:
       mz: 2.7.0
       pirates: 4.0.6
       ts-interface-checker: 0.1.13
-
-  sugar-high@0.6.1: {}
 
   supports-color@7.2.0:
     dependencies:
