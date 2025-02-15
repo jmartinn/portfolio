@@ -4,7 +4,6 @@ import { Icons } from "@/components/ui/icons";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "VP of Developer Experience at Vercel.",
 };
 
 export default function AboutPage() {
