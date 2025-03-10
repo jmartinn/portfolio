@@ -1,43 +1,57 @@
+import { MusicWidget } from "@/components/music-widget";
+
 import { Icons } from "../ui/icons";
 
 export function Footer() {
   return (
-    <footer className="mb-16">
-      <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
-        <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://x.com/jmartinn07"
-          >
-            <Icons.arrow />
-            <p className="ml-2 h-7">follow me on twitter</p>
-          </a>
-        </li>
-        <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="mailto:juamp_m@hotmail.com"
-          >
-            <Icons.arrow />
-            <p className="ml-2 h-7">send me an email</p>
-          </a>
-        </li>
-        <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="/resume"
-          >
-            <Icons.arrow />
-            <p className="ml-2 h-7">resume</p>
-          </a>
-        </li>
-      </ul>
+    <footer className="my-12 border-t border-neutral-200 pt-8 dark:border-neutral-800">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div className="mb-8 md:mb-0">
+            <MusicWidget
+              albumArt="/images/album-cover.jpg"
+              title="Somewhere in Stockholm"
+              artist="Avicii"
+            />
+          </div>
+
+          <ul className="flex flex-col space-y-2 text-neutral-600 dark:text-neutral-300">
+            <li>
+              <a
+                className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://x.com/jmartinn07"
+              >
+                <Icons.twitter className="size-4" />
+                <span className="ml-2">follow me on twitter</span>
+              </a>
+            </li>
+            <li>
+              <a
+                className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+                rel="noopener noreferrer"
+                target="_blank"
+                href="mailto:juamp_m@hotmail.com"
+              >
+                <Icons.arrow className="size-3" />
+                <span className="ml-2">send me an email</span>
+              </a>
+            </li>
+            <li>
+              <a
+                className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+                rel="noopener noreferrer"
+                target="_blank"
+                href="/resume"
+              >
+                <Icons.arrow className="size-3" />
+                <span className="ml-2">resume</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </footer>
   );
 }
