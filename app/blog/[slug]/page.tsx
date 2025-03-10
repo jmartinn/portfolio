@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import RelatedPosts from "@/components/blog/related-posts";
 import { ReportView } from "@/components/blog/report-view";
 import ViewCounter from "@/components/blog/view-counter";
 import { CustomMDX } from "@/components/mdx/mdx";
@@ -108,7 +109,6 @@ export default async function Blog({ params }: { params: Params }) {
       <h1 className="title max-w-[650px] text-3xl font-bold tracking-tighter dark:text-gray-100">
         {post.metadata.title}
       </h1>
-
       <span className="mt-2 flex font-mono text-sm text-neutral-600 dark:text-gray-400">
         <span className="flex grow">
           <span className="hidden md:inline">
@@ -135,9 +135,16 @@ export default async function Blog({ params }: { params: Params }) {
           <ReportView slug={post.slug} />
         </span>
       </span>
-      <article className="prose prose-neutral prose-quoteless mb-6 text-justify dark:prose-invert">
+      <article className="prose prose-neutral prose-quoteless mt-8 w-full dark:prose-invert">
         <CustomMDX source={post.content} />
       </article>
+      <Suspense fallback={null}>
+        <RelatedPosts
+          currentSlug={post.slug}
+          keywords={post.metadata.keywords || []}
+          limit={2}
+        />
+      </Suspense>
     </section>
   );
 }
