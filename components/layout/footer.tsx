@@ -23,7 +23,7 @@ export function Footer() {
                 target="_blank"
                 href="https://x.com/jmartinn07"
               >
-                <Icons.twitter className="size-4" />
+                <Icons.arrow className="size-3" />
                 <span className="ml-2">follow me on twitter</span>
               </a>
             </li>
