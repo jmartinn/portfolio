@@ -5,14 +5,10 @@ import { Icons } from "../ui/icons";
 export function Footer() {
   return (
     <footer className="my-12 border-t border-neutral-200 pt-8 dark:border-neutral-800">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl ">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-          <div className="mb-8 md:mb-0">
-            <MusicWidget
-              albumArt="/images/album-cover.jpg"
-              title="Somewhere in Stockholm"
-              artist="Avicii"
-            />
+          <div className="mb-8 grow md:mb-0 md:mr-8">
+            <MusicWidget />
           </div>
 
           <ul className="flex flex-col space-y-2 text-neutral-600 dark:text-neutral-300">
