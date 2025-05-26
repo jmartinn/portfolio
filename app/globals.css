@@ -2,26 +2,205 @@
 @tailwind components;
 @tailwind utilities;
 
-::selection {
-  background-color: #47a3f3;
-  color: #fefefe;
+@layer base {
+  :root {
+    --background: 36 33% 97%;
+    --foreground: 0 0% 7%;
+
+    --card: 36 33% 100%;
+    --card-foreground: 0 0% 7%;
+
+    --popover: 36 33% 100%;
+    --popover-foreground: 0 0% 7%;
+
+    --primary: 0 0% 7%;
+    --primary-foreground: 36 33% 97%;
+
+    --secondary: 36 33% 93%;
+    --secondary-foreground: 0 0% 7%;
+
+    --muted: 36 33% 93%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 36 33% 93%;
+    --accent-foreground: 0 0% 7%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 36 33% 97%;
+
+    --border: 36 33% 90%;
+    --input: 36 33% 90%;
+    --ring: 0 0% 7%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 36 33% 97%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 36 33% 97%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 36 33% 97%;
+
+    --primary: 36 33% 97%;
+    --primary-foreground: 0 0% 7%;
+
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 36 33% 97%;
+
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 0 0% 13%;
+    --accent-foreground: 36 33% 97%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 36 33% 97%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 83%;
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+@layer base {
+  * {
+    @apply border-border;
   }
 
   html {
-    color-scheme: dark;
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    scroll-padding-top: 2.5rem;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Smooth transitions for theme changes only */
+  :root {
+    --transition-theme: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Apply theme transitions to elements that need them */
+  body,
+  [data-theme-transition="true"],
+  /* Add theme transitions to common elements */
+  .prose,
+  .prose *,
+  section,
+  header,
+  nav,
+  main,
+  aside,
+  footer,
+  div,
+  span,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    transition: var(--transition-theme);
+  }
+
+  a,
+  button,
+  [role="button"],
+  input,
+  textarea,
+  select {
+    transition:
+      background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Disable transitions for elements that should animate with libraries */
+  [data-motion],
+  [data-framer-motion],
+  .motion-element {
+    transition: none !important;
+  }
+
+  /* Disable transitions for motion element children, but allow interactive elements to keep theirs */
+  .motion-element>*:not(a):not(button):not([role="button"]):not(svg):not(.group) {
+    transition: none !important;
+  }
+
+  /* Ensure interactive elements inside motion elements can still have hover transitions */
+  .motion-element a,
+  .motion-element button,
+  .motion-element [role="button"],
+  .motion-element svg,
+  .motion-element .group svg {
+    transition:
+      background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  /* Performance optimizations for animations */
+  .motion-element,
+  [data-motion],
+  [data-framer-motion] {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Fix anchor link positioning with fixed header */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    scroll-margin-top: 2rem;
+    /* Ensure headings appear below fixed header */
   }
 }
 
+::selection {
+  @apply bg-foreground text-background;
+}
+
 html {
-  min-width: 360px;
-  scrollbar-gutter: stable;
-  @apply scroll-smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Theme transition overlay effect */
+@keyframes theme-transition {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.theme-transitioning {
+  animation: theme-transition 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .prose .anchor {
@@ -39,20 +218,16 @@ html {
 }
 
 .prose a {
-  @apply transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
+  @apply transition-colors decoration-foreground/30 underline-offset-2 decoration-[0.1em] hover:decoration-foreground/60;
 }
 
 .prose .anchor:after {
-  @apply text-neutral-300 dark:text-neutral-700;
+  @apply text-foreground/30;
   content: '#';
 }
 
 .prose *:hover>.anchor {
   @apply visible;
-}
-
-.prose pre {
-  @apply dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900;
 }
 
 .prose code {
@@ -74,15 +249,8 @@ html {
   @apply m-0;
 }
 
-.prose h2,
-h3,
-h4 {
-  @apply font-medium tracking-tighter !important;
-  margin-bottom: 0.5rem;
-}
-
 .prose strong {
-  @apply font-medium;
+  @apply font-semibold text-foreground;
 }
 
 .prose> :first-child {
@@ -134,7 +302,43 @@ table {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Shiki syntax highlighting styles */
+.prose pre[data-theme*=" "],
+.prose pre[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.dark .prose pre[data-theme*=" "],
+.dark .prose pre[data-theme*=" "] span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* Ensure code blocks have proper styling */
+.prose pre {
+  @apply dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+/* Highlighted lines */
+.prose .line--highlighted {
+  background-color: rgba(101, 117, 133, 0.16);
+  display: block;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+/* Highlighted words */
+.prose .word--highlighted {
+  background-color: rgba(101, 117, 133, 0.16);
+  padding: 0.25rem;
+  border-radius: 0.25rem;
 }

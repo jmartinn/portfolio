@@ -1,6 +1,10 @@
 import fs from "fs";
 import path from "path";
 
+import { cache } from "react";
+
+import { calculateReadingTime } from "../reading-time";
+
 type Metadata = {
   title: string;
   publishedAt: string;
@@ -8,6 +12,7 @@ type Metadata = {
   summary: string;
   image?: string;
   keywords?: string[];
+  readingTime?: number;
 };
 
 type Post = {
@@ -58,8 +63,13 @@ function getMDXData(dir: string) {
     const { metadata, content } = readMDXFile(path.join(dir, file));
     const slug = path.basename(file, path.extname(file));
     const tweetIds = extractTweetIds(content);
+    const readingTime = calculateReadingTime(content);
+
     return {
-      metadata,
+      metadata: {
+        ...metadata,
+        readingTime,
+      },
       slug,
       tweetIds,
       content,
@@ -72,6 +82,13 @@ function extractTweetIds(content: string) {
   return tweetMatches?.map((tweet: string) => tweet.match(/[0-9]+/g)![0]) || [];
 }
 
-export function getBlogPosts(): Post[] {
+// Cache the blog posts to avoid re-reading files on every request
+export const getBlogPosts = cache((): Post[] => {
   return getMDXData(path.join(process.cwd(), "content"));
-}
+});
+
+// Helper function to get a single post by slug
+export const getBlogPost = cache((slug: string): Post | undefined => {
+  const posts = getBlogPosts();
+  return posts.find((post) => post.slug === slug);
+});

@@ -4,23 +4,23 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
+import { Instrument_Sans } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Footer } from "@/components/layout/footer";
-import { Sidebar } from "@/components/layout/sidebar";
+import { ThemeProvider } from "@/components/providers";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
-
-const GeistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
 
 const GeistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+
+const InstrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-instrument-sans",
 });
 
 export const metadata: Metadata = {
@@ -89,28 +89,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={cn(
-        "bg-[#fcfcfc] text-black dark:bg-[#111010] dark:text-gray-100",
-        GeistSans.variable,
-        GeistMono.variable
-      )}
-    >
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          GeistSans.className,
-          "mx-4 mt-8 flex max-w-4xl flex-col antialiased md:mt-10 md:flex-row lg:mx-auto lg:mt-16"
+          InstrumentSans.variable,
+          GeistMono.variable,
+          "font-sans antialiased"
         )}
       >
-        <Sidebar />
-        <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
-          {children}
-          <Footer />
-        </main>
-        <Analytics />
-        <SpeedInsights />
-        <Toaster />
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <main>
+            {children}
+            <Footer />
+          </main>
+          <Analytics />
+          <SpeedInsights />
+          <Toaster />
+        </ThemeProvider>
       </body>
       <GoogleAnalytics gaId="G-SZW29GL9NX" />
     </html>

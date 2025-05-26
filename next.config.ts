@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "i.scdn.co", // For Spotify album art
+        hostname: "i.scdn.co",
         pathname: "**",
       },
     ],

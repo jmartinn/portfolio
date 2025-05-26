@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { rehypePrettyCode } from "rehype-pretty-code";
 
+import { getHighlighter } from "@/lib/shiki";
 import { cn } from "@/lib/utils";
 
 import { TweetComponent } from "../tweet/tweet";
@@ -169,6 +170,117 @@ function createHeading(level: number): React.FC<{ children: React.ReactNode }> {
   return Component;
 }
 
+// Blog-specific heading components with anchor links AND improved styling
+function createBlogHeading(
+  level: number,
+  className: string
+): React.FC<{ children: React.ReactNode }> {
+  const Component: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const slug = slugify(children as string);
+    return createElement(
+      `h${level}`,
+      {
+        id: slug,
+        className: className,
+      },
+      createElement("a", {
+        href: `#${slug}`,
+        key: `link-${slug}`,
+        className: "anchor",
+      }),
+      children
+    );
+  };
+  Component.displayName = `BlogHeading${level}`;
+  return Component;
+}
+
+// Blog-specific styled components
+const blogComponents = {
+  h1: createBlogHeading(
+    1,
+    "mb-6 text-2xl font-medium leading-tight text-foreground md:text-3xl"
+  ),
+  h2: createBlogHeading(
+    2,
+    "mb-4 mt-8 text-xl font-medium leading-tight text-foreground md:text-2xl"
+  ),
+  h3: createBlogHeading(
+    3,
+    "mb-3 mt-6 text-lg font-medium leading-tight text-foreground md:text-xl"
+  ),
+  h4: createBlogHeading(
+    4,
+    "mb-3 mt-4 text-base font-semibold leading-tight text-foreground md:text-lg"
+  ),
+  h5: createBlogHeading(
+    5,
+    "mb-2 mt-4 text-sm font-semibold leading-tight text-foreground md:text-base"
+  ),
+  h6: createBlogHeading(
+    6,
+    "mb-2 mt-4 text-xs font-semibold uppercase tracking-wide leading-tight text-foreground/80 md:text-sm"
+  ),
+  p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
+    <p className="mb-4 leading-relaxed text-foreground/80" {...props} />
+  ),
+  a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+    <a
+      className="text-foreground underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-foreground/60"
+      {...props}
+    />
+  ),
+  code: (props: React.HTMLAttributes<HTMLElement>) => {
+    if (props.className?.includes("language-")) {
+      return <code {...props} />;
+    }
+    return (
+      <code
+        className="rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground"
+        {...props}
+      />
+    );
+  },
+  pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
+    <pre className="mb-4 overflow-x-auto rounded-lg p-4 text-sm" {...props} />
+  ),
+  blockquote: (props: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
+    <blockquote
+      className="border-l-4 border-foreground/20 pl-4 italic text-foreground/70"
+      {...props}
+    />
+  ),
+  ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
+    <ul
+      className="mb-4 list-disc space-y-1 pl-6 text-foreground/80"
+      {...props}
+    />
+  ),
+  ol: (props: React.OlHTMLAttributes<HTMLOListElement>) => (
+    <ol
+      className="mb-4 list-decimal space-y-1 pl-6 text-foreground/80"
+      {...props}
+    />
+  ),
+  li: (props: React.LiHTMLAttributes<HTMLLIElement>) => (
+    <li className="text-foreground/80" {...props} />
+  ),
+  strong: (props: React.HTMLAttributes<HTMLElement>) => (
+    <strong className="font-semibold text-foreground" {...props} />
+  ),
+  em: (props: React.HTMLAttributes<HTMLElement>) => (
+    <em className="italic text-foreground/90" {...props} />
+  ),
+  // Include existing special components
+  Image: RoundedImage,
+  Callout,
+  ProsCard,
+  ConsCard,
+  StaticTweet: TweetComponent,
+  Table,
+};
+
+// Original components for general use
 const components = {
   h1: createHeading(1),
   h2: createHeading(2),
@@ -206,6 +318,7 @@ const options = {
 
 const rehypePlugins = [[rehypePrettyCode, options]];
 
+// Original CustomMDX for general use
 export function CustomMDX(
   props: React.JSX.IntrinsicAttributes & MDXRemoteProps
 ) {
@@ -217,6 +330,53 @@ export function CustomMDX(
         mdxOptions: {
           // @ts-expect-error: Plugins type missmatch
           rehypePlugins,
+        },
+      }}
+    />
+  );
+}
+
+// Blog-specific MDX component with enhanced styling and shiki
+export function BlogMDX(props: React.JSX.IntrinsicAttributes & MDXRemoteProps) {
+  return (
+    <MDXRemote
+      {...props}
+      components={{ ...blogComponents, ...(props.components || {}) }}
+      options={{
+        mdxOptions: {
+          rehypePlugins: [
+            [
+              rehypePrettyCode,
+              {
+                getHighlighter,
+                theme: {
+                  dark: "github-dark-dimmed",
+                  light: "github-light",
+                },
+                keepBackground: true,
+                defaultLang: "plaintext",
+                onVisitLine(node: {
+                  children: Array<{ type: string; value: string }>;
+                }) {
+                  // Prevent lines from collapsing in `display: grid` mode, and allow empty
+                  // lines to be copy/pasted
+                  if (node.children.length === 0) {
+                    node.children = [{ type: "text", value: " " }];
+                  }
+                },
+                onVisitHighlightedLine(node: {
+                  properties: { className: string[] };
+                }) {
+                  node.properties.className.push("line--highlighted");
+                },
+                onVisitHighlightedChars(node: {
+                  properties: { className: string[] };
+                }) {
+                  node.properties.className = ["word--highlighted"];
+                },
+              },
+            ],
+          ],
         },
       }}
     />
