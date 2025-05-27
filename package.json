@@ -9,7 +9,7 @@
     "format": "prettier --write '{app,components,lib}/**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
-    "@next/third-parties": "15.1.0",
+    "@next/third-parties": "15.3.2",
     "@radix-ui/react-toast": "^1.2.3",
     "@supabase/supabase-js": "^2.47.8",
     "@tailwindcss/typography": "^0.5.15",
@@ -20,10 +20,10 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "motion": "^11.14.4",
-    "next": "15.1.0",
+    "next": "15.3.2",
     "next-mdx-remote": "^5.0.0",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-tweet": "3.2.1",
     "rehype-pretty-code": "^0.14.0",
     "shiki": "^1.22.2",
@@ -33,13 +33,13 @@
   },
   "devDependencies": {
     "@types/node": "^20.17.6",
-    "@types/react": "19.0.1",
-    "@types/react-dom": "19.0.2",
+    "@types/react": "19.1.6",
+    "@types/react-dom": "19.1.5",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
-    "eslint-config-next": "15.1.0",
+    "eslint-config-next": "15.3.2",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -51,8 +51,14 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "19.0.1",
-      "@types/react-dom": "19.0.2"
-    }
+      "@types/react": "19.1.6",
+      "@types/react-dom": "19.1.5"
+    },
+    "onlyBuiltDependencies": [
+      "@vercel/speed-insights",
+      "bufferutil",
+      "sharp",
+      "utf-8-validate"
+    ]
   }
 }
