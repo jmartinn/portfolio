@@ -5,7 +5,7 @@ import Link from "next/link";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { rehypePrettyCode } from "rehype-pretty-code";
 
-import { cn } from "@/lib/utils";
+import { getHighlighter } from "@/components/mdx/highlighter";
 
 import { TweetComponent } from "../tweet/tweet";
 
@@ -182,41 +182,61 @@ const components = {
   ProsCard,
   ConsCard,
   StaticTweet: TweetComponent,
-  pre: ({ children }: { children: React.ReactNode }) => (
-    <pre className="overflow-auto rounded-lg p-4">{children}</pre>
-  ),
-  code: ({
-    children,
-    className,
-  }: {
-    children: React.ReactNode;
-    className?: string;
-  }) => (
-    <code className={cn("whitespace-pre font-mono text-sm", className)}>
-      {children}
-    </code>
+  code: (props: React.HTMLAttributes<HTMLElement>) => {
+    if (props.className?.includes("language-")) {
+      return <code {...props} />;
+    }
+    return (
+      <code
+        className="bg-muted text-foreground rounded px-1.5 py-0.5 font-mono text-sm"
+        {...props}
+      />
+    );
+  },
+  pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
+    <pre className="mb-4 overflow-x-auto rounded-lg p-4 text-sm" {...props} />
   ),
   Table,
 };
 
-const options = {
-  theme: "one-dark-pro",
-  keepBackground: true,
-};
-
-const rehypePlugins = [[rehypePrettyCode, options]];
-
-export function CustomMDX(
-  props: React.JSX.IntrinsicAttributes & MDXRemoteProps
-) {
+export function BlogMDX(props: React.JSX.IntrinsicAttributes & MDXRemoteProps) {
   return (
     <MDXRemote
       {...props}
       components={{ ...components, ...(props.components || {}) }}
       options={{
         mdxOptions: {
-          // @ts-expect-error: Plugins type missmatch
-          rehypePlugins,
+          rehypePlugins: [
+            [
+              rehypePrettyCode,
+              {
+                getHighlighter,
+                theme: {
+                  dark: "github-dark",
+                  light: "rose-pine-dawn",
+                },
+                keepBackground: true,
+                defaultLang: "plaintext",
+                onVisitLine(node: {
+                  children: Array<{ type: string; value: string }>;
+                }) {
+                  if (node.children.length === 0) {
+                    node.children = [{ type: "text", value: " " }];
+                  }
+                },
+                onVisitHighlightedLine(node: {
+                  properties: { className: string[] };
+                }) {
+                  node.properties.className.push("line--highlighted");
+                },
+                onVisitHighlightedChars(node: {
+                  properties: { className: string[] };
+                }) {
+                  node.properties.className = ["word--highlighted"];
+                },
+              },
+            ],
+          ],
         },
       }}
     />

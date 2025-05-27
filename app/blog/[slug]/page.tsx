@@ -1,14 +1,13 @@
 import { Suspense } from "react";
 
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import RelatedPosts from "@/components/blog/related-posts";
 import { ReportView } from "@/components/blog/report-view";
 import ViewCounter from "@/components/blog/view-counter";
-import { CustomMDX } from "@/components/mdx/mdx";
+import { BlogMDX } from "@/components/mdx/mdx";
 import { getViewsCount } from "@/lib/db/actions";
-import { getBlogPosts } from "@/lib/db/blog";
+import { getBlogPost, getBlogPosts } from "@/lib/db/blog";
 import { formatDate } from "@/lib/utils";
 
 export const revalidate = 60;
@@ -23,16 +22,14 @@ export async function generateStaticParams() {
 
 type Params = Promise<{ slug: string }>;
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Params;
-}): Promise<Metadata | undefined> {
+export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
   const post = getBlogPosts().find((post) => post.slug === slug);
 
   if (!post) {
-    return;
+    return {
+      title: "Post Not Found",
+    };
   }
 
   const {
@@ -74,37 +71,43 @@ export async function generateMetadata({
 export default async function Blog({ params }: { params: Params }) {
   const { slug } = await params;
 
-  const post = getBlogPosts().find((post) => post.slug === slug);
+  const post = getBlogPost(slug);
 
   if (!post) {
     notFound();
   }
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.metadata.title,
+    description: post.metadata.summary,
+    author: {
+      "@type": "Person",
+      name: "Juan Pedro Martin",
+      url: "https://jmartinn.com",
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Juan Pedro Martin",
+      url: "https://jmartinn.com",
+    },
+    datePublished: new Date(post.metadata.publishedAt).toISOString(),
+    dateModified: new Date(post.metadata.publishedAt).toISOString(),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://jmartinn.com/blog/${slug}`,
+    },
+    url: `https://jmartinn.com/blog/${slug}`,
+    keywords: post.metadata.keywords,
+  };
 
   return (
     <section>
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: `${post.metadata.publishedAt}T08:00:00+01:00`,
-            dateModified: `${post.metadata.updatedAt}T08:00:00+01:00`,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? `https://www.jmartinn.com${post.metadata.image}`
-              : `https://www.jmartinn.com/og?title=${post.metadata.title}`,
-            url: `https://www.jmartinn.com/blog/${post.slug}`,
-            author: {
-              "@type": "Person",
-              name: "jmartinn",
-              jobTitle: "Frontend Developer",
-              url: "https://x.com/jmartinn07",
-            },
-          }),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <h1 className="title max-w-[650px] text-3xl font-bold tracking-tighter dark:text-gray-100">
         {post.metadata.title}
@@ -136,7 +139,7 @@ export default async function Blog({ params }: { params: Params }) {
         </span>
       </span>
       <article className="prose prose-neutral prose-quoteless mt-8 w-full dark:prose-invert">
-        <CustomMDX source={post.content} />
+        <BlogMDX source={post.content} />
       </article>
       <Suspense fallback={null}>
         <RelatedPosts

@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 
+import { cache } from "react";
+
 type Metadata = {
   title: string;
   publishedAt: string;
@@ -72,6 +74,11 @@ function extractTweetIds(content: string) {
   return tweetMatches?.map((tweet: string) => tweet.match(/[0-9]+/g)![0]) || [];
 }
 
-export function getBlogPosts(): Post[] {
+export const getBlogPosts = cache((): Post[] => {
   return getMDXData(path.join(process.cwd(), "content"));
-}
+});
+
+export const getBlogPost = cache((slug: string): Post | undefined => {
+  const posts = getBlogPosts();
+  return posts.find((post) => post.slug === slug);
+});

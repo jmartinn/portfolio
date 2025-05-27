@@ -51,22 +51,41 @@ html {
   @apply visible;
 }
 
+/* Shiki syntax highlighting styles */
+.prose pre[data-theme*=" "],
+.prose pre[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  .prose pre[data-theme*=" "],
+  .prose pre[data-theme*=" "] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}
+
+/* Ensure code blocks have proper styling */
 .prose pre {
   @apply dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900;
+  padding: 1rem;
+  margin: 1rem 0;
 }
 
-.prose code {
-  @apply px-1 rounded-lg;
+/* Highlighted lines */
+.prose .line--highlighted {
+  background-color: rgba(101, 117, 133, 0.16);
+  display: block;
+  margin: 0 -1rem;
+  padding: 0 1rem;
 }
 
-.prose pre code {
-  @apply p-0;
-  border: initial;
-  line-height: 1.5;
-}
-
-.prose code span {
-  @apply font-medium;
+/* Highlighted words */
+.prose .word--highlighted {
+  background-color: rgba(101, 117, 133, 0.16);
+  padding: 0.25rem;
+  border-radius: 0.25rem;
 }
 
 .prose img {

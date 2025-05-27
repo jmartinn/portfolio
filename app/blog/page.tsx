@@ -11,7 +11,11 @@ export const metadata = {
 };
 
 export default async function BlogPage() {
-  const allBlogs = getBlogPosts();
+  const posts = getBlogPosts().sort(
+    (a, b) =>
+      new Date(b.metadata.publishedAt).getTime() -
+      new Date(a.metadata.publishedAt).getTime()
+  );
 
   return (
     <section>
@@ -19,23 +23,13 @@ export default async function BlogPage() {
         read my blog
       </h1>
       <div className="space-y-6">
-        {allBlogs
-          .sort((a, b) => {
-            if (
-              new Date(a.metadata.publishedAt) >
-              new Date(b.metadata.publishedAt)
-            ) {
-              return -1;
-            }
-            return 1;
-          })
-          .map((post, idx) => (
-            <BlogLink
-              key={`blog-card-${idx}`}
-              name={post.metadata.title}
-              slug={post.slug}
-            />
-          ))}
+        {posts.map((post, idx) => (
+          <BlogLink
+            key={`blog-card-${idx}`}
+            name={post.metadata.title}
+            slug={post.slug}
+          />
+        ))}
       </div>
     </section>
   );
