@@ -3,15 +3,19 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Uses",
   description:
-    "Here's what tech I'm currently using for coding, working, and music.",
+    "A curated list of the tools, software, and hardware I use daily for development, productivity, and creativity.",
 };
 
 export default function UsesPage() {
   return (
     <section>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
+      <h1 className="mb-2 text-2xl font-semibold tracking-tighter">
         here&apos;s what I use on a daily basis
       </h1>
+      <p className="mb-8 text-neutral-600 dark:text-neutral-400">
+        A curated list of the tools, software, and hardware that power my daily
+        workflow.
+      </p>
       <div className="prose prose-neutral dark:prose-invert">
         <h3 id="computer-office">Computer / Office</h3>
         <ul>
@@ -20,8 +24,8 @@ export default function UsesPage() {
             for daily development.
           </li>
           <li>
-            <strong>24&quot; LG 24MP400-B</strong> - Just a monitor, nothing
-            fancy.
+            <strong>27&quot; LG UltraFine 27US500-W</strong> - Just a monitor,
+            nothing fancy.
           </li>
           <li>
             <strong>Logitech Signature M650</strong> - Silent and precise.
@@ -68,8 +72,8 @@ export default function UsesPage() {
               <strong>Obsidian</strong> - Note-taking and knowledge management.
             </li>
             <li>
-              <strong>Rectangle</strong> - Simple yet efficient macOS window
-              tiling manager.
+              <strong>Aerospace</strong> - Simple yet efficient macOS tiling
+              window manager.
             </li>
           </ul>
         </div>

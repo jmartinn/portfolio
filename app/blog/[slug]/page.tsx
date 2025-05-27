@@ -1,16 +1,8 @@
-import { Suspense } from "react";
-
 import { notFound } from "next/navigation";
 
-import RelatedPosts from "@/components/blog/related-posts";
-import { ReportView } from "@/components/blog/report-view";
-import ViewCounter from "@/components/blog/view-counter";
 import { BlogMDX } from "@/components/mdx/mdx";
-import { getViewsCount } from "@/lib/db/actions";
 import { getBlogPost, getBlogPosts } from "@/lib/db/blog";
-import { formatDate } from "@/lib/utils";
-
-export const revalidate = 60;
+import { formatDate, calculateReadingTime } from "@/lib/utils";
 
 export async function generateStaticParams() {
   const posts = getBlogPosts();
@@ -24,7 +16,7 @@ type Params = Promise<{ slug: string }>;
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
-  const post = getBlogPosts().find((post) => post.slug === slug);
+  const post = getBlogPost(slug);
 
   if (!post) {
     return {
@@ -39,9 +31,7 @@ export async function generateMetadata({ params }: { params: Params }) {
     image,
     keywords,
   } = post.metadata;
-  const ogImage = image
-    ? `https://www.jmartinn.com${image}`
-    : `https://www.jmartinn.com/og?title=${title}`;
+  const ogImage = image ? image : `https://www.jmartinn.com/og?title=${title}`;
 
   return {
     title,
@@ -68,7 +58,8 @@ export async function generateMetadata({ params }: { params: Params }) {
   };
 }
 
-export default async function Blog({ params }: { params: Params }) {
+// @ts-expect-error: Invalid types
+export default async function Blog({ params }) {
   const { slug } = await params;
 
   const post = getBlogPost(slug);
@@ -76,6 +67,8 @@ export default async function Blog({ params }: { params: Params }) {
   if (!post) {
     notFound();
   }
+
+  const readingTime = calculateReadingTime(post.content);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -130,29 +123,13 @@ export default async function Blog({ params }: { params: Params }) {
 
           <p>{formatDate(post.metadata.publishedAt)}</p>
         </span>
-
-        <span className="md:pr-12">
-          <Suspense fallback={<span className="h-5" />}>
-            <Views slug={post.slug} />
-          </Suspense>
-          <ReportView slug={post.slug} />
+        <span>
+          <p>{readingTime}</p>
         </span>
       </span>
       <article className="prose prose-neutral prose-quoteless mt-8 w-full dark:prose-invert">
         <BlogMDX source={post.content} />
       </article>
-      <Suspense fallback={null}>
-        <RelatedPosts
-          currentSlug={post.slug}
-          keywords={post.metadata.keywords || []}
-          limit={2}
-        />
-      </Suspense>
     </section>
   );
-}
-
-async function Views({ slug }: { slug: string }) {
-  const views = await getViewsCount();
-  return <ViewCounter allViews={views} slug={slug} />;
 }

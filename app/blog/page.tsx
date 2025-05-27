@@ -1,16 +1,13 @@
-import { Suspense } from "react";
-
-import ViewCounter from "@/components/blog/view-counter";
-import { Icons } from "@/components/ui/icons";
-import { getViewsCount } from "@/lib/db/actions";
+import BlogLink from "@/components/blog/blog-post-card";
 import { getBlogPosts } from "@/lib/db/blog";
 
 export const metadata = {
   title: "Blog",
-  description: "Read my thoughts on software development, design, and more.",
+  description:
+    "Thoughts, guides, and explorations on design, development, and the spaces in between.",
 };
 
-export default async function BlogPage() {
+export default function BlogPage() {
   const posts = getBlogPosts().sort(
     (a, b) =>
       new Date(b.metadata.publishedAt).getTime() -
@@ -19,52 +16,23 @@ export default async function BlogPage() {
 
   return (
     <section>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
+      <h1 className="mb-2 text-2xl font-semibold tracking-tighter">
         read my blog
       </h1>
+      <p className="mb-8 text-neutral-600 dark:text-neutral-400">
+        Thoughts, guides, and explorations on design, development, and the
+        spaces in between.
+      </p>
       <div className="space-y-6">
         {posts.map((post, idx) => (
           <BlogLink
             key={`blog-card-${idx}`}
             name={post.metadata.title}
             slug={post.slug}
+            summary={post.metadata.summary}
           />
         ))}
       </div>
     </section>
-  );
-}
-
-async function Views({ slug }: { slug: string }) {
-  const views = await getViewsCount();
-
-  return <ViewCounter allViews={views} slug={slug} />;
-}
-
-interface BlogLinkProps {
-  slug: string;
-  name: string;
-}
-
-async function BlogLink({ slug, name }: BlogLinkProps) {
-  return (
-    <div className="group" key={slug}>
-      <a
-        href={`/blog/${slug}`}
-        className="flex w-full items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 transition-all hover:border-neutral-300 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600 dark:hover:bg-neutral-700"
-      >
-        <div className="flex flex-col">
-          <p className="font-medium text-neutral-900 dark:text-neutral-100">
-            {name}
-          </p>
-          <Suspense fallback={<p className="h-5" />}>
-            <Views slug={slug} />
-          </Suspense>
-        </div>
-        <div className="text-neutral-700 transition-transform duration-300 group-hover:-rotate-12 dark:text-neutral-300">
-          <Icons.arrow />
-        </div>
-      </a>
-    </div>
   );
 }

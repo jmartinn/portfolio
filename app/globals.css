@@ -61,8 +61,8 @@ html {
 @media (prefers-color-scheme: dark) {
   .prose pre[data-theme*=" "],
   .prose pre[data-theme*=" "] span {
-    color: var(--shiki-dark);
-    background-color: var(--shiki-dark-bg);
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
   }
 }
 

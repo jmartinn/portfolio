@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { WorkCard } from "./card";
+
 export const metadata: Metadata = {
   title: "Projects",
   description:
@@ -12,10 +14,11 @@ export default function WorkPage() {
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
         take a look at my work so far
       </h1>
-      <p>
-        🚧 Whoops! This part of the sidewalk is under construction 🚧 <br />
-        Take a coffe and come back later! ☕️
-      </p>
+      <WorkCard
+        title="Strapex"
+        description="An open-source, Stripe inspired payment gateway which aims to democratize payments among users"
+        image=""
+      />
     </section>
   );
 }
