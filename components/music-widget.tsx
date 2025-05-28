@@ -1,4 +1,5 @@
 "use client";
+
 import useSWR from "swr";
 
 import { Card } from "@/components/ui/card";
@@ -61,9 +62,11 @@ export function MusicWidget({ title, artist, albumArt }: MusicWidgetProps) {
           <div
             className="absolute left-1/2 top-1/2 z-10 size-2/5 -translate-x-1/2 -translate-y-1/2 rounded-full"
             style={{
-              backgroundImage: `url(${displayAlbumArt})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              ...(displayAlbumArt && {
+                backgroundImage: `url(${displayAlbumArt})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }),
               boxShadow: "0 0 0 4px rgba(0, 0, 0, 0.8)",
             }}
           />
