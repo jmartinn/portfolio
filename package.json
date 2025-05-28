@@ -19,6 +19,7 @@
     "@vercel/speed-insights": "^1.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "geist": "^1.4.2",
     "motion": "^11.14.4",
     "next": "15.3.2",
     "next-mdx-remote": "^5.0.0",
