@@ -28,11 +28,11 @@ export async function GET() {
     <title>Juan Pedro Martin - Blog</title>
     <description>Thoughts, guides, and explorations on design, development, and the spaces in between.</description>
     <link>https://jmartinn.com</link>
-    <atom:link href="https://jmartinn.com/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://jmartinn.com/rss" rel="self" type="application/rss+xml" />
     <language>en-US</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    <managingEditor>hello@jmartinn.com (Juan Pedro Martin)</managingEditor>
-    <webMaster>hello@jmartinn.com (Juan Pedro Martin)</webMaster>
+    <managingEditor>juamp_m@hotmail.com (Juan Pedro Martin)</managingEditor>
+    <webMaster>juamp_m@hotmail.com (Juan Pedro Martin)</webMaster>
     ${rssItems}
   </channel>
 </rss>`;
