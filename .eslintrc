@@ -33,7 +33,15 @@
       ]
     },
     "import/resolver": {
-      "typescript": {}
+      "typescript": {},
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
     }
   },
   "rules": {
@@ -70,5 +78,24 @@
     ],
     "import/no-unresolved": "error",
     "import/no-absolute-path": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts",
+        "**/*.tsx"
+      ],
+      "rules": {
+        "import/no-unresolved": [
+          "error",
+          {
+            "ignore": [
+              "^geist/font/sans$",
+              "^geist/font/mono$"
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }
