@@ -1,15 +1,25 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+
 import { ImageResponse } from "next/og";
-import { NextRequest } from "next/server";
 
-export const runtime = "edge";
+import { getBlogPost } from "@/lib/db/blog";
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = req.nextUrl;
-  const postTitle = searchParams.get("title");
-  const font = fetch(
-    new URL("../../../public/fonts/Montserrat-Semibold.ttf", import.meta.url)
-  ).then((res) => res.arrayBuffer());
-  const fontData = await font;
+// Image metadata
+export const size = {
+  width: 1920,
+  height: 1080,
+};
+
+export const contentType = "image/png";
+
+// Image generation
+// @ts-expect-error: Implicit type 'any'
+export default async function Image({ params }) {
+  const post = getBlogPost(params.slug);
+  const montserratSemibold = await readFile(
+    join(process.cwd(), "public/fonts/Montserrat-Semibold.ttf")
+  );
 
   return new ImageResponse(
     (
@@ -37,7 +47,7 @@ export async function GET(req: NextRequest) {
             whiteSpace: "pre-wrap",
           }}
         >
-          {postTitle}
+          {post?.metadata.title}
         </div>
       </div>
     ),
@@ -47,7 +57,7 @@ export async function GET(req: NextRequest) {
       fonts: [
         {
           name: "Montserrat",
-          data: fontData,
+          data: montserratSemibold,
           style: "normal",
         },
       ],

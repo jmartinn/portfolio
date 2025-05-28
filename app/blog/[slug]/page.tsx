@@ -28,10 +28,8 @@ export async function generateMetadata({ params }: { params: Params }) {
     title,
     publishedAt: publishedTime,
     summary: description,
-    image,
     keywords,
   } = post.metadata;
-  const ogImage = image ? image : `https://www.jmartinn.com/og?title=${title}`;
 
   return {
     title,
@@ -43,17 +41,11 @@ export async function generateMetadata({ params }: { params: Params }) {
       type: "article",
       publishedTime,
       url: `https://www.jmartinn.com/blog/${post.slug}`,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
     },
   };
 }
