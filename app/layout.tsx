@@ -31,6 +31,14 @@ export const metadata: Metadata = {
     siteName: "Juan Pedro Martin",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Juan Pedro Martin - Software Developer",
+      },
+    ],
   },
   keywords: [
     "Juan Pedro Martin",
@@ -59,6 +67,7 @@ export const metadata: Metadata = {
     title: "Juan Pedro Martin - Software Developer",
     description: "Minimalist code. Maximum impact.",
     creator: "@jmartinn07",
+    images: ["/opengraph-image.jpg"],
   },
   verification: {
     google: "Fyg64Q58kWDqARPWRbdy4uCuy8ENcCPHLITkRgRzyW4",
