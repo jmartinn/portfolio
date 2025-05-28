@@ -1,4 +1,4 @@
-import BlogLink from "@/components/blog/blog-post-card";
+import { BlogLink } from "@/components/blog/blog-post-card";
 import { getBlogPosts } from "@/lib/db/blog";
 
 export const metadata = {

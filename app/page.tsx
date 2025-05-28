@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import BlogLink from "@/components/blog/blog-post-card";
+import { BlogLink } from "@/components/blog/blog-post-card";
 import { Badge } from "@/components/ui/badge";
 import { Icons } from "@/components/ui/icons";
 import avatar from "@/public/images/avatar.jpeg";

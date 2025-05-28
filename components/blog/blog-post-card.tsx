@@ -6,7 +6,7 @@ type BlogLinkProps = {
   summary?: string;
 };
 
-export default function BlogLink({ slug, name, summary }: BlogLinkProps) {
+export function BlogLink({ slug, name, summary }: BlogLinkProps) {
   return (
     <div className="group" key={slug}>
       <a
