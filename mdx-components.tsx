@@ -187,7 +187,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       }
       return (
         <code
-          className="bg-muted text-foreground relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold"
+          className="bg-muted text-foreground relative rounded px-1.5 py-0.5 font-mono text-sm"
           {...props}
         />
       );

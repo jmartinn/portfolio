@@ -4,11 +4,6 @@ import { rehypePrettyCode } from "rehype-pretty-code";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-import {
-  BundledHighlighterOptions,
-  BundledLanguage,
-  BundledTheme,
-} from "shiki";
 
 const nextConfig: NextConfig = {
   images: {
@@ -59,9 +54,7 @@ const withMDX = createMDX({
           },
           keepBackground: true,
           defaultLang: "plaintext",
-          getHighlighter: (
-            options: BundledHighlighterOptions<BundledLanguage, BundledTheme>
-          ) =>
+          getHighlighter: (options: any) =>
             import("shiki").then(({ getHighlighter }) =>
               getHighlighter({
                 ...options,
