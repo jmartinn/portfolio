@@ -1,4 +1,14 @@
+import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
+import { rehypePrettyCode } from "rehype-pretty-code";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import {
+  BundledHighlighterOptions,
+  BundledLanguage,
+  BundledTheme,
+} from "shiki";
 
 const nextConfig: NextConfig = {
   images: {
@@ -27,7 +37,82 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  pageExtensions: ["md", "mdx", "ts", "tsx"],
+  experimental: {
+    mdxRs: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
+
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
+    rehypePlugins: [
+      [
+        rehypePrettyCode,
+        {
+          theme: {
+            dark: "github-dark",
+            light: "rose-pine-dawn",
+          },
+          keepBackground: true,
+          defaultLang: "plaintext",
+          getHighlighter: (
+            options: BundledHighlighterOptions<BundledLanguage, BundledTheme>
+          ) =>
+            import("shiki").then(({ getHighlighter }) =>
+              getHighlighter({
+                ...options,
+                langs: [
+                  "javascript",
+                  "typescript",
+                  "jsx",
+                  "tsx",
+                  "json",
+                  "bash",
+                  "shell",
+                  "html",
+                  "css",
+                  "python",
+                  "cpp",
+                  "c++",
+                  "c",
+                  "java",
+                  "rust",
+                  "go",
+                  "sql",
+                  "yaml",
+                  "markdown",
+                ],
+              })
+            ),
+          onVisitLine(node: {
+            children: Array<{ type: string; value: string }>;
+          }) {
+            if (node.children.length === 0) {
+              node.children = [{ type: "text", value: " " }];
+            }
+          },
+          onVisitHighlightedLine(node: {
+            properties: { className: string[] };
+          }) {
+            if (!node.properties.className) {
+              node.properties.className = [];
+            }
+            node.properties.className.push("line--highlighted");
+          },
+          onVisitHighlightedChars(node: {
+            properties: { className: string[] };
+          }) {
+            node.properties.className = ["word--highlighted"];
+          },
+        },
+      ],
+    ],
+  },
+});
 
 const ContentSecurityPolicy = `
     style-src 'self' 'unsafe-inline';
@@ -66,4 +151,4 @@ const securityHeaders = [
   },
 ];
 
-export default nextConfig;
+export default withMDX(nextConfig);

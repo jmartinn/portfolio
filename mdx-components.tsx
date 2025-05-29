@@ -1,13 +1,11 @@
-import React, { type AnchorHTMLAttributes, createElement } from "react";
+import type React from "react";
+import { type AnchorHTMLAttributes, createElement } from "react";
 
+import type { MDXComponents } from "mdx/types";
 import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
-import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
-import { rehypePrettyCode } from "rehype-pretty-code";
 
-import { getHighlighter } from "@/components/mdx/highlighter";
-
-import { TweetComponent } from "../tweet/tweet";
+import { TweetComponent } from "@/components/tweet/tweet";
 
 interface TableProps {
   data: {
@@ -147,8 +145,8 @@ function slugify(str: string | number) {
     .trim()
     .replace(/\s+/g, "-")
     .replace(/&/g, "-and-")
-    .replace(/[^\w\-]+/g, "")
-    .replace(/\-\-+/g, "-");
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-");
 }
 
 function createHeading(level: number): React.FC<{ children: React.ReactNode }> {
@@ -169,76 +167,38 @@ function createHeading(level: number): React.FC<{ children: React.ReactNode }> {
   return Component;
 }
 
-const components = {
-  h1: createHeading(1),
-  h2: createHeading(2),
-  h3: createHeading(3),
-  h4: createHeading(4),
-  h5: createHeading(5),
-  h6: createHeading(6),
-  Image: RoundedImage,
-  a: CustomLink,
-  Callout,
-  ProsCard,
-  ConsCard,
-  StaticTweet: TweetComponent,
-  code: (props: React.HTMLAttributes<HTMLElement>) => {
-    if (props.className?.includes("language-")) {
-      return <code {...props} />;
-    }
-    return (
-      <code
-        className="bg-muted text-foreground rounded px-1.5 py-0.5 font-mono text-sm"
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    h1: createHeading(1),
+    h2: createHeading(2),
+    h3: createHeading(3),
+    h4: createHeading(4),
+    h5: createHeading(5),
+    h6: createHeading(6),
+    Image: RoundedImage,
+    a: CustomLink,
+    Callout,
+    ProsCard,
+    ConsCard,
+    StaticTweet: TweetComponent,
+    code: (props: React.HTMLAttributes<HTMLElement>) => {
+      if (props.className?.includes("language-")) {
+        return <code {...props} />;
+      }
+      return (
+        <code
+          className="bg-muted text-foreground relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold"
+          {...props}
+        />
+      );
+    },
+    pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
+      <pre
+        className="bg-muted mb-4 mt-6 overflow-x-auto rounded-lg border p-4 text-sm [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-sm [&_code]:font-normal"
         {...props}
       />
-    );
-  },
-  pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre className="mb-4 overflow-x-auto rounded-lg p-4 text-sm" {...props} />
-  ),
-  Table,
-};
-
-export function BlogMDX(props: React.JSX.IntrinsicAttributes & MDXRemoteProps) {
-  return (
-    <MDXRemote
-      {...props}
-      components={{ ...components, ...(props.components || {}) }}
-      options={{
-        mdxOptions: {
-          rehypePlugins: [
-            [
-              rehypePrettyCode,
-              {
-                getHighlighter,
-                theme: {
-                  dark: "github-dark",
-                  light: "rose-pine-dawn",
-                },
-                keepBackground: true,
-                defaultLang: "plaintext",
-                onVisitLine(node: {
-                  children: Array<{ type: string; value: string }>;
-                }) {
-                  if (node.children.length === 0) {
-                    node.children = [{ type: "text", value: " " }];
-                  }
-                },
-                onVisitHighlightedLine(node: {
-                  properties: { className: string[] };
-                }) {
-                  node.properties.className.push("line--highlighted");
-                },
-                onVisitHighlightedChars(node: {
-                  properties: { className: string[] };
-                }) {
-                  node.properties.className = ["word--highlighted"];
-                },
-              },
-            ],
-          ],
-        },
-      }}
-    />
-  );
+    ),
+    Table,
+    ...components,
+  };
 }
