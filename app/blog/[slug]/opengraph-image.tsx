@@ -3,7 +3,7 @@ import { join } from "node:path";
 
 import { ImageResponse } from "next/og";
 
-import { getBlogPost } from "@/lib/db/blog";
+import { getMDXMetadata } from "@/lib/db/blog";
 
 // Image metadata
 export const size = {
@@ -16,7 +16,7 @@ export const contentType = "image/png";
 // Image generation
 // @ts-expect-error: Implicit type 'any'
 export default async function Image({ params }) {
-  const post = getBlogPost(params.slug);
+  const metadata = await getMDXMetadata(params.slug);
   const montserratSemibold = await readFile(
     join(process.cwd(), "public/fonts/Montserrat-Semibold.ttf")
   );
@@ -47,7 +47,7 @@ export default async function Image({ params }) {
             whiteSpace: "pre-wrap",
           }}
         >
-          {post?.metadata.title}
+          {metadata.title}
         </div>
       </div>
     ),
