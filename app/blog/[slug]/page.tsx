@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { getBlogPost, getBlogPosts, getMDXMetadata } from "@/lib/db/blog";
@@ -12,7 +13,11 @@ export async function generateStaticParams() {
 
 type Params = Promise<{ slug: string }>;
 
-export async function generateMetadata({ params }: { params: Params }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata | undefined> {
   const { slug } = await params;
 
   const mdxMetadata = await getMDXMetadata(slug);
@@ -32,6 +37,8 @@ export async function generateMetadata({ params }: { params: Params }) {
     keywords,
   } = metadata;
 
+  const ogImage = `https://www.jmartinn.com/og?title=${title}`;
+
   return {
     title,
     description,
@@ -42,11 +49,17 @@ export async function generateMetadata({ params }: { params: Params }) {
       type: "article",
       publishedTime,
       url: `https://www.jmartinn.com/blog/${slug}`,
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [ogImage],
     },
   };
 }
