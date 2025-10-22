@@ -18,7 +18,7 @@ export default function Page() {
       <div className="my-8 flex items-center justify-start space-x-6 md:space-x-8">
         <Image
           alt="Juan Pedro Martin"
-          className="rounded-full grayscale"
+          className="rounded-full"
           src={avatar}
           placeholder="blur"
           width={100}
@@ -38,7 +38,7 @@ export default function Page() {
             rel="noopener noreferrer"
             aria-label="LinkedIn"
             target="_blank"
-            href="https://www.linkedin.com/in/juampemartin/"
+            href="https://www.linkedin.com/in/jmartinn/"
             className="flex items-center gap-2 transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
           >
             <Icons.linkedin />
