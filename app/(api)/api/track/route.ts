@@ -1,13 +1,45 @@
 import { kv } from "@vercel/kv";
 
-// Token key in KV store
+import { SPOTIFY_TOKEN_TTL } from "@/lib/constants";
+
 const SPOTIFY_TOKEN_KEY = "spotify:access_token";
 
+/**
+ * Helper to return empty track info when nothing is playing.
+ */
+function getEmptyTrackInfo() {
+  return Response.json({
+    trackInfo: {
+      isPlaying: false,
+      artist: "",
+      song: "",
+      cover: "",
+    },
+  });
+}
+
+/**
+ * Helper to format track info from Spotify API response.
+ */
+function formatTrackInfo(data: {
+  item: {
+    artists: { name: string }[];
+    name: string;
+    album: { images: { url: string }[] };
+  };
+  is_playing: boolean;
+}) {
+  return {
+    artist: data.item.artists[0].name,
+    song: data.item.name,
+    isPlaying: data.is_playing,
+    cover: data.item.album.images[0].url,
+  };
+}
+
 async function getSpotifyToken() {
-  // Try to get token from KV
   let token = await kv.get(SPOTIFY_TOKEN_KEY);
 
-  // If no token found, fetch a new one
   if (!token) {
     token = await refreshSpotifyToken();
   }
@@ -28,9 +60,7 @@ async function refreshSpotifyToken() {
     const data = await response.json();
     const newToken = data.accessToken;
 
-    // Store token in KV with expiry (3600 seconds = 1 hour)
-    // Set it to expire 50 seconds early to avoid edge cases
-    await kv.set(SPOTIFY_TOKEN_KEY, newToken, { ex: 3550 });
+    await kv.set(SPOTIFY_TOKEN_KEY, newToken, { ex: SPOTIFY_TOKEN_TTL });
 
     return newToken;
   } catch (error) {
@@ -74,55 +104,24 @@ export async function GET() {
 
       const retryData = await retryResponse.json();
 
-      // If no track is playing
       if (retryResponse.status === 204 || !retryData) {
-        return Response.json({
-          trackInfo: {
-            isPlaying: false,
-            artist: "",
-            song: "",
-            cover: "",
-          },
-        });
+        return getEmptyTrackInfo();
       }
 
-      const trackInfo = {
-        artist: retryData.item.artists[0].name,
-        song: retryData.item.name,
-        isPlaying: retryData.is_playing,
-        cover: retryData.item.album.images[0].url,
-      };
-
+      const trackInfo = formatTrackInfo(retryData);
       return Response.json({ trackInfo });
     }
 
-    // If no track is playing
     if (response.status === 204) {
-      return Response.json({
-        trackInfo: {
-          isPlaying: false,
-          artist: "",
-          song: "",
-          cover: "",
-        },
-      });
+      return getEmptyTrackInfo();
     }
 
-    // If successful response with track data
     if (response.ok) {
       const data = await response.json();
-
-      const trackInfo = {
-        artist: data.item.artists[0].name,
-        song: data.item.name,
-        isPlaying: data.is_playing,
-        cover: data.item.album.images[0].url,
-      };
-
+      const trackInfo = formatTrackInfo(data);
       return Response.json({ trackInfo });
     }
 
-    // Handle other error cases
     throw new Error(`Spotify API error: ${response.status}`);
   } catch (error) {
     console.error("Error fetching Spotify data:", error);

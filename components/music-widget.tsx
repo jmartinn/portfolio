@@ -3,6 +3,7 @@
 import useSWR from "swr";
 
 import { Card } from "@/components/ui/card";
+import { SPOTIFY_DEDUP_INTERVAL, SPOTIFY_POLL_INTERVAL } from "@/lib/constants";
 
 interface TrackInfo {
   artist: string;
@@ -23,12 +24,32 @@ const fetcher = (url: string) =>
     return res.json();
   });
 
+/**
+ * Music widget that displays currently playing Spotify track.
+ * Polls the Spotify API every 30 seconds using SWR.
+ * Shows a spinning vinyl record animation when music is playing.
+ * Falls back to default title/artist/albumArt props when nothing is playing.
+ *
+ * @param props - Widget configuration
+ * @param props.title - Default title to display when not playing
+ * @param props.artist - Default artist to display when not playing
+ * @param props.albumArt - Default album art URL when not playing
+ *
+ * @example
+ * ```tsx
+ * <MusicWidget
+ *   title="Not Playing"
+ *   artist="Nothing"
+ *   albumArt="/default-album.jpg"
+ * />
+ * ```
+ */
 export function MusicWidget({ title, artist, albumArt }: MusicWidgetProps) {
   const { data, error, isLoading } = useSWR("/api/track", fetcher, {
-    refreshInterval: 30000,
+    refreshInterval: SPOTIFY_POLL_INTERVAL,
     revalidateOnFocus: true,
     errorRetryCount: 2,
-    dedupingInterval: 5000,
+    dedupingInterval: SPOTIFY_DEDUP_INTERVAL,
   });
 
   const trackInfo: TrackInfo | null = data?.trackInfo || null;

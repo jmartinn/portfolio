@@ -2,10 +2,36 @@ import { clsx, type ClassValue } from "clsx";
 import { unstable_noStore as noStore } from "next/cache";
 import { twMerge } from "tailwind-merge";
 
+/**
+ * Merges Tailwind CSS class names without conflicts using clsx and tailwind-merge.
+ * Handles conditional classes and prevents Tailwind specificity issues.
+ *
+ * @param inputs - Class names, objects, or arrays to merge
+ * @returns Merged class name string with conflicts resolved
+ *
+ * @example
+ * ```ts
+ * cn("px-2 py-1", "px-4") // => "py-1 px-4"
+ * cn("text-red-500", condition && "text-blue-500") // => conditionally applied classes
+ * ```
+ */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/**
+ * Calculates estimated reading time for blog post content.
+ * Removes code blocks, HTML tags, and markdown formatting before calculating.
+ * Uses 200 words per minute as the average reading speed for technical content.
+ *
+ * @param content - The raw blog post content (markdown/MDX)
+ * @returns Formatted string like "5 min read"
+ *
+ * @example
+ * ```ts
+ * calculateReadingTime("This is a test post with about 200 words...") // => "1 min read"
+ * ```
+ */
 export function calculateReadingTime(content: string): string {
   // Remove MDX/HTML tags and get plain text
   const plainText = content
@@ -25,6 +51,19 @@ export function calculateReadingTime(content: string): string {
   return `${readingTimeMinutes} min read`;
 }
 
+/**
+ * Formats a date as a long date string with relative time.
+ * Uses unstable_noStore() to prevent caching and ensure fresh relative times.
+ *
+ * @param input - Date string or timestamp to format
+ * @returns Formatted string like "October 24, 2025 (24h ago)"
+ *
+ * @example
+ * ```ts
+ * formatDate("2025-10-24") // => "October 24, 2025 (1d ago)"
+ * formatDate(Date.now()) // => "October 24, 2025 (Today)"
+ * ```
+ */
 export function formatDate(input: string | number): string {
   noStore();
 

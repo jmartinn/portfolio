@@ -1,11 +1,18 @@
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 
+import { sanitizeTitle } from "@/lib/validation";
+
 export const runtime = "edge";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
-  const postTitle = searchParams.get("title");
+  const rawTitle = searchParams.get("title");
+
+  // Validate and sanitize the title input
+  // Limit to 100 characters to prevent abuse and ensure proper rendering
+  const postTitle = sanitizeTitle(rawTitle, 100);
+
   const font = fetch(
     new URL("../../../public/fonts/Montserrat-Semibold.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());

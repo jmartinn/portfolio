@@ -4,23 +4,17 @@ import { LayoutGroup, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { navItems } from "@/lib/config/navigation";
 import { cn } from "@/lib/utils";
 
-const navItems = {
-  "/": {
-    name: "home",
-  },
-  "/about": {
-    name: "about",
-  },
-  "/uses": {
-    name: "uses",
-  },
-  "/blog": {
-    name: "blog",
-  },
-};
-
+/**
+ * Sidebar navigation component with smooth animated active indicator.
+ * Uses Framer Motion's LayoutGroup for shared layout animations.
+ * The active link background smoothly transitions between navigation items.
+ * Responsive: horizontal on mobile, vertical/sticky on desktop.
+ *
+ * @returns Navigation sidebar with animated active state
+ */
 export function Sidebar() {
   let pathname = usePathname() || "/";
   if (pathname.includes("/blog/")) {
@@ -36,7 +30,7 @@ export function Sidebar() {
             id="nav"
           >
             <div className="my-2 flex flex-row space-x-0 pr-10 md:mt-0 md:flex-col">
-              {Object.entries(navItems).map(([path, { name }]) => {
+              {navItems.map(({ path, name }) => {
                 const isActive = path === pathname;
                 return (
                   <Link
