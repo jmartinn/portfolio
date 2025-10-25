@@ -1,13 +1,7 @@
 import createMDX from "@next/mdx";
-import { rehypePrettyCode } from "rehype-pretty-code";
-import remarkFrontmatter from "remark-frontmatter";
-import remarkGfm from "remark-gfm";
-import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 
 /**
  * @typedef {import('next').NextConfig} NextConfig
- * @typedef {import('rehype-pretty-code').Options} RehypePrettyCodeOptions
- * @typedef {import('shiki').BundledHighlighterOptions<import('shiki').BundledLanguage, import('shiki').BundledTheme>} BundledHighlighterOptions
  */
 
 const ContentSecurityPolicy = `
@@ -76,69 +70,32 @@ const nextConfig = {
     ];
   },
   pageExtensions: ["md", "mdx", "ts", "tsx"],
-  experimental: {
-    mdxRs: false,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
 };
 
-/** @type {RehypePrettyCodeOptions} */
-const rehypePrettyCodeOptions = {
-  theme: {
-    dark: "github-dark",
-    light: "rose-pine-dawn",
-  },
-  keepBackground: true,
-  defaultLang: "plaintext",
-  getHighlighter: (options) =>
-    import("shiki").then(({ getHighlighter }) =>
-      getHighlighter({
-        ...options,
-        langs: [
-          "javascript",
-          "typescript",
-          "jsx",
-          "tsx",
-          "json",
-          "bash",
-          "shell",
-          "html",
-          "css",
-          "python",
-          "cpp",
-          "c++",
-          "c",
-          "java",
-          "rust",
-          "go",
-          "sql",
-          "yaml",
-          "markdown",
-        ],
-      })
-    ),
-  onVisitLine(node) {
-    if (node.children.length === 0) {
-      node.children = [{ type: "text", value: " " }];
-    }
-  },
-  onVisitHighlightedLine(node) {
-    if (!node.properties.className) {
-      node.properties.className = [];
-    }
-    node.properties.className.push("line--highlighted");
-  },
-  onVisitHighlightedChars(node) {
-    node.properties.className = ["word--highlighted"];
-  },
-};
-
+/**
+ * MDX configuration with Turbopack-compatible string-based plugin syntax.
+ * Using strings instead of imports allows Turbopack to serialize plugin options.
+ */
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
-    rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
+    remarkPlugins: [
+      'remark-gfm',
+      'remark-frontmatter',
+      'remark-mdx-frontmatter',
+    ],
+    rehypePlugins: [
+      [
+        'rehype-pretty-code',
+        {
+          theme: {
+            dark: "github-dark",
+            light: "rose-pine-dawn",
+          },
+          keepBackground: true,
+          defaultLang: "plaintext",
+        },
+      ],
+    ],
   },
 });
 

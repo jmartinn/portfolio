@@ -1,64 +1,84 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getBlogPost, getBlogPosts, getMDXMetadata } from "@/lib/db/blog";
+import { getBlogPost, getBlogPosts } from "@/lib/db/blog";
 import { formatDate } from "@/lib/utils";
 
 export async function generateStaticParams() {
-  const posts = getBlogPosts();
+  const posts = await getBlogPosts();
   return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
+export const revalidate = 3600;
+
 type Params = Promise<{ slug: string }>;
+
+/**
+ * Helper to get post data from the filesystem.
+ * All blog posts are stored as MDX files in the content directory
+ * and are parsed at build time using the file system.
+ */
+async function getPostData(slug: string) {
+  const post = await getBlogPost(slug);
+
+  if (!post) {
+    return null;
+  }
+
+  return {
+    metadata: post.metadata,
+    readingTime: post.readingTime,
+  };
+}
 
 export async function generateMetadata({
   params,
 }: {
   params: Params;
-}): Promise<Metadata | undefined> {
+}): Promise<Metadata> {
   const { slug } = await params;
+  const postData = await getPostData(slug);
 
-  const mdxMetadata = await getMDXMetadata(slug);
-  const post = getBlogPost(slug);
-
-  if (!post && !mdxMetadata) {
+  if (!postData || !postData.metadata) {
     return {
       title: "Post Not Found",
+      description: "The blog post you're looking for could not be found.",
     };
   }
 
-  const metadata = mdxMetadata || post?.metadata;
-  const {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    keywords,
-  } = metadata;
+  const { metadata } = postData;
 
-  const ogImage = `https://www.jmartinn.com/og?title=${title}`;
+  const publishedTime = new Date(metadata.publishedAt).toISOString();
+  const ogImage = `https://www.jmartinn.com/og?title=${encodeURIComponent(metadata.title)}`;
 
   return {
-    title,
-    description,
-    keywords,
+    title: metadata.title,
+    description: metadata.summary,
+    keywords: metadata.keywords,
+    authors: [{ name: "Juan Pedro Martin", url: "https://x.com/jmartinn07" }],
     openGraph: {
-      title,
-      description,
+      title: metadata.title,
+      description: metadata.summary,
       type: "article",
-      publishedTime,
+      publishedTime: publishedTime,
       url: `https://www.jmartinn.com/blog/${slug}`,
+      siteName: "Juan Pedro Martin",
       images: [
         {
           url: ogImage,
+          width: 1920,
+          height: 1080,
+          alt: metadata.title,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: metadata.title,
+      description: metadata.summary,
+      creator: "@jmartinn07",
       images: [ogImage],
     },
   };
@@ -77,11 +97,9 @@ async function getMDXComponent(slug: string) {
 export default async function Blog({ params }: { params: Params }) {
   const { slug } = await params;
 
-  // Get metadata from both sources
-  const mdxMetadata = await getMDXMetadata(slug);
-  const post = getBlogPost(slug);
+  const postData = await getPostData(slug);
 
-  if (!post && !mdxMetadata) {
+  if (!postData) {
     notFound();
   }
 
@@ -91,9 +109,7 @@ export default async function Blog({ params }: { params: Params }) {
     notFound();
   }
 
-  // Use MDX metadata if available, fallback to parsed metadata
-  const metadata = mdxMetadata || post?.metadata;
-  const readingTime = post?.readingTime || "5 min read";
+  const { metadata, readingTime } = postData;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -135,7 +151,6 @@ export default async function Blog({ params }: { params: Params }) {
     <section>
       <script
         type="application/ld+json"
-        suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <h1 className="title max-w-[650px] text-3xl font-bold tracking-tighter dark:text-gray-100">

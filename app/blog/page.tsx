@@ -1,14 +1,18 @@
+import { Metadata } from "next";
+
 import { BlogLink } from "@/components/blog/blog-post-card";
 import { getBlogPosts } from "@/lib/db/blog";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Blog",
   description:
     "Thoughts, guides, and explorations on design, development, and the spaces in between.",
 };
 
-export default function BlogPage() {
-  const posts = getBlogPosts().sort(
+export const revalidate = 3600;
+
+export default async function BlogPage() {
+  const posts = (await getBlogPosts()).sort(
     (a, b) =>
       new Date(b.metadata.publishedAt).getTime() -
       new Date(a.metadata.publishedAt).getTime()

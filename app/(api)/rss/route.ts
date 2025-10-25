@@ -1,7 +1,7 @@
 import { getBlogPosts } from "@/lib/db/blog";
 
 export async function GET() {
-  const posts = getBlogPosts().sort(
+  const posts = (await getBlogPosts()).sort(
     (a, b) =>
       new Date(b.metadata.publishedAt).getTime() -
       new Date(a.metadata.publishedAt).getTime()

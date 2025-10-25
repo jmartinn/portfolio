@@ -36,7 +36,7 @@ function Table({ data }: TableProps) {
   );
 }
 
-interface CustomLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {}
+type CustomLinkProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 
 function CustomLink(props: CustomLinkProps) {
   const href: string = props.href!;
