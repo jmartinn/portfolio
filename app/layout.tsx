@@ -7,6 +7,7 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 
+import { ErrorBoundary } from "@/components/error-boundary";
 import { Footer } from "@/components/layout/footer";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Toaster } from "@/components/ui/toaster";
@@ -103,7 +104,7 @@ export default function RootLayout({
       >
         <Sidebar />
         <main className="mt-6 flex min-w-0 flex-auto flex-col px-2 md:mt-0 md:px-0">
-          {children}
+          <ErrorBoundary>{children}</ErrorBoundary>
           <Footer />
         </main>
         <Analytics />
