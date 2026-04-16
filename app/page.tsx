@@ -138,19 +138,14 @@ export default async function Page() {
             <WorkItem
               company="BBVA"
               role="Frontend Engineer"
-              period="2025 - Present"
+              period="Dec 2025 - Present"
               href="https://www.bbva.com"
             />
             <WorkItem
               company="Interamplify"
               role="Frontend Engineer"
-              period="2023 - 2025"
+              period="May 2022 - Dec 2025"
               href="https://interamplify.com"
-            />
-            <WorkItem
-              company="Freelance"
-              role="Web Developer"
-              period="2021 - 2023"
             />
           </div>
         </section>
