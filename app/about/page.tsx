@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
-import { Icons } from "@/components/ui/icons";
+import avatar from "@/public/images/avatar.jpeg";
 
 export const metadata: Metadata = {
   title: "About",
@@ -10,80 +11,115 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <section>
-      <h1 className="mb-2 text-2xl font-semibold tracking-tighter">about me</h1>
-      <p className="mb-8 text-neutral-600 dark:text-neutral-400">
-        Learn more about my journey, values, and what drives me as an engineer.
-      </p>
-      <p className="my-5 text-neutral-800 dark:text-neutral-200">
-        Hola, I&apos;m Juan — a frontend engineer with a deep appreciation for
-        thoughtful design and robust engineering.
-      </p>
-      <div className="prose prose-neutral text-neutral-800 dark:prose-invert dark:text-neutral-200">
-        <p>
-          I specialize in building fast, accessible, and maintainable web
-          applications using modern tools like <b>React</b>, <b>Next.js</b>,{" "}
-          <b>Tailwind</b>, and <b>TypeScript</b>. My work focuses on bridging
-          the gap between clean architecture and intuitive, user-centered
-          interfaces.
-        </p>
-        <p>
-          What sets me apart is my eye for design and user experience, allowing
-          me to bridge the gap between technical implementation and beautiful,
-          intuitive interfaces. I believe in writing clean, scalable code while
-          never compromising on the user experience.
-        </p>
-        <p>
-          That said, my passion for engineering goes beyond the frontend.
-          You&apos;ll just as likely find me building an SDK, designing backend
-          infrastructure, or streamlining dev workflows. I enjoy working across
-          the stack, especially when the goal is improving clarity, performance,
-          and maintainability.
-        </p>
-        <hr />
-        <p>
-          Outside of work, I&apos;m guided by values like <b>discipline</b>,{" "}
-          <b>curiosity</b>, and <b>faith</b>. I like to push limits—whether
-          it&apos;s in the terminal, on the track, or in how I think and learn.
-        </p>
-        <p>
-          I&apos;m also into <b>note-taking systems</b> (Zettelkasten +
-          Obsidian), testing new tools, and documenting what I learn. I believe
-          in learning by doing, and contributing however I can—through
-          open-source, mentoring, or just building things that help others.
-        </p>
-        <p>
-          My goal? Keep refining the craft. Build things that are useful,
-          thoughtful, and well-made.
-        </p>
+    <>
+        <section className="mb-12">
+          <h1 className="mb-4 font-serif text-2xl font-medium tracking-tight text-foreground">
+            About
+          </h1>
+          <p className="text-muted-foreground">
+            A bit more about who I am and what drives me.
+          </p>
+        </section>
 
-        <div className="mt-6 flex flex-col gap-2 md:flex-row md:gap-2">
-          <a
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://linkedin.com/in/juampemartin"
-            className="flex w-full items-center justify-between rounded-lg border border-neutral-200 p-4 text-neutral-800 no-underline transition-all hover:bg-neutral-100 dark:border-neutral-800 dark:text-neutral-200 hover:dark:bg-neutral-900"
-          >
-            <div className="flex items-center">
-              <Icons.linkedin />
-              <div className="ml-3">LinkedIn</div>
-            </div>
-            <Icons.arrow />
-          </a>
-          <a
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://github.com/jmartinn"
-            className="flex w-full items-center justify-between rounded-lg border border-neutral-200 p-4 text-neutral-800 no-underline transition-all hover:bg-neutral-100 dark:border-neutral-800 dark:text-neutral-200 hover:dark:bg-neutral-900"
-          >
-            <div className="flex items-center">
-              <Icons.github />
-              <div className="ml-3">GitHub</div>
-            </div>
-            <Icons.arrow />
-          </a>
+        <div className="mb-12 flex justify-center">
+          <Image
+            alt="Juan Pedro Martin"
+            className="rounded-xl transition-transform duration-300 hover:scale-[1.02]"
+            src={avatar}
+            placeholder="blur"
+            width={280}
+            height={280}
+            priority
+          />
         </div>
-      </div>
-    </section>
+
+        <article className="prose prose-neutral max-w-none dark:prose-invert">
+          <p className="text-lg leading-relaxed">
+            Hola, I&apos;m Juan&mdash;a frontend engineer with a deep
+            appreciation for thoughtful design and robust engineering.
+          </p>
+
+          <p>
+            I specialize in building fast, accessible, and maintainable web
+            applications using modern tools like <strong>React</strong>,{" "}
+            <strong>Next.js</strong>, <strong>Tailwind</strong>, and{" "}
+            <strong>TypeScript</strong>. My work focuses on bridging the gap
+            between clean architecture and intuitive, user-centered interfaces.
+          </p>
+
+          <p>
+            What sets me apart is my eye for design and user experience, allowing
+            me to bridge the gap between technical implementation and beautiful,
+            intuitive interfaces. I believe in writing clean, scalable code while
+            never compromising on the user experience.
+          </p>
+
+          <p>
+            That said, my passion for engineering goes beyond the frontend.
+            You&apos;ll just as likely find me building an SDK, designing backend
+            infrastructure, or streamlining dev workflows. I enjoy working across
+            the stack, especially when the goal is improving clarity, performance,
+            and maintainability.
+          </p>
+
+          <hr />
+
+          <h2 className="font-serif">Beyond Code</h2>
+
+          <p>
+            Outside of work, I&apos;m guided by values like{" "}
+            <strong>discipline</strong>, <strong>curiosity</strong>, and{" "}
+            <strong>faith</strong>. I like to push limits&mdash;whether it&apos;s
+            in the terminal, on the track, or in how I think and learn.
+          </p>
+
+          <p>
+            I&apos;m also into <strong>note-taking systems</strong> (Zettelkasten
+            + Obsidian), testing new tools, and documenting what I learn. I
+            believe in learning by doing, and contributing however I can&mdash;
+            through open-source, mentoring, or just building things that help
+            others.
+          </p>
+
+          <blockquote>
+            My goal? Keep refining the craft. Build things that are useful,
+            thoughtful, and well-made.
+          </blockquote>
+
+          <hr />
+
+          <h2 className="font-serif">Connect</h2>
+
+          <p>
+            I&apos;m always open to meaningful collaborations and conversations.
+            You can find me on{" "}
+            <a
+              href="https://github.com/jmartinn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+            ,{" "}
+            <a
+              href="https://linkedin.com/in/jmartinn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
+            , or{" "}
+            <a
+              href="https://x.com/jmartinn07"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Twitter
+            </a>
+            . Or just{" "}
+            <a href="mailto:juamp_m@hotmail.com">send me an email</a>.
+          </p>
+        </article>
+    </>
   );
 }

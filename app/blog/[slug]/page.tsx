@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getBlogPost, getBlogPosts } from "@/lib/db/blog";
@@ -15,11 +16,6 @@ export const revalidate = 3600;
 
 type Params = Promise<{ slug: string }>;
 
-/**
- * Helper to get post data from the filesystem.
- * All blog posts are stored as MDX files in the content directory
- * and are parsed at build time using the file system.
- */
 async function getPostData(slug: string) {
   const post = await getBlogPost(slug);
 
@@ -148,38 +144,49 @@ export default async function Blog({ params }: { params: Params }) {
   };
 
   return (
-    <section>
+    <>
       <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <h1 className="title max-w-[650px] text-3xl font-bold tracking-tighter dark:text-gray-100">
-        {metadata.title}
-      </h1>
-      <span className="mt-2 flex font-mono text-sm text-neutral-600 dark:text-gray-400">
-        <span className="flex grow">
-          <span className="hidden md:inline">
-            <span>
-              <a
-                href="https://x.com/jmartinn07"
-                className="hover:text-gray-800 dark:hover:text-gray-300"
-                target="_blank"
-                rel="noreferrer"
-              >
-                @jmartinn
-              </a>
-            </span>
-            <span className="mx-2">|</span>
-          </span>
-          <p>{formatDate(metadata.publishedAt)}</p>
-        </span>
-        <span>
-          <p>{readingTime}</p>
-        </span>
-      </span>
-      <article className="prose prose-neutral prose-quoteless mt-8 w-full dark:prose-invert">
-        <MDXContent />
-      </article>
-    </section>
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
+        <header className="mb-10">
+          <Link
+            href="/blog"
+            className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <svg
+              className="size-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M7 16l-4-4m0 0l4-4m-4 4h18"
+              />
+            </svg>
+            Back to writing
+          </Link>
+
+          <h1 className="mb-4 font-serif text-3xl font-medium tracking-tight text-foreground text-balance">
+            {metadata.title}
+          </h1>
+
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+            <time dateTime={metadata.publishedAt}>
+              {formatDate(metadata.publishedAt)}
+            </time>
+            <span className="text-border">|</span>
+            <span>{readingTime}</span>
+          </div>
+        </header>
+
+        <article className="prose prose-neutral prose-quoteless max-w-none dark:prose-invert">
+          <MDXContent />
+        </article>
+    </>
   );
 }

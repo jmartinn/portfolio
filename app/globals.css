@@ -2,31 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-::selection {
-  background-color: #47a3f3;
-  color: #fefefe;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
+    /* Warm, soulful color palette */
+    --background: 40 20% 98%;
+    --foreground: 30 10% 10%;
+    --muted: 40 8% 64%;
+    --muted-foreground: 40 6% 45%;
+    --accent: 43 70% 46%;
+    --accent-foreground: 30 10% 10%;
+    --border: 40 10% 88%;
+    --ring: 43 70% 46%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 30 8% 7%;
+    --foreground: 40 10% 90%;
+    --muted: 30 6% 40%;
+    --muted-foreground: 30 8% 55%;
+    --accent: 43 75% 52%;
+    --accent-foreground: 30 8% 7%;
+    --border: 30 8% 18%;
+    --ring: 43 75% 52%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
   }
+}
 
-  html {
-    color-scheme: dark;
-  }
+::selection {
+  background-color: hsl(var(--accent) / 0.3);
+  color: hsl(var(--foreground));
 }
 
 html {
   min-width: 360px;
   scrollbar-gutter: stable;
+  color-scheme: light;
   @apply scroll-smooth;
 }
 
+.dark {
+  color-scheme: dark;
+}
+
+/* Prose link styles - warm underline animation */
+.prose a {
+  @apply relative text-foreground no-underline transition-colors;
+}
+
+.prose a::after {
+  @apply absolute bottom-0 left-0 h-px w-full origin-left scale-x-100 transition-transform duration-300;
+  content: '';
+  background-color: hsl(var(--muted));
+}
+
+.prose a:hover::after {
+  background-color: hsl(var(--accent));
+}
+
+/* Anchor links for headings */
 .prose .anchor {
   @apply absolute invisible no-underline;
-
   margin-left: -1em;
   padding-right: 0.5em;
   width: 80%;
@@ -38,44 +77,38 @@ html {
   @apply visible;
 }
 
-.prose a {
-  @apply transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
-}
-
 .prose .anchor:after {
-  @apply text-neutral-300 dark:text-neutral-700;
+  @apply text-muted;
   content: '#';
 }
 
-.prose *:hover>.anchor {
+.prose *:hover > .anchor {
   @apply visible;
 }
 
 /* Shiki syntax highlighting styles */
-.prose pre[data-theme*=" "],
-.prose pre[data-theme*=" "] span {
+.prose pre[data-theme*=' '],
+.prose pre[data-theme*=' '] span {
   color: var(--shiki-light);
   background-color: var(--shiki-light-bg);
 }
 
-@media (prefers-color-scheme: dark) {
-  .prose pre[data-theme*=" "],
-  .prose pre[data-theme*=" "] span {
+.dark .prose pre[data-theme*=' '],
+.dark .prose pre[data-theme*=' '] span {
   color: var(--shiki-dark);
   background-color: var(--shiki-dark-bg);
-  }
 }
 
-/* Ensure code blocks have proper styling */
+/* Code blocks with warm styling */
 .prose pre {
-  @apply dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900;
+  @apply rounded-lg overflow-x-auto border border-border bg-background;
   padding: 1rem;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
 }
 
 /* Highlighted lines */
 .prose .line--highlighted {
-  background-color: rgba(101, 117, 133, 0.16);
+  background-color: hsl(var(--accent) / 0.1);
   display: block;
   margin: 0 -1rem;
   padding: 0 1rem;
@@ -83,31 +116,38 @@ html {
 
 /* Highlighted words */
 .prose .word--highlighted {
-  background-color: rgba(101, 117, 133, 0.16);
+  background-color: hsl(var(--accent) / 0.15);
   padding: 0.25rem;
   border-radius: 0.25rem;
 }
 
 .prose img {
-  /* Don't apply styles to next/image */
-  @apply m-0;
+  @apply m-0 rounded-lg;
 }
 
+.prose h1,
 .prose h2,
-h3,
-h4 {
-  @apply font-medium tracking-tighter !important;
-  margin-bottom: 0.5rem;
+.prose h3,
+.prose h4 {
+  @apply font-serif font-medium tracking-tight text-foreground;
+  margin-bottom: 0.75rem;
 }
 
 .prose strong {
-  @apply font-medium;
+  @apply font-medium text-foreground;
 }
 
-.prose> :first-child {
-  /* Override removing top margin, causing layout shift */
+.prose > :first-child {
   margin-top: 1.25em !important;
   margin-bottom: 1.25em !important;
+}
+
+.prose blockquote {
+  @apply border-l-2 border-accent pl-4 italic text-muted-foreground;
+}
+
+.prose hr {
+  @apply my-8 border-border;
 }
 
 pre::-webkit-scrollbar {
@@ -116,9 +156,7 @@ pre::-webkit-scrollbar {
 
 pre {
   -ms-overflow-style: none;
-  /* IE and Edge */
   scrollbar-width: none;
-  /* Firefox */
 }
 
 /* Remove Safari input shadow on mobile */
@@ -141,7 +179,7 @@ table {
   white-space: nowrap;
 }
 
-.prose .callout>p {
+.prose .callout > p {
   margin: 0 !important;
 }
 
@@ -149,6 +187,7 @@ table {
   text-wrap: balance;
 }
 
+/* Animations */
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -156,4 +195,138 @@ table {
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes subtle-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--accent) / 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px hsl(var(--accent) / 0.1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slide-in-right 0.4s ease-out forwards;
+}
+
+/* Staggered animation delays */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.4s; }
+
+/* Interactive link with sliding underline */
+.link-hover {
+  @apply relative;
+}
+
+.link-hover::after {
+  @apply absolute bottom-0 left-0 h-px w-0 transition-all duration-300 ease-out;
+  content: '';
+  background-color: hsl(var(--accent));
+}
+
+.link-hover:hover::after {
+  @apply w-full;
+}
+
+/* Card hover lift effect */
+.card-hover {
+  @apply transition-all duration-300 ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px -2px hsl(var(--foreground) / 0.08);
+}
+
+/* Avatar glow on hover */
+.avatar-glow {
+  @apply transition-all duration-300;
+}
+
+.avatar-glow:hover {
+  box-shadow: 0 0 0 3px hsl(var(--accent) / 0.2);
+}
+
+/* Arrow that slides on hover */
+.arrow-slide {
+  @apply transition-transform duration-200 ease-out;
+}
+
+.group:hover .arrow-slide {
+  transform: translateX(3px);
+}
+
+/* Subtle scale on hover */
+.hover-lift {
+  @apply transition-transform duration-200 ease-out;
+}
+
+.hover-lift:hover {
+  transform: scale(1.02);
+}
+
+/* Focus ring animation */
+.focus-ring {
+  @apply outline-none ring-0 ring-accent/0 transition-shadow duration-200;
+}
+
+.focus-ring:focus-visible {
+  @apply ring-2 ring-accent/50 ring-offset-2 ring-offset-background;
 }

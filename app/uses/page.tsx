@@ -8,88 +8,108 @@ export const metadata: Metadata = {
 
 export default function UsesPage() {
   return (
-    <section>
-      <h1 className="mb-2 text-2xl font-semibold tracking-tighter">
-        here&apos;s what I use on a daily basis
-      </h1>
-      <p className="mb-8 text-neutral-600 dark:text-neutral-400">
-        A curated list of the tools, software, and hardware that power my daily
-        workflow.
-      </p>
-      <div className="prose prose-neutral dark:prose-invert">
-        <h3 id="computer-office">Computer / Office</h3>
-        <ul>
-          <li>
-            <strong>Mac Mini (2023)</strong> - Reliable, compact, and powerful
-            for daily development.
-          </li>
-          <li>
-            <strong>27&quot; LG UltraFine 27US500-W</strong> - Just a monitor,
-            nothing fancy.
-          </li>
-          <li>
-            <strong>Logitech Signature M650</strong> - Silent and precise.
-          </li>
-          <li>
-            <strong>Keychron V4 QMK</strong> - Customizable with a tactile
-            mechanical feel.
-          </li>
-        </ul>
-        <h3 id="coding">Coding</h3>
-        <ul>
-          <li>
-            <strong>Neovim</strong> (
-            <a
-              href="https://github.com/jmartinn/dotfiles/tree/main/.config/nvim"
-              target="_blank"
-            >
-              Settings / Plugins
-            </a>
-            ) - My editor of choice for it&apos;s speed and versatility.
-          </li>
-          <li>
-            <strong>Theme:</strong>{" "}
-            <a href="https://github.com/folke/tokyonight.nvim">Tokyo Night</a>-
-            Aesthetic and easy on the eyes theme by the one and only{" "}
-            <a href="https://github.com/folke">Folke.</a>
-          </li>
-          <li>
-            <strong>Terminal: Ghostty / zsh</strong> - For seamless terminal
-            work.
-          </li>
-        </ul>
-        <h3 id="audio">Audio</h3>
-        <ul>
-          <li>
-            <strong>Sony WH-1000XM4</strong> - Excellent noise-canceling.
-          </li>
-        </ul>
-        <h3 id="software">Software</h3>
-        <div>
-          <h4 id="productivity">Productivity</h4>
+    <>
+        <section className="mb-12">
+          <h1 className="mb-4 font-serif text-2xl font-medium tracking-tight text-foreground">
+            Uses
+          </h1>
+          <p className="text-muted-foreground">
+            A curated list of the tools, software, and hardware that power my
+            daily workflow.
+          </p>
+        </section>
+
+        <article className="prose prose-neutral max-w-none dark:prose-invert">
+          <h2 className="font-serif">Computer / Office</h2>
           <ul>
             <li>
-              <strong>Obsidian</strong> - Note-taking and knowledge management.
+              <strong>Mac Mini (2023)</strong> &mdash; Reliable, compact, and
+              powerful for daily development.
             </li>
             <li>
-              <strong>Aerospace</strong> - Simple yet efficient macOS tiling
-              window manager.
+              <strong>27&quot; LG UltraFine 27US500-W</strong> &mdash; Just a
+              monitor, nothing fancy.
+            </li>
+            <li>
+              <strong>Logitech Signature M650</strong> &mdash; Silent and
+              precise.
+            </li>
+            <li>
+              <strong>Keychron V4 QMK</strong> &mdash; Customizable with a
+              tactile mechanical feel.
             </li>
           </ul>
-        </div>
-        <div>
-          <h4>Development</h4>
+
+          <h2 className="font-serif">Coding</h2>
           <ul>
             <li>
-              <strong>TablePlus</strong> – Easy database management.
+              <strong>Neovim</strong> (
+              <a
+                href="https://github.com/jmartinn/dotfiles/tree/main/.config/nvim"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Settings / Plugins
+              </a>
+              ) &mdash; My editor of choice for its speed and versatility.
             </li>
             <li>
-              <strong>Screen Studio</strong> – High-quality screen recordings
-              for tutorials.
+              <strong>Theme:</strong>{" "}
+              <a
+                href="https://github.com/folke/tokyonight.nvim"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Tokyo Night
+              </a>{" "}
+              &mdash; Aesthetic and easy on the eyes theme by the one and only{" "}
+              <a
+                href="https://github.com/folke"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Folke
+              </a>
+              .
+            </li>
+            <li>
+              <strong>Terminal: Ghostty / zsh</strong> &mdash; For seamless
+              terminal work.
             </li>
           </ul>
-        </div>
-      </div>
-    </section>
+
+          <h2 className="font-serif">Audio</h2>
+          <ul>
+            <li>
+              <strong>Sony WH-1000XM4</strong> &mdash; Excellent noise-canceling.
+            </li>
+          </ul>
+
+          <h2 className="font-serif">Software</h2>
+
+          <h3 className="font-serif">Productivity</h3>
+          <ul>
+            <li>
+              <strong>Obsidian</strong> &mdash; Note-taking and knowledge
+              management.
+            </li>
+            <li>
+              <strong>Aerospace</strong> &mdash; Simple yet efficient macOS
+              tiling window manager.
+            </li>
+          </ul>
+
+          <h3 className="font-serif">Development</h3>
+          <ul>
+            <li>
+              <strong>TablePlus</strong> &mdash; Easy database management.
+            </li>
+            <li>
+              <strong>Screen Studio</strong> &mdash; High-quality screen
+              recordings for tutorials.
+            </li>
+          </ul>
+        </article>
+    </>
   );
 }

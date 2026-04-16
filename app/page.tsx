@@ -1,136 +1,215 @@
 import Image from "next/image";
+import Link from "next/link";
 
-import { BlogLink } from "@/components/blog/blog-post-card";
-import { Badge } from "@/components/ui/badge";
-import { Icons } from "@/components/ui/icons";
+import { getBlogPosts } from "@/lib/db/blog";
 import avatar from "@/public/images/avatar.jpeg";
 
-export default function Page() {
+export default async function Page() {
+  const posts = (await getBlogPosts())
+    .sort(
+      (a, b) =>
+        new Date(b.metadata.publishedAt).getTime() -
+        new Date(a.metadata.publishedAt).getTime()
+    )
+    .slice(0, 3);
+
   return (
-    <section>
-      <h1 className="group mb-8 text-2xl font-semibold tracking-tighter">
-        hey, I&apos;m Juan{" "}
-        <span className="inline-block origin-[70%_70%] transition-transform group-hover:animate-waving-hand">
-          👋
-        </span>
-      </h1>
-
-      <div className="my-8 flex items-center justify-start space-x-6 md:space-x-8">
-        <Image
-          alt="Juan Pedro Martin"
-          className="rounded-full"
-          src={avatar}
-          placeholder="blur"
-          width={100}
-          priority
-        />
-        <div className="flex flex-col space-y-3 text-neutral-500 dark:text-neutral-400">
-          <a
-            rel="noopener noreferrer"
-            aria-label="Twitter"
-            target="_blank"
-            href="https://x.com/jmartinn07"
-            className="flex items-center gap-2 transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
-          >
-            <Icons.twitter />
-          </a>
-          <a
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            target="_blank"
-            href="https://www.linkedin.com/in/jmartinn/"
-            className="flex items-center gap-2 transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
-          >
-            <Icons.linkedin />
-          </a>
-          <a
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            target="_blank"
-            href="https://github.com/jmartinn"
-            className="flex items-center gap-2 transition-all hover:text-neutral-700 dark:hover:text-neutral-200"
-          >
-            <Icons.github />
-          </a>
-        </div>
-      </div>
-
-      <div className="prose prose-neutral dark:prose-invert">
-        <p>
-          I&apos;m a frontend engineer currently working at{" "}
-          <Badge href="https://interamplify.com">
-            <Icons.interamplify />
-            Interamplify
-          </Badge>
-          , where I craft performant, accessible, and beautifully designed web
-          experiences using technologies like{" "}
-          <Badge href="https://react.dev">
+    <>
+        {/* Hero Section */}
+        <section className="mb-16">
+          <div className="mb-8 flex items-center gap-5">
             <Image
-              alt="React logomark"
-              src="/react-logo.svg"
-              className="!mr-1 inline-block align-middle"
-              height="16"
-              width="16"
+              alt="Juan Pedro Martin"
+              className="rounded-full transition-transform duration-300 hover:scale-105"
+              src={avatar}
+              placeholder="blur"
+              width={72}
+              height={72}
+              priority
             />
-            React
-          </Badge>
-          ,{" "}
-          <Badge href="https://nextjs.org">
-            <Image
-              alt="Next.js logomark"
-              src="/next-logo.svg"
-              className="!mr-1 inline-block align-middle"
-              width="16"
-              height="16"
-            />
-            Next.js
-          </Badge>
-          , and{" "}
-          <Badge href="https://typescriptlang.org">
-            <Image
-              alt="TypeScript logomark"
-              src="/typescript-logo.svg"
-              className="!mr-1 inline-block align-middle"
-              width="16"
-              height="16"
-            />
-            TypeScript
-          </Badge>
-          . My focus is bridging the gap between robust engineering and
-          thoughtful design—building interfaces that feel as good as they look.
-        </p>
-      </div>
+            <div>
+              <h1 className="font-serif text-2xl font-medium tracking-tight text-foreground">
+                Juan Pedro Martin
+              </h1>
+              <p className="text-muted-foreground">Frontend Engineer</p>
+            </div>
+          </div>
 
-      <div className="prose prose-neutral dark:prose-invert">
-        <p>
-          Beyond the keyboard, I&apos;m a sports enthusiast who thrives on
-          pushing limits—whether on the track or in tech. Discipline and
-          optimism guide how I work and live.
-        </p>
-        <blockquote className="font-semibold">
-          I believe great software is built with precision, creativity, and
-          care. It&apos;s more than functionality; it&apos;s an experience.
-        </blockquote>
-        <p>
-          I&apos;m always open to meaningful collaborations and side projects,
-          especially those that challenge convention and push craft forward.
-          I&apos;m constantly learning, refining, and exploring the intersection
-          of engineering and design.
-        </p>
-      </div>
+          <div className="space-y-4 leading-relaxed text-foreground/90">
+            <p>
+              I&apos;m a frontend engineer who believes great software should feel as
+              good as it looks. Currently at{" "}
+              <a
+                href="https://www.bbva.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-foreground underline decoration-muted-foreground/40 underline-offset-2 transition-colors duration-200 hover:decoration-accent"
+              >
+                BBVA
+              </a>
+              , building accessible, performant web experiences.
+            </p>
+            <p>
+              Beyond the keyboard, I&apos;m driven by discipline, curiosity, and
+              faith. I push limits&mdash;on the track, in the terminal, and in
+              how I think.
+            </p>
+          </div>
+        </section>
 
-      <div className="my-8 flex w-full flex-col space-y-4">
-        <BlogLink
-          name="A Guide to Productive Perfectionism"
-          slug="balancing-perfectionism"
-          summary="A front-end developer's journey in harnessing perfectionism's power while avoiding its pitfalls."
-        />
-        <BlogLink
-          name="Video To ASCII Using C++"
-          slug="video-to-ascii"
-          summary="A journey into creating a C++ application that transforms videos into mesmerizing ASCII art in real-time."
-        />
-      </div>
-    </section>
+        {/* Writing Section */}
+        <section className="mb-16">
+          <h2 className="mb-6 font-serif text-lg font-medium tracking-tight text-foreground">
+            Writing
+          </h2>
+          <div className="flex flex-col">
+            {posts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="group -mx-3 flex rounded-lg px-3 py-3 transition-colors duration-200 hover:bg-muted/30"
+              >
+                <div className="flex w-full items-start justify-between gap-4">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
+                      {post.metadata.title}
+                    </h3>
+                    {post.metadata.summary && (
+                      <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">
+                        {post.metadata.summary}
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex shrink-0 items-center gap-2">
+                    <span className="text-sm text-muted">
+                      {new Date(post.metadata.publishedAt).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "short",
+                          year: "numeric",
+                        }
+                      )}
+                    </span>
+                    <svg
+                      className="size-3.5 text-muted opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <Link
+            href="/blog"
+            className="group mt-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
+          >
+            <span>View all posts</span>
+            <svg
+              className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </Link>
+        </section>
+
+        {/* Work Section */}
+        <section>
+          <h2 className="mb-6 font-serif text-lg font-medium tracking-tight text-foreground">
+            Work
+          </h2>
+          <div className="space-y-1">
+            <WorkItem
+              company="BBVA"
+              role="Frontend Engineer"
+              period="2025 - Present"
+              href="https://www.bbva.com"
+            />
+            <WorkItem
+              company="Interamplify"
+              role="Frontend Engineer"
+              period="2023 - 2025"
+              href="https://interamplify.com"
+            />
+            <WorkItem
+              company="Freelance"
+              role="Web Developer"
+              period="2021 - 2023"
+            />
+          </div>
+        </section>
+    </>
   );
+}
+
+function WorkItem({
+  company,
+  role,
+  period,
+  href,
+}: {
+  company: string;
+  role: string;
+  period: string;
+  href?: string;
+}) {
+  const content = (
+    <div className="flex items-start justify-between gap-4">
+      <div>
+        <h3 className="font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
+          {company}
+        </h3>
+        <p className="text-sm text-muted-foreground">{role}</p>
+      </div>
+      <div className="flex shrink-0 items-center gap-2">
+        <span className="text-sm text-muted">{period}</span>
+        {href && (
+          <svg
+            className="size-3.5 text-muted opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M7 17L17 7M17 7H7M17 7v10"
+            />
+          </svg>
+        )}
+      </div>
+    </div>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group -mx-3 block rounded-lg px-3 py-3 transition-colors duration-200 hover:bg-muted/30"
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return <div className="-mx-3 px-3 py-3">{content}</div>;
 }
