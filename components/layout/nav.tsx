@@ -15,9 +15,14 @@ export function Nav() {
   }
 
   return (
-    <nav className="mb-16 flex items-center justify-between">
+    <motion.nav
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
+      className="mb-16 flex items-center justify-between"
+    >
       <LayoutGroup>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5">
           {navItems.map(({ path, name }) => {
             const isActive = path === pathname;
             return (
@@ -25,7 +30,7 @@ export function Nav() {
                 key={path}
                 href={path}
                 className={cn(
-                  "relative px-3 py-1.5 text-sm transition-colors",
+                  "relative px-3 py-1.5 text-sm transition-all duration-200",
                   isActive
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
@@ -34,11 +39,11 @@ export function Nav() {
                 {isActive && (
                   <motion.span
                     layoutId="nav-indicator"
-                    className="absolute inset-0 rounded-md bg-foreground/5"
+                    className="absolute inset-0 rounded-md bg-foreground/[0.06]"
                     transition={{
                       type: "spring",
-                      stiffness: 380,
-                      damping: 30,
+                      stiffness: 400,
+                      damping: 28,
                     }}
                   />
                 )}
@@ -49,6 +54,6 @@ export function Nav() {
         </div>
       </LayoutGroup>
       <ThemeToggle />
-    </nav>
+    </motion.nav>
   );
 }

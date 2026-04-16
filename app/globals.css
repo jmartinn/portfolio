@@ -219,6 +219,35 @@ table {
   }
 }
 
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes subtle-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--accent) / 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px hsl(var(--accent) / 0.1);
+  }
+}
+
 .animate-fade-in {
   animation: fade-in 0.5s ease-out forwards;
 }
@@ -227,9 +256,77 @@ table {
   animation: fade-up 0.6s ease-out forwards;
 }
 
+.animate-slide-in {
+  animation: slide-in-right 0.4s ease-out forwards;
+}
+
 /* Staggered animation delays */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.4s; }
+
+/* Interactive link with sliding underline */
+.link-hover {
+  @apply relative;
+}
+
+.link-hover::after {
+  @apply absolute bottom-0 left-0 h-px w-0 transition-all duration-300 ease-out;
+  content: '';
+  background-color: hsl(var(--accent));
+}
+
+.link-hover:hover::after {
+  @apply w-full;
+}
+
+/* Card hover lift effect */
+.card-hover {
+  @apply transition-all duration-300 ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px -2px hsl(var(--foreground) / 0.08);
+}
+
+/* Avatar glow on hover */
+.avatar-glow {
+  @apply transition-all duration-300;
+}
+
+.avatar-glow:hover {
+  box-shadow: 0 0 0 3px hsl(var(--accent) / 0.2);
+}
+
+/* Arrow that slides on hover */
+.arrow-slide {
+  @apply transition-transform duration-200 ease-out;
+}
+
+.group:hover .arrow-slide {
+  transform: translateX(3px);
+}
+
+/* Subtle scale on hover */
+.hover-lift {
+  @apply transition-transform duration-200 ease-out;
+}
+
+.hover-lift:hover {
+  transform: scale(1.02);
+}
+
+/* Focus ring animation */
+.focus-ring {
+  @apply outline-none ring-0 ring-accent/0 transition-shadow duration-200;
+}
+
+.focus-ring:focus-visible {
+  @apply ring-2 ring-accent/50 ring-offset-2 ring-offset-background;
+}
