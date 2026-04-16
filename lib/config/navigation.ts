@@ -10,7 +10,7 @@
 export const navItems = [
   { path: "/", name: "home" },
   { path: "/about", name: "about" },
-  { path: "/uses", name: "uses" },
+  { path: "/projects", name: "projects" },
   { path: "/blog", name: "blog" },
 ] as const;
 
