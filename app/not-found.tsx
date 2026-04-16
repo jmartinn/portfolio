@@ -1,12 +1,8 @@
 import Link from "next/link";
 
-import { Nav } from "@/components/layout/nav";
-
 export default function NotFound() {
   return (
-    <>
-      <Nav />
-      <main className="flex flex-col items-center justify-center py-24 text-center">
+    <div className="flex flex-col items-center justify-center py-24 text-center">
         <h1 className="mb-4 font-serif text-4xl font-medium tracking-tight text-foreground">
           404
         </h1>
@@ -32,7 +28,6 @@ export default function NotFound() {
           </svg>
           Go back home
         </Link>
-      </main>
-    </>
+    </div>
   );
 }

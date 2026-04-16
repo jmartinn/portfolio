@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Footer } from "@/components/layout/footer";
-import { Nav } from "@/components/layout/nav";
 import { getBlogPost, getBlogPosts } from "@/lib/db/blog";
 import { formatDate } from "@/lib/utils";
 
@@ -147,9 +145,7 @@ export default async function Blog({ params }: { params: Params }) {
 
   return (
     <>
-      <Nav />
-      <main>
-        <script
+      <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
@@ -191,8 +187,6 @@ export default async function Blog({ params }: { params: Params }) {
         <article className="prose prose-neutral prose-quoteless max-w-none dark:prose-invert">
           <MDXContent />
         </article>
-      </main>
-      <Footer />
     </>
   );
 }

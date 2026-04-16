@@ -9,6 +9,8 @@ import type { Metadata } from "next";
 import { Newsreader } from "next/font/google";
 
 import { ErrorBoundary } from "@/components/error-boundary";
+import { Footer } from "@/components/layout/footer";
+import { Nav } from "@/components/layout/nav";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
@@ -113,7 +115,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
-            <ErrorBoundary>{children}</ErrorBoundary>
+            <Nav />
+            <ErrorBoundary>
+              <main>{children}</main>
+            </ErrorBoundary>
+            <Footer />
           </div>
           <Toaster />
         </ThemeProvider>

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
-import { Footer } from "@/components/layout/footer";
-import { Nav } from "@/components/layout/nav";
 import avatar from "@/public/images/avatar.jpeg";
 
 export const metadata: Metadata = {
@@ -14,8 +12,6 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <Nav />
-      <main>
         <section className="mb-12">
           <h1 className="mb-4 font-serif text-2xl font-medium tracking-tight text-foreground">
             About
@@ -124,8 +120,6 @@ export default function AboutPage() {
             <a href="mailto:juamp_m@hotmail.com">send me an email</a>.
           </p>
         </article>
-      </main>
-      <Footer />
     </>
   );
 }

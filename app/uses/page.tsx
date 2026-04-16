@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 
-import { Footer } from "@/components/layout/footer";
-import { Nav } from "@/components/layout/nav";
-
 export const metadata: Metadata = {
   title: "Uses",
   description:
@@ -12,8 +9,6 @@ export const metadata: Metadata = {
 export default function UsesPage() {
   return (
     <>
-      <Nav />
-      <main>
         <section className="mb-12">
           <h1 className="mb-4 font-serif text-2xl font-medium tracking-tight text-foreground">
             Uses
@@ -115,8 +110,6 @@ export default function UsesPage() {
             </li>
           </ul>
         </article>
-      </main>
-      <Footer />
     </>
   );
 }

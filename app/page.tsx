@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Footer } from "@/components/layout/footer";
-import { Nav } from "@/components/layout/nav";
 import { getBlogPosts } from "@/lib/db/blog";
 import avatar from "@/public/images/avatar.jpeg";
 
@@ -17,8 +15,6 @@ export default async function Page() {
 
   return (
     <>
-      <Nav />
-      <main>
         {/* Hero Section */}
         <section className="mb-16">
           <div className="mb-8 flex items-center gap-5">
@@ -158,8 +154,6 @@ export default async function Page() {
             />
           </div>
         </section>
-      </main>
-      <Footer />
     </>
   );
 }

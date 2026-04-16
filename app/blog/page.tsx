@@ -1,8 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
-import { Footer } from "@/components/layout/footer";
-import { Nav } from "@/components/layout/nav";
 import { getBlogPosts } from "@/lib/db/blog";
 
 export const metadata: Metadata = {
@@ -22,8 +20,6 @@ export default async function BlogPage() {
 
   return (
     <>
-      <Nav />
-      <main>
         <section className="mb-12">
           <h1 className="mb-4 font-serif text-2xl font-medium tracking-tight text-foreground">
             Writing
@@ -81,8 +77,6 @@ export default async function BlogPage() {
             </Link>
           ))}
         </div>
-      </main>
-      <Footer />
     </>
   );
 }
