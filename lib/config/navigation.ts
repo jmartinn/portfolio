@@ -11,6 +11,7 @@ export const navItems = [
   { path: "/", name: "home" },
   { path: "/about", name: "about" },
   { path: "/projects", name: "projects" },
+  { path: "/uses", name: "uses" },
   { path: "/blog", name: "blog" },
 ] as const;
 

@@ -21,11 +21,11 @@
   .dark {
     --background: 30 8% 7%;
     --foreground: 40 10% 90%;
-    --muted: 30 6% 40%;
-    --muted-foreground: 30 8% 55%;
+    --muted: 30 6% 45%;
+    --muted-foreground: 30 8% 58%;
     --accent: 43 75% 52%;
     --accent-foreground: 30 8% 7%;
-    --border: 30 8% 18%;
+    --border: 30 8% 22%;
     --ring: 43 75% 52%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
@@ -41,7 +41,6 @@ html {
   min-width: 360px;
   scrollbar-gutter: stable;
   color-scheme: light;
-  @apply scroll-smooth;
 }
 
 .dark {
@@ -187,7 +186,48 @@ table {
   text-wrap: balance;
 }
 
-/* Animations */
+/* View Transition timing */
+:root {
+  --duration-exit: 120ms;
+  --duration-enter: 180ms;
+  --duration-move: 350ms;
+}
+
+@keyframes fade {
+  from { filter: blur(2px); opacity: 0; }
+  to { filter: blur(0); opacity: 1; }
+}
+
+::view-transition-old(.fade-out) {
+  animation: var(--duration-exit) ease-in fade reverse;
+}
+::view-transition-new(.fade-in) {
+  animation: var(--duration-enter) ease-out var(--duration-exit) both fade;
+}
+
+/* Isolate persistent elements from page transitions */
+::view-transition-group(site-nav),
+::view-transition-group(site-footer) {
+  animation: none;
+}
+::view-transition-old(site-nav),
+::view-transition-old(site-footer) {
+  display: none;
+}
+::view-transition-new(site-nav),
+::view-transition-new(site-footer) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -195,138 +235,4 @@ table {
   to {
     transform: rotate(360deg);
   }
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes subtle-bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 hsl(var(--accent) / 0);
-  }
-  50% {
-    box-shadow: 0 0 0 4px hsl(var(--accent) / 0.1);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.5s ease-out forwards;
-}
-
-.animate-fade-up {
-  animation: fade-up 0.6s ease-out forwards;
-}
-
-.animate-slide-in {
-  animation: slide-in-right 0.4s ease-out forwards;
-}
-
-/* Staggered animation delays */
-.stagger-1 { animation-delay: 0.05s; }
-.stagger-2 { animation-delay: 0.1s; }
-.stagger-3 { animation-delay: 0.15s; }
-.stagger-4 { animation-delay: 0.2s; }
-.stagger-5 { animation-delay: 0.25s; }
-.stagger-6 { animation-delay: 0.3s; }
-.stagger-7 { animation-delay: 0.35s; }
-.stagger-8 { animation-delay: 0.4s; }
-
-/* Interactive link with sliding underline */
-.link-hover {
-  @apply relative;
-}
-
-.link-hover::after {
-  @apply absolute bottom-0 left-0 h-px w-0 transition-all duration-300 ease-out;
-  content: '';
-  background-color: hsl(var(--accent));
-}
-
-.link-hover:hover::after {
-  @apply w-full;
-}
-
-/* Card hover lift effect */
-.card-hover {
-  @apply transition-all duration-300 ease-out;
-}
-
-.card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px -2px hsl(var(--foreground) / 0.08);
-}
-
-/* Avatar glow on hover */
-.avatar-glow {
-  @apply transition-all duration-300;
-}
-
-.avatar-glow:hover {
-  box-shadow: 0 0 0 3px hsl(var(--accent) / 0.2);
-}
-
-/* Arrow that slides on hover */
-.arrow-slide {
-  @apply transition-transform duration-200 ease-out;
-}
-
-.group:hover .arrow-slide {
-  transform: translateX(3px);
-}
-
-/* Subtle scale on hover */
-.hover-lift {
-  @apply transition-transform duration-200 ease-out;
-}
-
-.hover-lift:hover {
-  transform: scale(1.02);
-}
-
-/* Focus ring animation */
-.focus-ring {
-  @apply outline-none ring-0 ring-accent/0 transition-shadow duration-200;
-}
-
-.focus-ring:focus-visible {
-  @apply ring-2 ring-accent/50 ring-offset-2 ring-offset-background;
 }
