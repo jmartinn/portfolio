@@ -15,7 +15,7 @@ export function Nav() {
   }
 
   return (
-    <nav className="mb-16 flex items-center justify-between">
+    <nav className="mb-16 flex items-center justify-between" style={{ viewTransitionName: "site-nav" }}>
       <LayoutGroup>
         <div className="flex items-center gap-0.5">
           {navItems.map(({ path, name }) => {

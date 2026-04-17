@@ -9,7 +9,7 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-border pt-8">
+    <footer className="mt-24 border-t border-border pt-8" style={{ viewTransitionName: "site-footer" }}>
       <div className="flex flex-col gap-6">
         <NowPlaying />
         <nav className="flex flex-wrap gap-x-4 gap-y-2">
