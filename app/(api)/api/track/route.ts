@@ -48,25 +48,31 @@ async function getSpotifyToken() {
 }
 
 async function refreshSpotifyToken() {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || ""}api/spotify/token`
-    );
+  const response = await fetch("https://accounts.spotify.com/api/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: `Basic ${process.env.SPOTIFY_AUTH_TOKEN}`,
+    },
+    body: new URLSearchParams({
+      grant_type: "refresh_token",
+      refresh_token: process.env.SPOTIFY_REFRESH_TOKEN!,
+      client_id: process.env.SPOTIFY_CLIENT_ID!,
+    }),
+  });
 
-    if (!response.ok) {
-      throw new Error(`Failed to refresh token: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const newToken = data.accessToken;
-
-    await kv.set(SPOTIFY_TOKEN_KEY, newToken, { ex: SPOTIFY_TOKEN_TTL });
-
-    return newToken;
-  } catch (error) {
-    console.error("Error refreshing Spotify token:", error);
-    throw error;
+  if (!response.ok) {
+    throw new Error(`Failed to refresh token: ${response.status}`);
   }
+
+  const data = await response.json();
+  const newToken = data.access_token;
+
+  if (newToken) {
+    await kv.set(SPOTIFY_TOKEN_KEY, newToken, { ex: SPOTIFY_TOKEN_TTL });
+  }
+
+  return newToken;
 }
 
 export async function GET() {
@@ -83,6 +89,11 @@ export async function GET() {
       }
     );
 
+    // 403 = Premium required (Spotify policy change, late 2024)
+    if (response.status === 403 || response.status === 204) {
+      return getEmptyTrackInfo();
+    }
+
     if (response.status === 401) {
       const newToken = await refreshSpotifyToken();
 
@@ -96,24 +107,17 @@ export async function GET() {
         }
       );
 
-      if (!retryResponse.ok) {
-        throw new Error(
-          `Spotify API error after token refresh: ${retryResponse.status}`
-        );
+      if (retryResponse.status === 403 || retryResponse.status === 204 || !retryResponse.ok) {
+        return getEmptyTrackInfo();
       }
 
       const retryData = await retryResponse.json();
-
-      if (retryResponse.status === 204 || !retryData) {
+      if (!retryData) {
         return getEmptyTrackInfo();
       }
 
       const trackInfo = formatTrackInfo(retryData);
       return Response.json({ trackInfo });
-    }
-
-    if (response.status === 204) {
-      return getEmptyTrackInfo();
     }
 
     if (response.ok) {
