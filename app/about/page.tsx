@@ -6,7 +6,7 @@ import avatar from "@/public/images/avatar.jpeg";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn more about Juan Pedro Martin, a frontend engineer passionate about thoughtful design and robust engineering.",
+    "About Juan Pedro Martin — frontend engineer at BBVA, based in Spain.",
 };
 
 export default function AboutPage() {
@@ -35,31 +35,23 @@ export default function AboutPage() {
 
         <article className="prose prose-neutral max-w-none dark:prose-invert">
           <p className="text-lg leading-relaxed">
-            Hola, I&apos;m Juan&mdash;a frontend engineer with a deep
-            appreciation for thoughtful design and robust engineering.
+            Hola, I&apos;m Juan. I&apos;m a frontend engineer based in Spain,
+            currently working at <strong>BBVA</strong>.
           </p>
 
           <p>
-            I specialize in building fast, accessible, and maintainable web
-            applications using modern tools like <strong>React</strong>,{" "}
-            <strong>Next.js</strong>, <strong>Tailwind</strong>, and{" "}
-            <strong>TypeScript</strong>. My work focuses on bridging the gap
-            between clean architecture and intuitive, user-centered interfaces.
+            I mostly work with <strong>React</strong>,{" "}
+            <strong>Next.js</strong>, and <strong>TypeScript</strong>, building
+            things for the web. I like when software feels considered&mdash;when
+            someone clearly thought about the small things. That&apos;s what I
+            try to do, even if I don&apos;t always get it right.
           </p>
 
           <p>
-            What sets me apart is my eye for design and user experience, allowing
-            me to bridge the gap between technical implementation and beautiful,
-            intuitive interfaces. I believe in writing clean, scalable code while
-            never compromising on the user experience.
-          </p>
-
-          <p>
-            That said, my passion for engineering goes beyond the frontend.
-            You&apos;ll just as likely find me building an SDK, designing backend
-            infrastructure, or streamlining dev workflows. I enjoy working across
-            the stack, especially when the goal is improving clarity, performance,
-            and maintainability.
+            I&apos;m not strictly a frontend person, though. I enjoy working
+            across the stack&mdash;building APIs, setting up infrastructure,
+            improving how a team ships code. I like understanding how things work
+            end to end.
           </p>
 
           <hr />
@@ -67,32 +59,17 @@ export default function AboutPage() {
           <h2 className="font-serif">Beyond Code</h2>
 
           <p>
-            Outside of work, I&apos;m guided by values like{" "}
-            <strong>discipline</strong>, <strong>curiosity</strong>, and{" "}
-            <strong>faith</strong>. I like to push limits&mdash;whether it&apos;s
-            in the terminal, on the track, or in how I think and learn.
+            I run, take notes in <strong>Obsidian</strong>, and try to learn
+            something new most days. My faith matters to me. So does showing up
+            consistently and doing good work, even when nobody&apos;s watching.
           </p>
-
-          <p>
-            I&apos;m also into <strong>note-taking systems</strong> (Zettelkasten
-            + Obsidian), testing new tools, and documenting what I learn. I
-            believe in learning by doing, and contributing however I can&mdash;
-            through open-source, mentoring, or just building things that help
-            others.
-          </p>
-
-          <blockquote>
-            My goal? Keep refining the craft. Build things that are useful,
-            thoughtful, and well-made.
-          </blockquote>
 
           <hr />
 
           <h2 className="font-serif">Connect</h2>
 
           <p>
-            I&apos;m always open to meaningful collaborations and conversations.
-            You can find me on{" "}
+            I&apos;m always happy to chat. You can find me on{" "}
             <a
               href="https://github.com/jmartinn"
               target="_blank"

@@ -11,7 +11,7 @@ const projects = [
   {
     title: "Strapex",
     description:
-      "An open-source payment gateway inspired by Stripe, aiming to democratize payments for everyone.",
+      "An open-source payment gateway inspired by Stripe. Still early days.",
     tech: ["TypeScript", "Next.js", "PostgreSQL"],
     href: "https://github.com/jmartinn/strapex",
     status: "in-progress" as const,
@@ -19,7 +19,7 @@ const projects = [
   {
     title: "Portfolio",
     description:
-      "This website — a personal space built with care, attention to detail, and a lot of iteration.",
+      "This website. Perpetually being tweaked.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "MDX"],
     href: "https://github.com/jmartinn/portfolio",
     status: "active" as const,
@@ -42,9 +42,8 @@ export default function ProjectsPage() {
           Projects
         </h1>
         <p className="text-muted-foreground">
-          Side projects and experiments — things I build to learn, explore, and
-          scratch my own itches. Some are polished, others are works in
-          progress.
+          Things I&apos;ve built or I&apos;m building. Some are finished, most
+          aren&apos;t.
         </p>
       </section>
 

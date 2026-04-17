@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Uses",
   description:
-    "A curated list of the tools, software, and hardware I use daily for development, productivity, and creativity.",
+    "The tools and hardware I use day to day.",
 };
 
 export default function UsesPage() {
@@ -14,8 +14,7 @@ export default function UsesPage() {
             Uses
           </h1>
           <p className="text-muted-foreground">
-            A curated list of the tools, software, and hardware that power my
-            daily workflow.
+            The tools and hardware I use day to day.
           </p>
         </section>
 

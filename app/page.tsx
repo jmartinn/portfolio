@@ -37,8 +37,7 @@ export default async function Page() {
 
           <div className="space-y-4 leading-relaxed text-foreground/90">
             <p>
-              I&apos;m a frontend engineer who believes great software should feel as
-              good as it looks. Currently at{" "}
+              I&apos;m a frontend engineer at{" "}
               <a
                 href="https://www.bbva.com"
                 target="_blank"
@@ -47,12 +46,13 @@ export default async function Page() {
               >
                 BBVA
               </a>
-              , building accessible, performant web experiences.
+              , working mostly with React and TypeScript. I care about the
+              details&mdash;how things look, how they feel, whether they&apos;re
+              actually pleasant to use.
             </p>
             <p>
-              Beyond the keyboard, I&apos;m driven by discipline, curiosity, and
-              faith. I push limits&mdash;on the track, in the terminal, and in
-              how I think.
+              Outside of work, I run, tinker with my Neovim setup, and try to
+              write here when I have something worth saying.
             </p>
           </div>
         </section>

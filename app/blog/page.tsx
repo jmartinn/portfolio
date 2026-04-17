@@ -6,7 +6,7 @@ import { getBlogPosts } from "@/lib/db/blog";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Thoughts, guides, and explorations on design, development, and the spaces in between.",
+    "Writing about web development, tools, and things I've learned along the way.",
 };
 
 export const revalidate = 3600;
@@ -25,8 +25,7 @@ export default async function BlogPage() {
             Writing
           </h1>
           <p className="text-muted-foreground">
-            Thoughts, guides, and explorations on design, development, and the
-            spaces in between.
+            Things I&apos;ve learned, figured out, or just wanted to write down.
           </p>
         </section>
 

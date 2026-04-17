@@ -28,14 +28,14 @@ export const metadata: Metadata = {
     template: "%s | Juan Pedro Martin",
   },
   description:
-    "Frontend engineer crafting thoughtful, accessible web experiences. Writing about design, development, and the spaces in between.",
+    "Frontend engineer at BBVA. Writing about web development and the things I learn along the way.",
   alternates: {
     canonical: "https://www.jmartinn.com",
   },
   openGraph: {
     title: "Juan Pedro Martin",
     description:
-      "Frontend engineer crafting thoughtful, accessible web experiences. Writing about design, development, and the spaces in between.",
+      "Frontend engineer at BBVA. Writing about web development and the things I learn along the way.",
     url: "https://www.jmartinn.com",
     siteName: "Juan Pedro Martin",
     locale: "en_US",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Juan Pedro Martin",
-    description: "Frontend engineer crafting thoughtful, accessible web experiences.",
+    description: "Frontend engineer at BBVA. Writing about web development and the things I learn along the way.",
     creator: "@jmartinn07",
     images: ["/opengraph-image.jpg"],
   },
