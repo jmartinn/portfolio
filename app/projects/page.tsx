@@ -9,6 +9,13 @@ export const metadata: Metadata = {
 
 const projects = [
   {
+    title: "Threshold",
+    description:
+      "A self-hosted web client for my building's Fermax Blue smart intercom. Reverse-engineered over a Saturday.",
+    tech: ["TypeScript", "Next.js", "WebRTC", "Socket.IO"],
+    status: "in-progress" as const,
+  },
+  {
     title: "Strapex",
     description:
       "An open-source payment gateway inspired by Stripe. Still early days.",
