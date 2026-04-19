@@ -5,6 +5,8 @@ import type { MDXComponents } from "mdx/types";
 import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
 
+import { WebRTCFlow } from "@/components/blog/diagrams/webrtc-flow";
+import { Figure } from "@/components/blog/figure";
 import { TweetComponent } from "@/components/tweet/tweet";
 
 interface TableProps {
@@ -181,6 +183,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ProsCard,
     ConsCard,
     StaticTweet: TweetComponent,
+    Figure,
+    WebRTCFlow,
     code: (props: React.HTMLAttributes<HTMLElement>) => {
       if (props.className?.includes("language-")) {
         return <code {...props} />;
