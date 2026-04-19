@@ -9,8 +9,6 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const rawTitle = searchParams.get("title");
 
-  // Validate and sanitize the title input
-  // Limit to 100 characters to prevent abuse and ensure proper rendering
   const postTitle = sanitizeTitle(rawTitle, 100);
 
   const font = fetch(
