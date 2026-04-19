@@ -1,0 +1,189 @@
+---
+title: "Reverse-engineering my smart doorbell"
+publishedAt: 2026-04-19
+summary: "I built a full replacement for my building's intercom app, got live video working over WebRTC, and stumbled onto a vulnerability that lets any authenticated user watch any other user's camera."
+keywords: reverse engineering, webrtc, security, mitmproxy, fermax, iot
+---
+
+My building got a new intercom a while ago — a Fermax Blue system. The panel outside talks to a little screen inside each apartment, and there's an optional iOS app that does roughly the same thing from your phone. It works. I wanted to understand how.
+
+By the end of that Saturday — I was on vacation, nothing better to do — I had a full replacement for the app running in my browser: login, door unlock, live video from the outdoor panel. I also had an accidental proof of concept that any authenticated Fermax user could join any other user's video session and watch their camera.
+
+This is how that went.
+
+> **Note on disclosure.** I reported this to Fermax before publishing and I'm keeping the sensitive details out of this post on purpose — no credentials, no request payloads that aren't in a capture screenshot, no PoC code. Some bits are deliberately vague. I'll update the post once the patch is out.
+
+## No SSL pinning
+
+The first thing I checked was whether the iOS app pinned its certificates. If it did, capturing traffic would mean patching the binary, which I wasn't going to do on a weekend.
+
+It didn't. mitmproxy worked on the first try.
+
+I wrote a small mitmdump addon to filter Fermax hostnames and dump each request/response as JSON. Three captures were enough: one session with login + door open + a video call, one with logout/login, one triggering "live view" from the app.
+
+## Mapping the API
+
+From the captures I built an `API_MAP.md` — a full reference of every endpoint the app touches. OAuth2 with the resource owner password credentials grant (the `client_id` and `client_secret` are hardcoded in the iOS binary). REST endpoints for pairings, devices, panels, subscriptions. A single `POST` to open the door. And a signaling layer for video calls that I didn't understand yet.
+
+The relevant shape, abbreviated:
+
+```
+AUTH
+  POST  /oauth/token                 password grant, hardcoded client creds
+  POST  /oauth/token/revoke
+
+USER & PAIRING
+  GET   /user/api/v1/users/me
+  GET   /pairing/api/v4/pairings/me
+
+DEVICES
+  GET   /deviceaction/api/v1/device/{id}
+  GET   /deviceaction/api/v1/device/{id}/panels
+  GET   /services2/api/v1/services/{id}
+
+SUBSCRIPTIONS
+  GET   /subscriptionnowifi/api/v1/plans
+  GET   /subscriptionnowifi/api/v1/subscription/{logicalId}
+
+ACTIONS
+  POST  /deviceaction/api/v1/device/{panelId}/directed-opendoor
+  POST  /deviceaction/api/v2/device/{panelId}/autoon    ← wakes the panel camera
+
+NOTIFICATIONS
+  POST  /notification/api/v1/apptoken
+  GET   /notification/api/v1/mutedevice/me
+
+SIGNALING  (Socket.IO)
+  → join_call
+  → transport_consume
+  → transport_connect
+  ← on-browser-autoon       broadcast
+  ← end_up
+```
+
+The `autoon` endpoint is the door into the video flow. The `on-browser-autoon` event is where things go wrong later. Neither of those was obvious at this point — I just had a list.
+
+## The web client
+
+Turning the captures into a typed TypeScript client was the fastest part of the project. Auth with auto-refresh, a thin wrapper around each REST endpoint, a Next.js app with server actions and iron-session for the cookie.
+
+Login + dashboard + door unlock took a day.
+
+<Figure caption="The dashboard of the web replacement. Device status, plan counters, and the two actions I use every day.">
+  <Image
+    src="/blog/reverse-engineering-my-doorbell/threshold-screenshot.png"
+    alt="Screenshot of the Threshold web app dashboard. A device card labeled 'Residence 01' shows a VEO-XS NOWIFI monitor, a SKYLINE 4G panel connected at 85% signal, trial plan counters for OpenDoor/CallDivert/AutoOn, and two buttons: Open door and Live view."
+    width={3584}
+    height={2298}
+  />
+</Figure>
+
+## The hard part: live video
+
+The video signaling is Socket.IO on top of mediasoup, an SFU. There's no public documentation for the specific event protocol Fermax uses. I had to piece it together from the captures.
+
+<WebRTCFlow />
+
+The steps, simplified:
+
+1. Hit the REST `autoon` endpoint to wake the panel camera
+2. The signaling server broadcasts an `on-browser-autoon` event with the new room ID
+3. Join the room over Socket.IO
+4. Negotiate the mediasoup transports and consume the video + audio
+5. ~30 seconds later the server sends `end_up` and the session ends
+6. Wait a second for the panel to release and start over
+
+### Things that went wrong
+
+A few bugs cost me real time:
+
+- **JWT without `Bearer`.** The REST API wants `Authorization: Bearer <token>`. The signaling server wants the raw JWT in a different field, no prefix. I copied the REST pattern and got `invalid token` errors for an hour before I re-read the capture.
+- **Result wrapper.** Responses from `join_call` and `transport_consume` look like `{result: {...}, context: {...}}`. I was reading fields from the top level. Everything was `undefined` and nothing made sense until I logged the raw payload.
+- **Two signaling servers.** Sessions get created on either `srv01` or `srv02` — load-balanced. You can't know which one in advance. I had to connect to both and race for the event.
+- **Preemptive reconnect doesn't work.** My first attempt at handling the 30-second cutoff was to start a new session before the old one ended. The panel returned `409 device_busy`. Reactive reconnect — wait for `end_up`, then restart — works.
+
+After all that, the video came through. H.264 frames and G.711 audio from the panel, rendered in a `<video>` tag in my browser.
+
+<Figure caption="Login, dashboard, and live view end-to-end. The feed runs for ~30 seconds, the server ends the session, and the client reconnects automatically.">
+  <video
+    src="/blog/reverse-engineering-my-doorbell/live-session.mp4"
+    controls
+    playsInline
+    muted
+    preload="metadata"
+    className="w-full rounded-md"
+  />
+</Figure>
+
+## The accident
+
+I was trying to grab my own panel ID — I needed it to connect to the right room — so I left the Socket.IO stream open and waited for `on-browser-autoon` to fire. Three different IDs came through. Only one of them was mine.
+
+Hmm. Does this mean what I think it means?
+
+It did. The server was broadcasting `on-browser-autoon` — the event that carries the room ID and device ID of every starting video session — to every connected socket. Not just the owner's session. Every session, to everyone.
+
+That's already a leak. Knowing who is at someone else's door and when is not something a stranger should have.
+
+But the worse part was whether the room itself was protected. I built a small audit page that listens to both signaling servers, displays broadcasts in real time, and puts a "Join" button next to each session. Then I tried joining a session that wasn't mine, using my own JWT.
+
+<Figure caption="Two broadcasts picked up on srv01 within a second of each other. Neither of these sessions was started by me.">
+  <Image
+    src="/blog/reverse-engineering-my-doorbell/audit-dashboard.png"
+    alt="Screenshot of the /audit page. Two srv01 entries list room and device identifiers with timestamps. Each row has a Probe button and a Join button."
+    width={3584}
+    height={2298}
+  />
+</Figure>
+
+The "Probe" button is a safer check than "Join" — it asks the server for session metadata using someone else's room/device IDs without actually joining or touching media. When privacy mode is active, the payload itself is hidden; only the shape of the response tells you whether the server answered or refused.
+
+<Figure caption="Probe result with privacy mode on. The server answered — the payload is redacted here, but the response itself is the signal.">
+  <Image
+    src="/blog/reverse-engineering-my-doorbell/audit-probe.png"
+    alt="Screenshot of the /audit page with a data probe result expanded. The JSON shows deviceId, access: redacted, and a note that the real payload is hidden while privacy mode is on."
+    width={3496}
+    height={2210}
+  />
+</Figure>
+
+I clicked Join on a session that wasn't mine. The feed came up — someone's hallway, not mine.
+
+<Figure caption="The audit flow end-to-end. Privacy mode keeps the IDs masked. The click happens at the end; the panel camera follows about a second later.">
+  <video
+    src="/blog/reverse-engineering-my-doorbell/audit-flow.mp4"
+    controls
+    playsInline
+    muted
+    preload="metadata"
+    className="w-full rounded-md"
+  />
+</Figure>
+
+It worked. `join_call` didn't check whether my token belonged to the device owner. Any authenticated Fermax user could join any active room.
+
+## What's actually wrong
+
+Two issues, stacked:
+
+1. `on-browser-autoon` is scoped to the connection, not to the device. Anyone listening to the signaling server sees every starting session across all users.
+2. `join_call` authenticates the user but doesn't authorize the room. A valid JWT is enough; it doesn't have to be the right JWT.
+
+The REST side is fine — asking for someone else's device data returns 403, the door-open endpoint returns 403, everything you'd hope for. The vulnerability lives in the signaling and media layer. Which is where the camera is.
+
+## Disclosure
+
+I've reported this to Fermax with a full write-up and a proof of concept. This post is the public-facing version and deliberately skips the details that would make exploitation easier.
+
+I'll update this section once there's a patch.
+
+## What I took away from this
+
+- Without certificate pinning, reverse-engineering the whole API took one Saturday. Most of that Saturday was me being confused, not clever.
+- I wasn't hunting for a vulnerability. I was trying to get my panel ID. It found me.
+- WebRTC is less scary than its reputation. The SFU does the media; the hard part is the protocol on top.
+- A 403 on the REST side felt reassuring while I was building. It turned out to mean very little.
+
+---
+
+I'll publish the client source on GitHub once disclosure wraps up. The PoC stays private either way. If you work at Fermax and want those details, email me.
