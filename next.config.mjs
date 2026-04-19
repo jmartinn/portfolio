@@ -7,7 +7,7 @@ import createMDX from "@next/mdx";
 const ContentSecurityPolicy = `
     style-src 'self' 'unsafe-inline';
     img-src * blob: data:;
-    media-src 'none';
+    media-src 'self';
     connect-src *;
     font-src 'self' data:;
     frame-src 'self' vercel.live;
