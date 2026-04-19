@@ -48,39 +48,42 @@ html {
 }
 
 /* Prose link styles - warm underline animation */
-.prose a {
+.prose a:not(.anchor) {
   @apply relative text-foreground no-underline transition-colors;
 }
 
-.prose a::after {
+.prose a:not(.anchor)::after {
   @apply absolute bottom-0 left-0 h-px w-full origin-left scale-x-100 transition-transform duration-300;
   content: '';
   background-color: hsl(var(--muted));
 }
 
-.prose a:hover::after {
+.prose a:not(.anchor):hover::after {
   background-color: hsl(var(--accent));
 }
 
 /* Anchor links for headings */
+.prose :is(h1, h2, h3, h4, h5, h6) {
+  position: relative;
+}
+
 .prose .anchor {
-  @apply absolute invisible no-underline;
-  margin-left: -1em;
-  padding-right: 0.5em;
-  width: 80%;
-  max-width: 700px;
+  @apply absolute invisible no-underline transition-colors;
+  left: -1em;
+  width: 1em;
   cursor: pointer;
 }
 
-.anchor:hover {
-  @apply visible;
-}
-
-.prose .anchor:after {
+.prose .anchor::after {
   @apply text-muted;
   content: '#';
 }
 
+.prose .anchor:hover::after {
+  color: hsl(var(--accent));
+}
+
+.anchor:hover,
 .prose *:hover > .anchor {
   @apply visible;
 }
@@ -118,6 +121,16 @@ html {
   background-color: hsl(var(--accent) / 0.15);
   padding: 0.25rem;
   border-radius: 0.25rem;
+}
+
+/* Inline code — subtle warm background, hide default backticks */
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
+.prose :not(pre) > code {
+  @apply rounded-md border border-border/60 bg-muted/15 px-1.5 py-0.5 text-[0.875em] font-normal text-foreground;
 }
 
 .prose img {
