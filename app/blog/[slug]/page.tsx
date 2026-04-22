@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ScrollMarkers } from "@/components/blog/scroll-markers";
 import { getBlogPost, getBlogPosts } from "@/lib/db/blog";
 import { formatDate } from "@/lib/utils";
 
@@ -187,6 +188,8 @@ export default async function Blog({ params }: { params: Params }) {
         <article className="prose prose-neutral prose-quoteless max-w-none dark:prose-invert">
           <MDXContent />
         </article>
+
+        <ScrollMarkers />
     </>
   );
 }
