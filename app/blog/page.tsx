@@ -63,7 +63,7 @@ export default async function BlogPage() {
                   </time>
                   <svg
                     aria-hidden="true"
-                    className="size-3.5 text-muted opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+                    className="size-3.5 text-muted opacity-0 transition-[opacity,transform] duration-200 ease-out group-hover:translate-x-0.5 group-hover:opacity-100"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

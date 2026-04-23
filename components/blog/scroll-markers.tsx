@@ -96,7 +96,7 @@ export function ScrollMarkers() {
                   {s.text}
                 </span>
                 <span
-                  className={`block h-px transition-[width,background-color] duration-300 ease-out group-hover/tick:w-8 group-hover/tick:bg-foreground ${
+                  className={`block h-px transition-[width,background-color] duration-200 ease-in-out group-hover/tick:w-8 group-hover/tick:bg-foreground ${
                     isActive
                       ? "w-7 bg-foreground"
                       : isPassed

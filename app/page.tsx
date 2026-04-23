@@ -20,7 +20,7 @@ export default async function Page() {
           <div className="mb-8 flex items-center gap-5">
             <Image
               alt="Juan Pedro Martin"
-              className="rounded-full transition-transform duration-300 hover:scale-105"
+              className="rounded-full transition-transform duration-200 hover:scale-105"
               src={avatar}
               placeholder="blur"
               width={72}
@@ -92,7 +92,7 @@ export default async function Page() {
                     </span>
                     <svg
                       aria-hidden="true"
-                      className="size-3.5 text-muted opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+                      className="size-3.5 text-muted opacity-0 transition-[opacity,transform] duration-200 ease-out group-hover:translate-x-0.5 group-hover:opacity-100"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -116,7 +116,7 @@ export default async function Page() {
             <span>View all posts</span>
             <svg
               aria-hidden="true"
-              className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+              className="size-3.5 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -179,7 +179,7 @@ function WorkItem({
         {href && (
           <svg
             aria-hidden="true"
-            className="size-3.5 text-muted opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+            className="size-3.5 text-muted opacity-0 transition-[opacity,transform] duration-200 ease-out group-hover:translate-x-0.5 group-hover:opacity-100"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

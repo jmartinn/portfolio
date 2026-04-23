@@ -29,16 +29,16 @@ export function ThemeToggle() {
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       )}
       whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: 0.97 }}
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
       <AnimatePresence mode="wait" initial={false}>
         {isDark ? (
           <motion.svg
             key="moon"
-            initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+            initial={{ opacity: 0, rotate: -90, scale: 0.9 }}
             animate={{ opacity: 1, rotate: 0, scale: 1 }}
-            exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+            exit={{ opacity: 0, rotate: 90, scale: 0.9 }}
             transition={{ duration: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
             className="size-4"
             fill="none"
@@ -51,9 +51,9 @@ export function ThemeToggle() {
         ) : (
           <motion.svg
             key="sun"
-            initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
+            initial={{ opacity: 0, rotate: 90, scale: 0.9 }}
             animate={{ opacity: 1, rotate: 0, scale: 1 }}
-            exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
+            exit={{ opacity: 0, rotate: -90, scale: 0.9 }}
             transition={{ duration: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
             className="size-4"
             fill="none"

@@ -15,7 +15,7 @@ export default function NotFound() {
         >
           <svg
             aria-hidden="true"
-            className="size-3.5 transition-transform duration-200 group-hover:-translate-x-1"
+            className="size-3.5 transition-transform duration-200 ease-out group-hover:-translate-x-1"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

@@ -37,8 +37,8 @@ export function Nav() {
                     className="absolute inset-0 rounded-md bg-foreground/[0.06]"
                     transition={{
                       type: "spring",
-                      stiffness: 350,
-                      damping: 30,
+                      duration: 0.35,
+                      bounce: 0.15,
                     }}
                   />
                 )}

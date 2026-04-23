@@ -22,7 +22,7 @@ export function Footer() {
               className="group relative text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
             >
               <span>{label}</span>
-              <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-accent transition-[width] duration-200 group-hover:w-full" />
+              <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-200 group-hover:scale-x-100" />
             </a>
           ))}
         </nav>

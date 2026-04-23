@@ -132,7 +132,7 @@ function ProjectCard({
         <div className="flex shrink-0 items-center gap-2 self-start">
           <svg
             aria-hidden="true"
-            className="size-4 text-muted opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+            className="size-4 text-muted opacity-0 transition-[opacity,transform] duration-200 ease-out group-hover:translate-x-0.5 group-hover:opacity-100"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
