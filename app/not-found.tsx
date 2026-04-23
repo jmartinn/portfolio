@@ -14,6 +14,7 @@ export default function NotFound() {
           className="group inline-flex items-center gap-2 text-sm text-foreground underline decoration-muted underline-offset-4 transition-colors duration-200 hover:decoration-accent"
         >
           <svg
+            aria-hidden="true"
             className="size-3.5 transition-transform duration-200 group-hover:-translate-x-1"
             fill="none"
             viewBox="0 0 24 24"

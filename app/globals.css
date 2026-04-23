@@ -47,6 +47,12 @@ html {
   color-scheme: dark;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* Prose link styles - warm underline animation */
 .prose a:not(.anchor) {
   @apply relative text-foreground no-underline transition-colors;
@@ -65,6 +71,7 @@ html {
 /* Anchor links for headings */
 .prose :is(h1, h2, h3, h4, h5, h6) {
   position: relative;
+  scroll-margin-top: 5rem;
 }
 
 .prose .anchor {

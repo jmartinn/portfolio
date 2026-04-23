@@ -157,6 +157,7 @@ export default async function Blog({ params }: { params: Params }) {
             className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             <svg
+              aria-hidden="true"
               className="size-3.5"
               fill="none"
               viewBox="0 0 24 24"

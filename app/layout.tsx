@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Newsreader } from "next/font/google";
 
 import { ErrorBoundary } from "@/components/error-boundary";
@@ -88,6 +88,13 @@ export const metadata: Metadata = {
   category: "Technology",
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "hsl(40 20% 98%)" },
+    { media: "(prefers-color-scheme: dark)", color: "hsl(30 8% 7%)" },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -115,10 +122,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <a
+            href="#main-content"
+            className="sr-only rounded-md bg-background px-3 py-2 text-sm text-foreground ring-2 ring-accent focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50"
+          >
+            Skip to content
+          </a>
           <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
             <Nav />
             <ErrorBoundary>
-              <main>{children}</main>
+              <main id="main-content">{children}</main>
             </ErrorBoundary>
             <Footer />
           </div>

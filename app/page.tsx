@@ -71,7 +71,7 @@ export default async function Page() {
               >
                 <div className="flex w-full items-start justify-between gap-4">
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
+                    <h3 className="line-clamp-2 font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
                       {post.metadata.title}
                     </h3>
                     {post.metadata.summary && (
@@ -91,7 +91,8 @@ export default async function Page() {
                       )}
                     </span>
                     <svg
-                      className="size-3.5 text-muted opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+                      aria-hidden="true"
+                      className="size-3.5 text-muted opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -114,6 +115,7 @@ export default async function Page() {
           >
             <span>View all posts</span>
             <svg
+              aria-hidden="true"
               className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
               fill="none"
               viewBox="0 0 24 24"
@@ -176,7 +178,8 @@ function WorkItem({
         <span className="text-sm text-muted">{period}</span>
         {href && (
           <svg
-            className="size-3.5 text-muted opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+            aria-hidden="true"
+            className="size-3.5 text-muted opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

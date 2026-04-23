@@ -80,7 +80,13 @@ export function ScrollMarkers() {
                   e.preventDefault();
                   const el = document.getElementById(s.id);
                   if (!el) return;
-                  el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  const prefersReduced = window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                  ).matches;
+                  el.scrollIntoView({
+                    behavior: prefersReduced ? "auto" : "smooth",
+                    block: "start",
+                  });
                   history.replaceState(null, "", `#${s.id}`);
                 }}
                 aria-label={`Jump to: ${s.text}`}
@@ -90,7 +96,7 @@ export function ScrollMarkers() {
                   {s.text}
                 </span>
                 <span
-                  className={`block h-px rounded-full transition-all duration-300 ease-out group-hover/tick:w-8 group-hover/tick:bg-foreground ${
+                  className={`block h-px transition-[width,background-color] duration-300 ease-out group-hover/tick:w-8 group-hover/tick:bg-foreground ${
                     isActive
                       ? "w-7 bg-foreground"
                       : isPassed

@@ -1,10 +1,10 @@
 import { NowPlaying } from "@/components/now-playing";
 
 const links = [
-  { href: "https://github.com/jmartinn", label: "github" },
-  { href: "https://x.com/jmartinn07", label: "twitter" },
-  { href: "https://linkedin.com/in/jmartinn", label: "linkedin" },
-  { href: "mailto:juamp_m@hotmail.com", label: "email" },
+  { href: "https://github.com/jmartinn", label: "GitHub" },
+  { href: "https://x.com/jmartinn07", label: "Twitter" },
+  { href: "https://linkedin.com/in/jmartinn", label: "LinkedIn" },
+  { href: "mailto:juamp_m@hotmail.com", label: "Email" },
 ];
 
 export function Footer() {
@@ -22,7 +22,7 @@ export function Footer() {
               className="group relative text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
             >
               <span>{label}</span>
-              <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-accent transition-all duration-200 group-hover:w-full" />
+              <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-accent transition-[width] duration-200 group-hover:w-full" />
             </a>
           ))}
         </nav>

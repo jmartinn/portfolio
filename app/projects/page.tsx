@@ -131,7 +131,8 @@ function ProjectCard({
       {href && (
         <div className="flex shrink-0 items-center gap-2 self-start">
           <svg
-            className="size-4 text-muted opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+            aria-hidden="true"
+            className="size-4 text-muted opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

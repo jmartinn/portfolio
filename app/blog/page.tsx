@@ -48,7 +48,10 @@ export default async function BlogPage() {
                   )}
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
-                  <time className="text-sm text-muted">
+                  <time
+                    dateTime={post.metadata.publishedAt}
+                    className="text-sm text-muted"
+                  >
                     {new Date(post.metadata.publishedAt).toLocaleDateString(
                       "en-US",
                       {
@@ -59,7 +62,8 @@ export default async function BlogPage() {
                     )}
                   </time>
                   <svg
-                    className="size-3.5 text-muted opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+                    aria-hidden="true"
+                    className="size-3.5 text-muted opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
