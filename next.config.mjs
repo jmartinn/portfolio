@@ -7,7 +7,7 @@ import createMDX from "@next/mdx";
 const ContentSecurityPolicy = `
     style-src 'self' 'unsafe-inline';
     img-src * blob: data:;
-    media-src 'self';
+    media-src 'self' https://*.public.blob.vercel-storage.com;
     connect-src *;
     font-src 'self' data:;
     frame-src 'self' vercel.live;
@@ -57,6 +57,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "i.scdn.co",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
         pathname: "**",
       },
     ],
