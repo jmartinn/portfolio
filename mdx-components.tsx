@@ -193,14 +193,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       }
       return (
         <code
-          className="bg-muted text-foreground relative rounded px-1.5 py-0.5 font-mono text-sm"
+          className="relative rounded bg-muted px-1.5 py-0.5 font-mono text-sm text-foreground"
           {...props}
         />
       );
     },
     pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
       <pre
-        className="bg-muted mb-4 mt-6 overflow-x-auto rounded-lg border p-4 text-sm [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-sm [&_code]:font-normal"
+        className="mb-4 mt-6 overflow-x-auto rounded-lg border bg-muted p-4 text-sm [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-sm [&_code]:font-normal"
         {...props}
       />
     ),
