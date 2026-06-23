@@ -37,16 +37,8 @@ export default async function Page() {
 
           <div className="space-y-4 leading-relaxed text-foreground/90">
             <p>
-              I&apos;m a frontend engineer at{" "}
-              <a
-                href="https://www.bbva.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-foreground underline decoration-muted-foreground/40 underline-offset-2 transition-colors duration-200 hover:decoration-accent"
-              >
-                BBVA
-              </a>
-              , working mostly with React and TypeScript. I care about the
+              I&apos;m a frontend engineer working at a startup, mostly with
+              React and TypeScript. I care about the
               details&mdash;how things look, how they feel, whether they&apos;re
               actually pleasant to use.
             </p>
@@ -138,15 +130,20 @@ export default async function Page() {
           </h2>
           <div className="space-y-1">
             <WorkItem
+              company="Startup"
+              role="Frontend Engineer"
+              period="2026 - Present"
+            />
+            <WorkItem
               company="BBVA"
               role="Frontend Engineer"
-              period="Dec 2025 - Present"
+              period="2026"
               href="https://www.bbva.com"
             />
             <WorkItem
               company="Interamplify"
               role="Frontend Engineer"
-              period="May 2022 - Dec 2025"
+              period="2022 - 2026"
               href="https://interamplify.com"
             />
           </div>

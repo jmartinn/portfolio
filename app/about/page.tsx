@@ -6,7 +6,7 @@ import avatar from "@/public/images/avatar.jpeg";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About Juan Pedro Martin — frontend engineer at BBVA, based in Spain.",
+    "About Juan Pedro Martin — frontend engineer at a startup, based in Spain.",
 };
 
 export default function AboutPage() {
@@ -36,7 +36,7 @@ export default function AboutPage() {
         <article className="prose prose-neutral max-w-none dark:prose-invert">
           <p className="text-lg leading-relaxed">
             Hola, I&apos;m Juan. I&apos;m a frontend engineer based in Spain,
-            currently working at <strong>BBVA</strong>.
+            currently working at a startup.
           </p>
 
           <p>
