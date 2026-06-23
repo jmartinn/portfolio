@@ -9,6 +9,14 @@ export const metadata: Metadata = {
 
 const projects = [
   {
+    title: "Cadence",
+    description:
+      "A native iOS subscription tracker with month-end balance forecasting. Local-first, built with SwiftUI and SwiftData.",
+    tech: ["Swift", "SwiftUI", "SwiftData"],
+    href: "https://github.com/jmartinn/cadence",
+    status: "in-progress" as const,
+  },
+  {
     title: "Threshold",
     description:
       "A self-hosted web client for my building's Fermax Blue smart intercom. Reverse-engineered over a Saturday.",
