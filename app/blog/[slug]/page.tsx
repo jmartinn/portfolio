@@ -94,15 +94,13 @@ async function getMDXComponent(slug: string) {
 export default async function Blog({ params }: { params: Params }) {
   const { slug } = await params;
 
-  const postData = await getPostData(slug);
+  // postData and the compiled MDX are independent — load them in parallel.
+  const [postData, MDXContent] = await Promise.all([
+    getPostData(slug),
+    getMDXComponent(slug),
+  ]);
 
-  if (!postData) {
-    notFound();
-  }
-
-  const MDXContent = await getMDXComponent(slug);
-
-  if (!MDXContent) {
+  if (!postData || !MDXContent) {
     notFound();
   }
 
@@ -147,50 +145,50 @@ export default async function Blog({ params }: { params: Params }) {
   return (
     <>
       <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
-        <header className="mb-10">
-          <Link
-            href="/blog"
-            className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+      <header className="mb-10">
+        <Link
+          href="/blog"
+          className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <svg
+            aria-hidden="true"
+            className="size-3.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
           >
-            <svg
-              aria-hidden="true"
-              className="size-3.5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M7 16l-4-4m0 0l4-4m-4 4h18"
-              />
-            </svg>
-            Back to writing
-          </Link>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M7 16l-4-4m0 0l4-4m-4 4h18"
+            />
+          </svg>
+          Back to writing
+        </Link>
 
-          <h1 className="mb-4 font-serif text-3xl font-medium tracking-tight text-foreground text-balance">
-            {metadata.title}
-          </h1>
+        <h1 className="mb-4 text-balance font-serif text-3xl font-medium tracking-tight text-foreground">
+          {metadata.title}
+        </h1>
 
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
-            <time dateTime={metadata.publishedAt}>
-              {formatDate(metadata.publishedAt)}
-            </time>
-            <span className="text-border">|</span>
-            <span>{readingTime}</span>
-          </div>
-        </header>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+          <time dateTime={metadata.publishedAt}>
+            {formatDate(metadata.publishedAt)}
+          </time>
+          <span className="text-border">|</span>
+          <span>{readingTime}</span>
+        </div>
+      </header>
 
-        <article className="prose prose-neutral prose-quoteless max-w-none dark:prose-invert">
-          <MDXContent />
-        </article>
+      <article className="prose prose-neutral prose-quoteless max-w-none dark:prose-invert">
+        <MDXContent />
+      </article>
 
-        <ScrollMarkers />
+      <ScrollMarkers />
     </>
   );
 }
