@@ -18,10 +18,19 @@ interface StaggerContainerProps {
   className?: string;
 }
 
-export function StaggerContainer({ children, className }: StaggerContainerProps) {
+export function StaggerContainer({
+  children,
+  className,
+}: StaggerContainerProps) {
   return <div className={className}>{children}</div>;
 }
 
-export function StaggerItem({ children, className }: { children: ReactNode; className?: string }) {
+export function StaggerItem({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return <div className={className}>{children}</div>;
 }

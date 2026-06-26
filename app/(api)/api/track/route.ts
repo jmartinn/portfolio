@@ -107,7 +107,11 @@ export async function GET() {
         }
       );
 
-      if (retryResponse.status === 403 || retryResponse.status === 204 || !retryResponse.ok) {
+      if (
+        retryResponse.status === 403 ||
+        retryResponse.status === 204 ||
+        !retryResponse.ok
+      ) {
         return getEmptyTrackInfo();
       }
 

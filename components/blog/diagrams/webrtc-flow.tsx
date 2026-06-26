@@ -80,7 +80,7 @@ export function WebRTCFlow() {
           x="190"
           y="72"
           textAnchor="middle"
-          className="fill-muted-foreground text-[11px] font-mono"
+          className="fill-muted-foreground font-mono text-[11px]"
         >
           1. POST /autoon
         </text>
@@ -101,7 +101,7 @@ export function WebRTCFlow() {
           x="490"
           y="107"
           textAnchor="middle"
-          className="fill-muted-foreground text-[11px] font-mono"
+          className="fill-muted-foreground font-mono text-[11px]"
         >
           2. wake panel
         </text>
@@ -122,7 +122,7 @@ export function WebRTCFlow() {
           x="290"
           y="152"
           textAnchor="middle"
-          className="text-[11px] font-mono"
+          className="font-mono text-[11px]"
           fill="hsl(var(--accent))"
         >
           {"3. on-browser-autoon  {roomId, deviceId}"}
@@ -153,7 +153,7 @@ export function WebRTCFlow() {
           x="290"
           y="212"
           textAnchor="middle"
-          className="fill-muted-foreground text-[11px] font-mono"
+          className="fill-muted-foreground font-mono text-[11px]"
         >
           4. join_call(roomId)
         </text>
@@ -174,7 +174,7 @@ export function WebRTCFlow() {
           x="290"
           y="247"
           textAnchor="middle"
-          className="fill-muted-foreground text-[11px] font-mono"
+          className="fill-muted-foreground font-mono text-[11px]"
         >
           5. transport_consume (mediasoup params)
         </text>
@@ -196,7 +196,7 @@ export function WebRTCFlow() {
           x="390"
           y="292"
           textAnchor="middle"
-          className="fill-muted-foreground text-[11px] font-mono"
+          className="fill-muted-foreground font-mono text-[11px]"
         >
           6. H.264 video + G.711 audio
         </text>
@@ -238,7 +238,7 @@ export function WebRTCFlow() {
           x="290"
           y="392"
           textAnchor="middle"
-          className="fill-muted-foreground text-[11px] font-mono"
+          className="fill-muted-foreground font-mono text-[11px]"
         >
           7. end_up (reason: missed_call)
         </text>
@@ -258,7 +258,7 @@ export function WebRTCFlow() {
           x="190"
           y="465"
           textAnchor="middle"
-          className="text-[11px] font-mono"
+          className="font-mono text-[11px]"
           fill="hsl(var(--accent))"
         >
           8. wait 1s, loop from step 1

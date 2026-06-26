@@ -33,8 +33,7 @@ const projects = [
   },
   {
     title: "Portfolio",
-    description:
-      "This website. Perpetually being tweaked.",
+    description: "This website. Perpetually being tweaked.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "MDX"],
     href: "https://github.com/jmartinn/portfolio",
     status: "active" as const,

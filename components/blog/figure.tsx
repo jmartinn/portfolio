@@ -7,7 +7,7 @@ interface FigureProps {
 
 export function Figure({ children, caption }: FigureProps) {
   return (
-    <figure className="my-8 not-prose">
+    <figure className="not-prose my-8">
       <div className="rounded-lg border border-border bg-muted/10 p-6">
         {children}
       </div>

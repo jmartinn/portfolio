@@ -72,7 +72,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Juan Pedro Martin",
-    description: "Frontend engineer at a startup. Writing about web development and the things I learn along the way.",
+    description:
+      "Frontend engineer at a startup. Writing about web development and the things I learn along the way.",
     creator: "@jmartinn07",
     images: ["/opengraph-image.jpg"],
   },
