@@ -21,19 +21,19 @@ export default function AboutPage() {
           </p>
         </section>
 
-        <div className="mb-12 flex justify-center">
-          <Image
-            alt="Juan Pedro Martin"
-            className="rounded-xl transition-transform duration-300 hover:scale-[1.02]"
-            src={avatar}
-            placeholder="blur"
-            width={280}
-            height={280}
-            priority
-          />
-        </div>
-
         <article className="prose prose-neutral max-w-none dark:prose-invert">
+          <div className="float-right ml-6 mb-4 mt-1 size-32 shrink-0 overflow-hidden rounded-full sm:ml-8 sm:size-48">
+            <Image
+              alt="Juan Pedro Martin"
+              className="size-full scale-[1.4] object-cover transition-transform duration-300 hover:scale-[1.5]"
+              src={avatar}
+              placeholder="blur"
+              width={384}
+              height={384}
+              priority
+            />
+          </div>
+
           <p className="text-lg leading-relaxed">
             Hola, I&apos;m Juan. I&apos;m a frontend engineer based in Spain,
             currently working at a startup.

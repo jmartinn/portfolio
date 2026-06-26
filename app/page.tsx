@@ -18,15 +18,17 @@ export default async function Page() {
         {/* Hero Section */}
         <section className="mb-16">
           <div className="mb-8 flex items-center gap-5">
-            <Image
-              alt="Juan Pedro Martin"
-              className="rounded-full transition-transform duration-200 hover:scale-105"
-              src={avatar}
-              placeholder="blur"
-              width={72}
-              height={72}
-              priority
-            />
+            <div className="size-20 shrink-0 overflow-hidden rounded-full transition-transform duration-200 hover:scale-105">
+              <Image
+                alt="Juan Pedro Martin"
+                className="size-full scale-[1.4] object-cover"
+                src={avatar}
+                placeholder="blur"
+                width={160}
+                height={160}
+                priority
+              />
+            </div>
             <div>
               <h1 className="font-serif text-2xl font-medium tracking-tight text-foreground">
                 Juan Pedro Martin
@@ -37,8 +39,8 @@ export default async function Page() {
 
           <div className="space-y-4 leading-relaxed text-foreground/90">
             <p>
-              I&apos;m a frontend engineer working at a startup, mostly with
-              React and TypeScript. I care about the
+              I&apos;m a frontend engineer currently working at a startup,
+              mostly with React and TypeScript. I care about the
               details&mdash;how things look, how they feel, whether they&apos;re
               actually pleasant to use.
             </p>
