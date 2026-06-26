@@ -18,7 +18,7 @@ export default async function Page() {
       {/* Hero Section */}
       <section className="mb-16">
         <div className="mb-8 flex items-center gap-5">
-          <div className="size-20 shrink-0 overflow-hidden rounded-full transition-transform duration-200 hover:scale-105">
+          <div className="size-20 shrink-0 overflow-hidden rounded-full">
             <Image
               alt="Juan Pedro Martin"
               className="size-full scale-[1.4] object-cover"

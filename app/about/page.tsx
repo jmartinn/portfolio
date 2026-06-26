@@ -25,7 +25,7 @@ export default function AboutPage() {
         <div className="float-right mb-4 ml-6 mt-1 size-32 shrink-0 overflow-hidden rounded-full sm:ml-8 sm:size-48">
           <Image
             alt="Juan Pedro Martin"
-            className="size-full scale-[1.4] object-cover transition-transform duration-300 hover:scale-[1.5]"
+            className="size-full scale-[1.4] object-cover"
             src={avatar}
             placeholder="blur"
             width={384}
