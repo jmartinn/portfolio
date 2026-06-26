@@ -3,7 +3,11 @@
  * Provides sanitization and validation functions to prevent injection attacks.
  */
 
-import { MAX_STRING_LENGTH, OG_TITLE_MAX_LENGTH } from "@/lib/constants";
+import {
+  MAX_SLUG_LENGTH,
+  MAX_STRING_LENGTH,
+  OG_TITLE_MAX_LENGTH,
+} from "@/lib/constants";
 
 /**
  * Validates and sanitizes a string input.
@@ -62,7 +66,9 @@ export function isValidSlug(slug: string | null | undefined): boolean {
   }
 
   const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-  return slugRegex.test(slug) && slug.length > 0 && slug.length <= 100;
+  return (
+    slugRegex.test(slug) && slug.length > 0 && slug.length <= MAX_SLUG_LENGTH
+  );
 }
 
 /**

@@ -33,20 +33,15 @@ export function cn(...inputs: ClassValue[]) {
  * ```
  */
 export function calculateReadingTime(content: string): string {
-  // Remove MDX/HTML tags and get plain text
   const plainText = content
-    .replace(/```[\s\S]*?```/g, "") // Remove code blocks
-    .replace(/<[^>]*>/g, "") // Remove HTML tags
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // Replace markdown links with just the text
-    .replace(/[#*_`]/g, "") // Remove markdown formatting
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[#*_`]/g, "")
     .trim();
 
-  // Count words (split by whitespace and filter out empty strings)
   const words = plainText.split(/\s+/).filter((word) => word.length > 0);
-  const wordCount = words.length;
-
-  // Calculate reading time (average 200 words per minute)
-  const readingTimeMinutes = Math.ceil(wordCount / 200);
+  const readingTimeMinutes = Math.ceil(words.length / 200);
 
   return `${readingTimeMinutes} min read`;
 }

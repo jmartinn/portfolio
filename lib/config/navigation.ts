@@ -1,12 +1,4 @@
-/**
- * Navigation configuration for the application.
- * Centralizes all navigation items and routes for easy maintenance.
- */
-
-/**
- * Main navigation items displayed in the sidebar.
- * Order matters - items appear in the same order as defined here.
- */
+// Sidebar navigation items, in display order.
 export const navItems = [
   { path: "/", name: "home" },
   { path: "/about", name: "about" },
@@ -15,14 +7,7 @@ export const navItems = [
   { path: "/blog", name: "blog" },
 ] as const;
 
-/**
- * All site routes for sitemap generation.
- * Automatically derived from navigation items.
- */
+// Site routes, derived for sitemap generation.
 export const siteRoutes = navItems.map((item) => item.path);
 
-/**
- * Type for navigation item paths.
- * Ensures type safety when referencing routes.
- */
 export type NavPath = (typeof navItems)[number]["path"];
