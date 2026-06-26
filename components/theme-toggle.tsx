@@ -1,18 +1,22 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
+
 import { motion, AnimatePresence } from "motion/react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
+// `false` on the server, `true` after hydration — a mounted flag without setState-in-effect.
+const subscribe = () => () => {};
+
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false
+  );
 
   if (!mounted) {
     return <div className="size-8" />;

@@ -20,6 +20,8 @@ export function ScrollMarkers() {
     );
     if (headings.length === 0) return;
 
+    // Headings live only in the rendered article DOM, so read them once on mount.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSections(
       headings.map((h) => ({
         id: h.id,
