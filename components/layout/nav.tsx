@@ -15,7 +15,10 @@ export function Nav() {
   }
 
   return (
-    <nav className="mb-16 flex items-center justify-between" style={{ viewTransitionName: "site-nav" }}>
+    <nav
+      className="mb-16 flex items-center justify-between"
+      style={{ viewTransitionName: "site-nav" }}
+    >
       <LayoutGroup>
         <div className="flex items-center gap-0.5">
           {navItems.map(({ path, name }) => {
@@ -24,6 +27,7 @@ export function Nav() {
               <Link
                 key={path}
                 href={path}
+                aria-current={isActive ? "page" : undefined}
                 className={cn(
                   "relative px-3 py-1.5 text-sm transition-colors duration-200",
                   isActive
