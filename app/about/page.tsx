@@ -34,7 +34,7 @@ export default function AboutPage() {
           />
         </div>
 
-        <p className="text-lg leading-relaxed">
+        <p>
           Hola, I&apos;m Juan. I&apos;m a frontend engineer based in Spain,
           currently working at a startup.
         </p>

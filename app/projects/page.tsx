@@ -14,14 +14,12 @@ const projects = [
       "A native iOS subscription tracker with month-end balance forecasting. Local-first, built with SwiftUI and SwiftData.",
     tech: ["Swift", "SwiftUI", "SwiftData"],
     href: "https://github.com/jmartinn/cadence",
-    status: "in-progress" as const,
   },
   {
     title: "Threshold",
     description:
       "A self-hosted web client for my building's Fermax Blue smart intercom. Reverse-engineered over a Saturday.",
     tech: ["TypeScript", "Next.js", "WebRTC", "Socket.IO"],
-    status: "in-progress" as const,
   },
   {
     title: "Strapex",
@@ -29,14 +27,12 @@ const projects = [
       "An open-source payment gateway inspired by Stripe. Still early days.",
     tech: ["TypeScript", "Next.js", "PostgreSQL"],
     href: "https://github.com/jmartinn/strapex",
-    status: "in-progress" as const,
   },
   {
     title: "Portfolio",
     description: "This website. Perpetually being tweaked.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "MDX"],
     href: "https://github.com/jmartinn/portfolio",
-    status: "active" as const,
   },
   {
     title: "Video to ASCII",
@@ -44,7 +40,6 @@ const projects = [
       "A C++ experiment that converts video frames to ASCII art in real-time. Pure fun.",
     tech: ["C++", "OpenCV"],
     href: "https://github.com/jmartinn/video-to-ascii",
-    status: "completed" as const,
   },
 ];
 
@@ -90,39 +85,18 @@ function ProjectCard({
   description,
   tech,
   href,
-  status,
 }: {
   title: string;
   description: string;
   tech: string[];
   href?: string;
-  status: "active" | "in-progress" | "completed";
 }) {
-  const statusColors = {
-    active: "bg-green-500/20 text-green-700 dark:text-green-400",
-    "in-progress": "bg-amber-500/20 text-amber-700 dark:text-amber-400",
-    completed: "bg-muted text-muted-foreground",
-  };
-
-  const statusLabels = {
-    active: "Active",
-    "in-progress": "In Progress",
-    completed: "Completed",
-  };
-
   const content = (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
       <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2">
-          <h2 className="font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
-            {title}
-          </h2>
-          <span
-            className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${statusColors[status]}`}
-          >
-            {statusLabels[status]}
-          </span>
-        </div>
+        <h2 className="font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
+          {title}
+        </h2>
         <p className="mt-1 text-sm text-muted-foreground">{description}</p>
         <div className="mt-2 flex flex-wrap gap-1.5">
           {tech.map((t) => (
