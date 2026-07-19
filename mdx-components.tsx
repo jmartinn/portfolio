@@ -5,6 +5,7 @@ import type { MDXComponents } from "mdx/types";
 import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
 
+import { ForecastTimeline } from "@/components/blog/diagrams/forecast-timeline";
 import { WebRTCFlow } from "@/components/blog/diagrams/webrtc-flow";
 import { Figure } from "@/components/blog/figure";
 import { Asset } from "@/components/mdx/asset";
@@ -188,6 +189,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Figure,
     Asset,
     WebRTCFlow,
+    ForecastTimeline,
     code: (props: React.HTMLAttributes<HTMLElement>) => {
       if (props.className?.includes("language-")) {
         return <code {...props} />;
