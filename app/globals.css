@@ -256,3 +256,94 @@ table {
     transform: rotate(360deg);
   }
 }
+
+/* Diagram system — build-in choreography for hand-drawn blog diagrams.
+   The <Diagram> wrapper flips data-dg from "ready" (hidden) to "in"
+   (animate) when scrolled into view; elements stagger via --dg-s
+   (see stage() in components/blog/diagrams/diagram.tsx). Without JS the
+   attribute never appears and every element stays visible. */
+
+.dg-drop,
+.dg-wipe,
+.dg-wipe-r {
+  transform-box: fill-box;
+}
+.dg-drop {
+  transform-origin: top;
+}
+.dg-wipe {
+  transform-origin: left;
+}
+.dg-wipe-r {
+  transform-origin: right;
+}
+
+[data-dg="ready"] .dg-fade,
+[data-dg="ready"] .dg-rise {
+  opacity: 0;
+}
+[data-dg="ready"] .dg-drop {
+  transform: scaleY(0);
+}
+[data-dg="ready"] .dg-wipe,
+[data-dg="ready"] .dg-wipe-r {
+  transform: scaleX(0);
+}
+
+[data-dg="in"] .dg-fade,
+[data-dg="in"] .dg-rise,
+[data-dg="in"] .dg-drop,
+[data-dg="in"] .dg-wipe,
+[data-dg="in"] .dg-wipe-r {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+  animation-fill-mode: both;
+  animation-delay: calc(var(--dg-s, 0) * 150ms);
+}
+[data-dg="in"] .dg-fade {
+  animation-name: dg-fade;
+}
+[data-dg="in"] .dg-rise {
+  animation-name: dg-rise;
+}
+[data-dg="in"] .dg-drop {
+  animation-name: dg-drop;
+}
+[data-dg="in"] .dg-wipe,
+[data-dg="in"] .dg-wipe-r {
+  animation-name: dg-wipe;
+}
+
+@keyframes dg-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes dg-rise {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+@keyframes dg-drop {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes dg-wipe {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-dg] .dg-fade,
+  [data-dg] .dg-rise,
+  [data-dg] .dg-drop,
+  [data-dg] .dg-wipe,
+  [data-dg] .dg-wipe-r {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
