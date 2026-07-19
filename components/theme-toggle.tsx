@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 
+import { play } from "cuelume";
 import { motion, AnimatePresence } from "motion/react";
 import { useTheme } from "next-themes";
 
@@ -34,7 +35,10 @@ export function ThemeToggle() {
 
   return (
     <motion.button
-      onClick={() => setTheme(next)}
+      onClick={() => {
+        play("toggle");
+        setTheme(next);
+      }}
       className={cn(
         "relative flex size-8 items-center justify-center rounded-md",
         "text-muted-foreground transition-colors duration-200 hover:text-foreground",
