@@ -8,6 +8,7 @@ import Link from "next/link";
 import { WebRTCFlow } from "@/components/blog/diagrams/webrtc-flow";
 import { Figure } from "@/components/blog/figure";
 import { Asset } from "@/components/mdx/asset";
+import { CodeBlock } from "@/components/mdx/code-block";
 import { TweetComponent } from "@/components/tweet/tweet";
 
 interface TableProps {
@@ -198,12 +199,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         />
       );
     },
-    pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
-      <pre
-        className="mb-4 mt-6 overflow-x-auto rounded-lg border bg-muted p-4 text-sm [&_code]:bg-transparent [&_code]:p-0 [&_code]:text-sm [&_code]:font-normal"
-        {...props}
-      />
-    ),
+    pre: CodeBlock,
     Table,
     ...components,
   };
