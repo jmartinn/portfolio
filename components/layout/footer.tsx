@@ -30,7 +30,7 @@ export function Footer() {
           ))}
         </nav>
         <p className="text-xs text-muted">
-          {new Date().getFullYear()} Juan Pedro Martin
+          &copy; {new Date().getFullYear()} Juan Pedro Martin
         </p>
       </div>
     </footer>
