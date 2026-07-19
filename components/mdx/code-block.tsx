@@ -41,8 +41,8 @@ export function CodeBlock(props: React.HTMLAttributes<HTMLPreElement>) {
         onClick={copy}
         aria-label={copied ? "Copied" : "Copy code"}
         className={cn(
-          "absolute right-2 top-2 flex size-7 items-center justify-center rounded-md border bg-muted",
-          "text-muted-foreground transition-[color,opacity] duration-200 hover:text-foreground",
+          "absolute right-2 top-2 flex size-7 items-center justify-center rounded-md border border-foreground/10 bg-transparent",
+          "text-muted-foreground transition-[color,background-color,opacity] duration-200 hover:bg-foreground/5 hover:text-foreground",
           "opacity-0 focus-visible:opacity-100 group-hover:opacity-100",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
         )}
