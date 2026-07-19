@@ -13,6 +13,7 @@ import { Footer } from "@/components/layout/footer";
 import { Nav } from "@/components/layout/nav";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { ViewTransition } from "@/components/view-transition";
 import { cn } from "@/lib/utils";
 
 const newsreader = Newsreader({
@@ -132,7 +133,9 @@ export default function RootLayout({
           <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
             <Nav />
             <ErrorBoundary>
-              <main id="main-content">{children}</main>
+              <main id="main-content">
+              <ViewTransition>{children}</ViewTransition>
+            </main>
             </ErrorBoundary>
             <Footer />
           </div>

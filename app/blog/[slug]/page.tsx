@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ScrollMarkers } from "@/components/blog/scroll-markers";
+import { ViewTransition } from "@/components/view-transition";
 import { getBlogPost, getBlogPosts } from "@/lib/db/blog";
 import { formatDate } from "@/lib/utils";
 
@@ -171,9 +172,11 @@ export default async function Blog({ params }: { params: Params }) {
           Back to writing
         </Link>
 
-        <h1 className="mb-4 text-balance font-serif text-3xl font-medium tracking-tight text-foreground">
-          {metadata.title}
-        </h1>
+        <ViewTransition name={`post-title-${slug}`}>
+          <h1 className="mb-4 text-balance font-serif text-3xl font-medium tracking-tight text-foreground">
+            {metadata.title}
+          </h1>
+        </ViewTransition>
 
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
           <time dateTime={metadata.publishedAt}>

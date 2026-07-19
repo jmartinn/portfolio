@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { ViewTransition } from "@/components/view-transition";
 import { getBlogPosts } from "@/lib/db/blog";
 import avatar from "@/public/images/avatar.jpeg";
 
@@ -64,9 +65,11 @@ export default async function Page() {
             >
               <div className="flex w-full items-start justify-between gap-4">
                 <div className="min-w-0 flex-1">
-                  <h3 className="line-clamp-2 font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
-                    {post.metadata.title}
-                  </h3>
+                  <ViewTransition name={`post-title-${post.slug}`}>
+                    <h3 className="line-clamp-2 font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
+                      {post.metadata.title}
+                    </h3>
+                  </ViewTransition>
                   {post.metadata.summary && (
                     <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">
                       {post.metadata.summary}

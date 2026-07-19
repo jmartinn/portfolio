@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
+import { ViewTransition } from "@/components/view-transition";
 import { getBlogPosts } from "@/lib/db/blog";
 
 export const metadata: Metadata = {
@@ -38,9 +39,11 @@ export default async function BlogPage() {
           >
             <article className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
               <div className="min-w-0 flex-1">
-                <h2 className="font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
-                  {post.metadata.title}
-                </h2>
+                <ViewTransition name={`post-title-${post.slug}`}>
+                  <h2 className="font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
+                    {post.metadata.title}
+                  </h2>
+                </ViewTransition>
                 {post.metadata.summary && (
                   <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
                     {post.metadata.summary}
