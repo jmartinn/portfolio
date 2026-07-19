@@ -20,11 +20,19 @@ const projects = [
     description:
       "A self-hosted web client for my building's Fermax Blue smart intercom. Reverse-engineered over a Saturday.",
     tech: ["TypeScript", "Next.js", "WebRTC", "Socket.IO"],
+    href: "/blog/reverse-engineering-my-doorbell",
+  },
+  {
+    title: "Markdown Renderer",
+    description:
+      "A simple, Vercel-inspired markdown editor and previewer. Live at markdown.jmartinn.net.",
+    tech: ["TypeScript", "Next.js", "Playwright"],
+    href: "https://github.com/jmartinn/markdown-renderer",
   },
   {
     title: "Strapex",
     description:
-      "An open-source payment gateway inspired by Stripe. Still early days.",
+      "An open-source payment gateway inspired by Stripe. Currently on ice.",
     tech: ["TypeScript", "Next.js", "PostgreSQL"],
     href: "https://github.com/jmartinn/strapex",
   },
@@ -131,12 +139,24 @@ function ProjectCard({
   );
 
   if (href) {
+    const isInternal = href.startsWith("/");
+    const cardClassName =
+      "group -mx-3 block rounded-lg px-3 py-4 transition-colors duration-200 hover:bg-muted/30";
+
+    if (isInternal) {
+      return (
+        <Link href={href} className={cardClassName}>
+          {content}
+        </Link>
+      );
+    }
+
     return (
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="group -mx-3 block rounded-lg px-3 py-4 transition-colors duration-200 hover:bg-muted/30"
+        className={cardClassName}
       >
         {content}
       </a>
