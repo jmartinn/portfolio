@@ -6,7 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata, Viewport } from "next";
-import { Newsreader } from "next/font/google";
+import { Caveat, Newsreader } from "next/font/google";
 
 import { ErrorBoundary } from "@/components/error-boundary";
 import { Footer } from "@/components/layout/footer";
@@ -19,6 +19,12 @@ import { cn } from "@/lib/utils";
 const newsreader = Newsreader({
   subsets: ["latin"],
   variable: "--font-newsreader",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
   display: "swap",
 });
 
@@ -110,7 +116,8 @@ export default function RootLayout({
       className={cn(
         GeistSans.variable,
         GeistMono.variable,
-        newsreader.variable
+        newsreader.variable,
+        caveat.variable
       )}
     >
       <body

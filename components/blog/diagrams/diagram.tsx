@@ -42,8 +42,8 @@ export function Diagram({ children, note }: DiagramProps) {
       {children}
       {note && (
         <p
-          className="dg-fade mx-auto mt-2 max-w-lg text-center text-xs italic text-muted-foreground"
-          style={stage(9)}
+          className="dg-fade mx-auto mt-2 max-w-lg text-center font-hand text-[1.05rem] leading-snug text-muted-foreground"
+          style={{ ...stage(9), rotate: "-0.7deg" }}
         >
           {note}
         </p>

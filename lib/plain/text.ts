@@ -46,8 +46,21 @@ export function heading(title: string): string {
 export function mdxToPlain(raw: string): string {
   let content = raw.replace(/^---\s*[\s\S]*?\s*---/, "").trim();
 
+  // Sidenotes -> numbered inline markers plus a "notes" section at the end;
+  // margin notes -> indented asides where they appear. These must run before
+  // the generic component fallbacks below, which would otherwise swallow them.
+  const sidenotes: string[] = [];
+
   content = content
     .replace(/^import\s.*$/gm, "")
+    .replace(/<Sidenote>([\s\S]*?)<\/Sidenote>/g, (_, body: string) => {
+      sidenotes.push(body.replace(/\s+/g, " ").trim());
+      return `[${sidenotes.length}]`;
+    })
+    .replace(
+      /<MarginNote>([\s\S]*?)<\/MarginNote>/g,
+      (_, body: string) => `\n\nMNOTE:${body.replace(/\s+/g, " ").trim()}\n\n`
+    )
     // <Figure caption="...">...</Figure> -> [figure: caption]
     .replace(
       /<Figure\s+caption="([^"]*)"\s*>[\s\S]*?<\/Figure>/g,
@@ -83,6 +96,8 @@ export function mdxToPlain(raw: string): string {
       out.push(bold(line));
     } else if (/^>\s?/.test(line)) {
       out.push(wrap(line.replace(/^>\s?/, ""), PLAIN_WIDTH, "> "));
+    } else if (line.startsWith("MNOTE:")) {
+      out.push(dim(wrap(line.slice("MNOTE:".length), PLAIN_WIDTH, "    ")));
     } else if (/^(\s*)([-*]|\d+\.)\s+/.test(line)) {
       const marker = line.match(/^(\s*)([-*]|\d+\.)\s+/)![0];
       out.push(
@@ -93,6 +108,15 @@ export function mdxToPlain(raw: string): string {
       );
     } else {
       out.push(wrap(line));
+    }
+  }
+
+  if (sidenotes.length > 0) {
+    out.push("", heading("notes"));
+    for (const [i, note] of sidenotes.entries()) {
+      const label = `[${i + 1}] `;
+      const indent = " ".repeat(label.length);
+      out.push(label + wrap(note, PLAIN_WIDTH, indent).slice(indent.length));
     }
   }
 

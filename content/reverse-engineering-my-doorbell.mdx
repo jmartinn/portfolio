@@ -17,7 +17,7 @@ This is how that went.
 
 The first thing I checked was whether the iOS app pinned its certificates. If it did, capturing traffic would mean patching the binary, which I wasn't going to do on a weekend.
 
-It didn't. mitmproxy worked on the first try.
+It didn't. mitmproxy worked on the first try.<Sidenote>If it had pinned, this post would end here — patching an iOS binary was not how I wanted to spend a vacation Saturday.</Sidenote>
 
 I wrote a small mitmdump addon to filter Fermax hostnames and dump each request/response as JSON. Three captures were enough: one session with login + door open + a video call, one with logout/login, one triggering "live view" from the app.
 
@@ -118,6 +118,8 @@ After all that, the video came through. H.264 frames and G.711 audio from the pa
 
 I was trying to grab my own panel ID — I needed it to connect to the right room — so I left the Socket.IO stream open and waited for `on-browser-autoon` to fire. Three different IDs came through. Only one of them was mine.
 
+<MarginNote>The Asimov quote at the bottom of this post is not decoration.</MarginNote>
+
 Hmm. Does this mean what I think it means?
 
 It did. The server was broadcasting `on-browser-autoon` — the event that carries the room ID and device ID of every starting video session — to every connected socket. Not just the owner's session. Every session, to everyone.
@@ -166,7 +168,7 @@ It worked. `join_call` didn't check whether my token belonged to the device owne
 Two issues, stacked:
 
 1. `on-browser-autoon` is scoped to the connection, not to the device. Anyone listening to the signaling server sees every starting session across all users.
-2. `join_call` authenticates the user but doesn't authorize the room. A valid JWT is enough; it doesn't have to be the right JWT.
+2. `join_call` authenticates the user but doesn't authorize the room. A valid JWT is enough; it doesn't have to be the right JWT.<Sidenote>Authentication asks who you are; authorization asks whether you're allowed. The signaling layer only ever asked the first question.</Sidenote>
 
 The REST side is fine — asking for someone else's device data returns 403, the door-open endpoint returns 403, everything you'd hope for. The vulnerability lives in the signaling and media layer. Which is where the camera is.
 

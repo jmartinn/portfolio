@@ -8,6 +8,7 @@ import Link from "next/link";
 import { ForecastTimeline } from "@/components/blog/diagrams/forecast-timeline";
 import { WebRTCFlow } from "@/components/blog/diagrams/webrtc-flow";
 import { Figure } from "@/components/blog/figure";
+import { MarginNote, Sidenote } from "@/components/blog/sidenote";
 import { Asset } from "@/components/mdx/asset";
 import { CodeBlock } from "@/components/mdx/code-block";
 import { TweetComponent } from "@/components/tweet/tweet";
@@ -187,6 +188,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ConsCard,
     StaticTweet: TweetComponent,
     Figure,
+    Sidenote,
+    MarginNote,
     Asset,
     WebRTCFlow,
     ForecastTimeline,

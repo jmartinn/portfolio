@@ -38,6 +38,7 @@ export default {
         sans: ["var(--font-geist-sans)"],
         serif: ["var(--font-newsreader)"],
         mono: ["var(--font-geist-mono)"],
+        hand: ["var(--font-caveat)", "cursive"],
       },
       typography: {
         DEFAULT: {

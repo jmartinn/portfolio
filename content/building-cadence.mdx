@@ -33,7 +33,7 @@ Everything is local-first. Your data lives on your phone, and you can export it 
 
 I'm meticulous with my work — sometimes to a fault — and I wanted Cadence to be right from both sides: well-engineered underneath, and genuinely nice to use. Native apps have a bar for that, and Apple literally wrote it down.
 
-So I did something slightly unhinged: I transcribed Apple's Human Interface Guidelines into markdown files in my Obsidian vault. Every time I finished a phase of the app, I'd have an agent review the work against them. A HIG compliance check, on demand, for an app with exactly one user at the time. Worth it — it caught real things, and it kept me honest about details I would've rationalized away at 1 a.m.
+So I did something slightly unhinged: I transcribed Apple's Human Interface Guidelines into markdown files in my Obsidian vault. Every time I finished a phase of the app, I'd have an agent review the work against them. A HIG compliance check, on demand, for an app with exactly one user at the time.<Sidenote>The one user filed a lot of bugs.</Sidenote> Worth it — it caught real things, and it kept me honest about details I would've rationalized away at 1 a.m.
 
 ## The interesting bits
 
@@ -53,7 +53,7 @@ The same derivation handles the edges for free: a yearly subscription whose next
 
 There wasn't one big wall so much as a series of them. The most annoying one wasn't technical at all: I couldn't justify the Apple Developer Program fee. I'm in the middle of moving house — renovations, furniture, the whole bleed — and €99 for a membership lost every argument with a kitchen. No membership means no CloudKit, which means no sync.
 
-What I could do was build as if the membership already existed. The SwiftData schema is written to be CloudKit-legal from day one — no unique constraints, optionals and defaults where the sync engine demands them — so when the time comes, turning on sync should be a configuration change, not a rewrite. The app stays loyal to a version of itself it can't ship yet. I find that weirdly motivating.
+What I could do was build as if the membership already existed. The SwiftData schema is written to be CloudKit-legal from day one — no unique constraints, optionals and defaults where the sync engine demands them — so when the time comes, turning on sync should be a configuration change, not a rewrite.<Sidenote>Famous last words — but that is exactly what the no-unique-constraints, optionals-everywhere schema rules are buying.</Sidenote> The app stays loyal to a version of itself it can't ship yet. I find that weirdly motivating.
 
 ## Where it stands
 
