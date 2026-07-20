@@ -31,6 +31,14 @@ export function Lightbox({
 }: LightboxProps) {
   const ref = useRef<HTMLDialogElement>(null);
 
+  // The served variant caps how large the enlarged image can render, so hint a
+  // width that matches how each orientation is actually constrained: portraits
+  // are bounded by viewport height (staying narrow), landscapes by width.
+  const enlargedSizes =
+    height > width
+      ? "(max-width: 640px) 92vw, 620px"
+      : "(max-width: 900px) 92vw, 1200px";
+
   return (
     <>
       <button
@@ -58,8 +66,8 @@ export function Lightbox({
             alt={alt}
             width={width}
             height={height}
-            sizes="(max-width: 640px) 92vw, 560px"
-            className="h-auto w-full rounded-lg"
+            sizes={enlargedSizes}
+            className="sh-dialog-img"
           />
           <button
             type="button"

@@ -459,13 +459,36 @@ article.prose {
   outline-offset: 3px;
 }
 
+/* A native modal still lets the page behind it scroll. Lock it declaratively:
+   the rule stops matching the instant the dialog closes, so the lock can never
+   strand the page unscrollable the way an event-driven unlock can (the `close`
+   event is not reliably delivered). Covers Escape, backdrop and button alike. */
+html:has(.sh-dialog[open]) {
+  overflow: hidden;
+}
+
+/* Size to the image, not the other way round: the image is constrained by
+   BOTH viewport axes so tall phone shots fit the height and wide shots fit
+   the width, whichever binds first. Deriving height from a fixed width is
+   what made tall screenshots overflow the viewport. */
 .sh-dialog {
-  max-width: min(92vw, 560px);
+  width: auto;
+  height: auto;
+  max-width: 92vw;
   max-height: 92vh;
   padding: 0;
   border: 0;
   background: transparent;
   overflow: visible;
+}
+
+.sh-dialog-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 92vw;
+  max-height: 92vh;
+  border-radius: 0.5rem;
 }
 /* Literal color: ::backdrop sits in the top layer and cannot be relied on
    to inherit the theme's custom properties. */
@@ -476,6 +499,7 @@ article.prose {
 .sh-dialog-inner {
   position: relative;
   margin: 0;
+  line-height: 0; /* shrink-wrap the image so the close button hugs its corner */
 }
 
 .sh-close {
