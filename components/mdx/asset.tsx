@@ -40,6 +40,7 @@ export function Asset({ slug, src, alt, width, height, poster }: AssetProps) {
   // device rather than swallowing the viewport. Landscape art keeps the
   // full column. Either way it can be opened full size.
   const isPhone = height > width;
+  const thumbSizes = isPhone ? "240px" : "(max-width: 768px) 100vw, 624px";
 
   return (
     <Lightbox
@@ -47,6 +48,7 @@ export function Asset({ slug, src, alt, width, height, poster }: AssetProps) {
       alt={alt}
       width={width}
       height={height}
+      thumbSizes={thumbSizes}
       className={isPhone ? "w-full max-w-[240px]" : "w-full"}
     >
       <Image
@@ -54,7 +56,7 @@ export function Asset({ slug, src, alt, width, height, poster }: AssetProps) {
         alt={alt}
         width={width}
         height={height}
-        sizes={isPhone ? "240px" : "(max-width: 768px) 100vw, 624px"}
+        sizes={thumbSizes}
         className="h-auto w-full rounded-lg"
       />
     </Lightbox>

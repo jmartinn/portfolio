@@ -467,21 +467,30 @@ html:has(.sh-dialog[open]) {
   overflow: hidden;
 }
 
-/* Size to the image, not the other way round: the image is constrained by
-   BOTH viewport axes so tall phone shots fit the height and wide shots fit
-   the width, whichever binds first. Deriving height from a fixed width is
-   what made tall screenshots overflow the viewport. */
+/* Fill the viewport and centre the figure with flexbox. A modal <dialog> gets
+   `inset: 0` from the UA sheet, so sizing it to its content and relying on
+   `margin: auto` left it stretched full-width with the image pinned left —
+   flex centring is unambiguous on both axes. The whole surround is the dialog,
+   so a click anywhere outside the image dismisses. */
 .sh-dialog {
-  width: auto;
-  height: auto;
-  max-width: 92vw;
-  max-height: 92vh;
+  width: 100vw;
+  height: 100dvh;
+  max-width: 100vw;
+  max-height: 100dvh;
+  margin: 0;
   padding: 0;
   border: 0;
   background: transparent;
-  overflow: visible;
+  overflow: hidden;
+}
+.sh-dialog[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* The image is constrained by BOTH viewport axes, so tall phone shots fit the
+   height and wide shots fit the width, whichever binds first. */
 .sh-dialog-img {
   display: block;
   width: auto;
@@ -500,6 +509,30 @@ html:has(.sh-dialog[open]) {
   position: relative;
   margin: 0;
   line-height: 0; /* shrink-wrap the image so the close button hugs its corner */
+}
+
+/* Blur-up placeholder: fills the figure box behind the hi-res image and paints
+   instantly (its variant is already cached from the inline thumbnail), so the
+   lightbox never shows an empty frame while the full-res image is fetched. */
+.sh-dialog-ph {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(12px);
+  transform: scale(1.03);
+  border-radius: 0.5rem;
+  z-index: 0;
+}
+.sh-dialog-hires {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.sh-dialog-hires[data-loaded='true'] {
+  opacity: 1;
 }
 
 .sh-close {
@@ -543,5 +576,9 @@ html:has(.sh-dialog[open]) {
   .sh-dialog[open],
   .sh-dialog[open]::backdrop {
     animation: none;
+  }
+  .sh-dialog-hires {
+    opacity: 1;
+    transition: none;
   }
 }

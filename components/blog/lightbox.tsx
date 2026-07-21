@@ -13,6 +13,9 @@ interface LightboxProps {
   height: number;
   /** Sizing for the inline thumbnail button. */
   className?: string;
+  /** The inline thumbnail's `sizes`, reused so the blur-up placeholder is a
+   *  cache hit against the variant the page already downloaded. */
+  thumbSizes: string;
 }
 
 /**
@@ -28,6 +31,7 @@ export function Lightbox({
   width,
   height,
   className,
+  thumbSizes,
 }: LightboxProps) {
   const ref = useRef<HTMLDialogElement>(null);
 
@@ -54,20 +58,36 @@ export function Lightbox({
         ref={ref}
         className="sh-dialog"
         aria-label={alt}
-        // The dialog box itself is only the backdrop area around the image,
-        // so a click that lands on it (not on the figure) dismisses.
+        // The dialog fills the viewport and centres the figure, so any click
+        // that lands on the dialog itself (the area around the image) dismisses.
         onClick={(event) => {
           if (event.target === ref.current) ref.current.close();
         }}
       >
         <figure className="sh-dialog-inner">
+          {/* Instant placeholder: same `sizes` as the inline thumbnail, so it
+              resolves to the already-downloaded variant and paints with no
+              network wait. Blurred and scaled up to stand in for the hi-res. */}
+          <Image
+            src={src}
+            alt=""
+            aria-hidden
+            width={width}
+            height={height}
+            sizes={thumbSizes}
+            className="sh-dialog-ph"
+          />
+          {/* Full-resolution image, fades in over the placeholder once decoded. */}
           <Image
             src={src}
             alt={alt}
             width={width}
             height={height}
             sizes={enlargedSizes}
-            className="sh-dialog-img"
+            className="sh-dialog-img sh-dialog-hires"
+            onLoad={(event) => {
+              event.currentTarget.dataset.loaded = "true";
+            }}
           />
           <button
             type="button"
