@@ -87,7 +87,7 @@ export default function AboutPage() {
           </a>
           , or{" "}
           <a
-            href="https://x.com/jmartinn07"
+            href="https://x.com/jmartinn"
             target="_blank"
             rel="noopener noreferrer"
           >

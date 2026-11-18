@@ -55,7 +55,7 @@ export async function generateMetadata({
     title: metadata.title,
     description: metadata.summary,
     keywords: metadata.keywords,
-    authors: [{ name: "Juan Pedro Martin", url: "https://x.com/jmartinn07" }],
+    authors: [{ name: "Juan Pedro Martin", url: "https://x.com/jmartinn" }],
     openGraph: {
       title: metadata.title,
       description: metadata.summary,
@@ -76,7 +76,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: metadata.title,
       description: metadata.summary,
-      creator: "@jmartinn07",
+      creator: "@jmartinn",
       images: [ogImage],
     },
   };
@@ -119,7 +119,7 @@ export default async function Blog({ params }: { params: Params }) {
       name: "Juan Pedro Martin",
       url: "https://jmartinn.com",
       sameAs: [
-        "https://x.com/jmartinn07",
+        "https://x.com/jmartinn",
         "https://github.com/jmartinn",
         "https://linkedin.com/in/jmartinn",
       ],

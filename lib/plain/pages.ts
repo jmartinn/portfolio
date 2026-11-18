@@ -38,7 +38,7 @@ export async function renderHome(): Promise<string> {
     "",
     `${dim("web:")}      https://${SITE}`,
     `${dim("github:")}   https://github.com/jmartinn`,
-    `${dim("x:")}        https://x.com/jmartinn07`,
+    `${dim("x:")}        https://x.com/jmartinn`,
     `${dim("email:")}    juamp_m@hotmail.com`,
   ].join("\n");
 
