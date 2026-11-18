@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     title: "Juan Pedro Martin",
     description:
       "Frontend engineer at a startup. Writing about web development and the things I learn along the way.",
-    creator: "@jmartinn07",
+    creator: "@jmartinn",
     images: ["/opengraph-image.jpg"],
   },
   verification: {
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "Juan Pedro Martin",
-      url: "https://x.com/jmartinn07",
+      url: "https://x.com/jmartinn",
     },
   ],
   category: "Technology",

@@ -2,7 +2,7 @@ import { NowPlaying } from "@/components/now-playing";
 
 const links = [
   { href: "https://github.com/jmartinn", label: "GitHub" },
-  { href: "https://x.com/jmartinn07", label: "Twitter" },
+  { href: "https://x.com/jmartinn", label: "Twitter" },
   { href: "https://linkedin.com/in/jmartinn", label: "LinkedIn" },
   { href: "mailto:juamp_m@hotmail.com", label: "Email" },
 ];
